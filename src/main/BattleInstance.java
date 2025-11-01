@@ -1,10 +1,12 @@
 package main;
 
+import java.util.ArrayList;
+
 public class BattleInstance {
-	Summon[] allies;
-	Summon[] enemies;
+	ArrayList<Pokemon> allies;
+	ArrayList<Pokemon> enemies;
 	
-	public BattleInstance(Summon[] newAllies, Summon[] newEnemies) {
+	public BattleInstance(ArrayList<Pokemon> newAllies, ArrayList<Pokemon> newEnemies) {
 		allies = newAllies;
 		enemies = newEnemies;
 	}

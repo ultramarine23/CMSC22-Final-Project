@@ -3,6 +3,7 @@ package main;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -67,8 +68,8 @@ public class Main {
 		
 		
 		// create battle
-		Summon[] alliesArr = {new Summon()};
-		Summon[] enemiesArr = {new Summon()};
+		ArrayList<Pokemon> alliesArr = new ArrayList<Pokemon>();
+		ArrayList<Pokemon> enemiesArr = new ArrayList<Pokemon>();
 		
 		BattleInstance newBattle = new BattleInstance(alliesArr, enemiesArr);
 	}

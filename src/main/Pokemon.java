@@ -1,13 +1,14 @@
 package main;
 
-public class Summon {
-	StatsContainer baseStats = new StatsContainer();
-	StatsContainer currentStats = new StatsContainer();
+public class Pokemon {
+	StatsContainer baseStats;
+	StatsContainer currentStats;
 	
-	int curHp = 0;
-	
-	public Summon() {
-		System.out.println("SKIB");
+	public Pokemon(StatsContainer newBaseStats) {
+		baseStats = newBaseStats;
+		currentStats = newBaseStats;
+		
+		System.out.println();
 		System.out.println(String.valueOf(currentStats.hp));
 		takeDamage(10);
 		System.out.println(String.valueOf(currentStats.hp));
