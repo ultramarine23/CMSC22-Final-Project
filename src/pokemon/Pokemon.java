@@ -1,8 +1,9 @@
-package main;
+package pokemon;
 
 public class Pokemon {
 	StatsContainer baseStats;
 	StatsContainer currentStats;
+	
 	
 	public Pokemon(StatsContainer newBaseStats) {
 		baseStats = newBaseStats;

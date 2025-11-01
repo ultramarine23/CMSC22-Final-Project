@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 
+import pokemon.Pokemon;
+
 public class BattleInstance {
 	ArrayList<Pokemon> allies;
 	ArrayList<Pokemon> enemies;

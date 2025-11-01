@@ -1,6 +1,6 @@
 package abilities;
 
-import main.Pokemon;
+import pokemon.Pokemon;
 
 enum Event {
 	before_switchin,

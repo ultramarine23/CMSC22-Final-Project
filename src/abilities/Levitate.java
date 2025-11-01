@@ -1,6 +1,6 @@
 package abilities;
 
-import main.Pokemon;
+import pokemon.Pokemon;
 
 public class Levitate extends Ability {
 	 public Levitate(Pokemon user) {

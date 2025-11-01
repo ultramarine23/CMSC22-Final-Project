@@ -1,4 +1,4 @@
-package main;
+package pokemon;
 
 public class StatsContainer {
 	int hp = 0;

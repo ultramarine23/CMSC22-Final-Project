@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import pokemon.Pokemon;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,11 +25,11 @@ public class Main {
 	public Main() {
 		// create game window
 		window = new JFrame();
-		window.setTitle(Globals.game_name);
+		window.setTitle(Globals.gameName);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setBackground(Color.black);
 		window.setLayout(null);
-		window.setSize(Globals.def_win_width, Globals.def_win_height);
+		window.setSize(Globals.defWinWidth, Globals.defWinHeight);
 		window.setResizable(false);
 		window.setVisible(true);
 		
@@ -35,11 +38,11 @@ public class Main {
 		// create title panel
 		titleNamePanel = new JPanel();
 		titleNamePanel.setBounds(
-				Globals.def_win_width / 5, 
-				Globals.def_win_height / 5,
-				Globals.def_win_width * 3 / 5,
-				Globals.def_win_height / 4);
-		titleNamePanel.setBackground(Globals.def_bg_color);
+				Globals.defWinWidth / 5, 
+				Globals.defWinHeight / 5,
+				Globals.defWinWidth * 3 / 5,
+				Globals.defWinHeight / 4);
+		titleNamePanel.setBackground(Globals.defBgColor);
 		
 		titleLabel = new JLabel();
 		titleLabel.setText("ROGUELIKE");
@@ -50,15 +53,15 @@ public class Main {
 		// create start button
 		titleButPanel = new JPanel();
 		titleButPanel.setBounds(
-				Globals.def_win_width / 3, 
-				(Globals.def_win_height * 2) / 3,
-				Globals.def_win_width / 3,
-				Globals.def_win_height / 6
+				Globals.defWinWidth / 3, 
+				(Globals.defWinHeight * 2) / 3,
+				Globals.defWinWidth / 3,
+				Globals.defWinHeight / 6
 				);
 		
 		titleButton = new JButton("Start");
 		titleButton.setForeground(Color.white);
-		titleButton.setBackground(Globals.def_bg_color);
+		titleButton.setBackground(Globals.defBgColor);
 		
 		titleButPanel.add(titleButton);
 		titleNamePanel.add(titleLabel);
