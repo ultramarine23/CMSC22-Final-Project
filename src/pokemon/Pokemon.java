@@ -1,6 +1,6 @@
 package pokemon;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import main.Globals.Types;
 import moves.Move;
@@ -10,7 +10,7 @@ public class Pokemon {
 	private StatsContainer currentStats;
 	private Types type1;
 	private Types type2;
-	private ArrayList<Move> moves;
+	private List<Move> moves;
 	
 	
 	public Pokemon(PokemonSpecies pokemonSpecies) {
@@ -53,7 +53,7 @@ public class Pokemon {
 	public PokemonSpecies getPokemonSpecies() { return pokemonSpecies; } 
 	public StatsContainer getBaseStats() { return pokemonSpecies.getBaseStats(); }
 	public StatsContainer getCurrentStats() { return currentStats; }
-	public ArrayList<Move> getMoves() { return moves; }
+	public List<Move> getMoves() { return moves; }
 
 	public void setType1(Types type1) { this.type1 = type1; }
 	public void setType2(Types type2) { this.type2 = type2; }

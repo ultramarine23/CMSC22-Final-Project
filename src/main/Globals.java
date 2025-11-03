@@ -9,7 +9,7 @@ public class Globals {
 	public static Color defBgColor = Color.darkGray;
 	
 	public enum Types {
-		WATER, FIRE, GRASS, ELECTRIC, ICE, DARK, PSYCHIC, FAIRY, GHOST,
+		WATER, FIRE, GRASS, ELECTRIC, ICE, DARK, PSYCHIC, FAIRY, GHOST, NONE,
 		DRAGON, NORMAL, FIGHTING, GROUND, ROCK, STEEL, FLYING, POISON, BUG
 	}
 	

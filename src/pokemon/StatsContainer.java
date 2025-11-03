@@ -8,6 +8,17 @@ public class StatsContainer {
 	private int specAtk = 0;
 	private int specDef = 0;
 	
+	public StatsContainer(int[] statsArray) {
+		hp = statsArray[0];
+		physAtk = statsArray[1];
+		physDef = statsArray[2];
+		specAtk = statsArray[3];
+		specDef = statsArray[4];
+		speed = statsArray[5];
+	}
+	
+	
+	// set-get methods
 	public int getHp() { return hp; }
 	public int getAtk() { return physAtk; }
 	public int getDef() { return physDef; }
@@ -69,7 +80,7 @@ public class StatsContainer {
 	}
 	
 	public StatsContainer clone() {
-		StatsContainer clonedStats = new StatsContainer();
+		StatsContainer clonedStats = new StatsContainer(new int[6]);
 		
 		clonedStats.setHp(hp);
 		clonedStats.setAtk(physAtk);

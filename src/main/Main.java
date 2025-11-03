@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import pokemon.Pokemon;
+import pokemon.SpeciesLibrary;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -73,6 +74,8 @@ public class Main {
 		// create battle
 		ArrayList<Pokemon> alliesArr = new ArrayList<Pokemon>();
 		ArrayList<Pokemon> enemiesArr = new ArrayList<Pokemon>();
+		
+		alliesArr.add(new Pokemon(SpeciesLibrary.WEEZING));
 		
 		BattleInstance newBattle = new BattleInstance(alliesArr, enemiesArr);
 	}

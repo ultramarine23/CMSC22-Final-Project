@@ -1,6 +1,6 @@
 package pokemon;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import abilities.Ability;
 import moves.Move;
@@ -12,11 +12,11 @@ public class PokemonSpecies {
 	private final int weight;
 	private final Types type1;
 	private final Types type2;
-	private final ArrayList<Ability> abilities;
-	private final ArrayList<Move> learnableMoves;
+	private final List<Ability> abilities;
+	private final List<Move> learnableMoves;
 	
 	public PokemonSpecies(String name, StatsContainer baseStats, int weight, Types type1,
-			Types type2, ArrayList<Ability> abilities, ArrayList<Move> learnableMoves) {
+			Types type2, List<Ability> abilities, List<Move> learnableMoves) {
 		this.name = name;
 		this.baseStats = baseStats;
 		this.weight = weight;
@@ -32,8 +32,8 @@ public class PokemonSpecies {
 	public int getWeight() { return weight; }
 	public Types getType1() { return type1; }
 	public Types getType2() { return type2; }
-	public ArrayList<Ability> getAbilities() { return abilities; }
-	public ArrayList<Move> getLearnableMoves() { return learnableMoves; }
+	public List<Ability> getAbilities() { return abilities; }
+	public List<Move> getLearnableMoves() { return learnableMoves; }
 	
 	
 }
