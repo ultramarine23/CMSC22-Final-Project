@@ -1,12 +1,26 @@
 package pokemon;
 
 public class StatsContainer {
-	int hp = 0;
-	int physAtk = 0;
-	int physDef = 0;
-	int speed = 0;
-	int specAtk = 0;
-	int specDef = 0;
+	private int hp = 0;
+	private int physAtk = 0;
+	private int physDef = 0;
+	private int speed = 0;
+	private int specAtk = 0;
+	private int specDef = 0;
+	
+	public int getHp() { return hp; }
+	public int getAtk() { return physAtk; }
+	public int getDef() { return physDef; }
+	public int getSpeed() { return speed; }
+	public int getSpAtk() { return specAtk; }
+	public int getSpDef() { return specDef; }
+	
+	public void setHp(int newVal) { hp = newVal; }
+	public void setAtk(int newVal) { physAtk = newVal; }
+	public void setDef(int newVal) { physDef = newVal; }
+	public void setSpeed(int newVal) { speed = newVal; }
+	public void setSpAtk(int newVal) { specAtk = newVal; }
+	public void setSpDef(int newVal) { specDef = newVal; }
 	
 	public int getStat(String statName) {
 		switch (statName) {
@@ -52,5 +66,18 @@ public class StatsContainer {
 		default:
 			throw new RuntimeException("Invalid stat name: " + statName);
 		}
+	}
+	
+	public StatsContainer clone() {
+		StatsContainer clonedStats = new StatsContainer();
+		
+		clonedStats.setHp(hp);
+		clonedStats.setAtk(physAtk);
+		clonedStats.setDef(physDef);
+		clonedStats.setSpAtk(specAtk);
+		clonedStats.setSpDef(specDef);
+		clonedStats.setSpeed(speed);
+		
+		return clonedStats;
 	}
 }

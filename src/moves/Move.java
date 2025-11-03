@@ -1,25 +1,51 @@
 package moves;
 
-public class Move {
-	private String name;
-	private int basePower;
-	private int accuracy;
+import pokemon.Pokemon;
+
+import main.BattleInstance;
+import main.Globals.Types;
+import main.Globals.MoveCategory;
+
+public abstract class Move {
+	private final String name;
+	private final int basePower;
+	private final int accuracy;
+	private final MoveCategory moveCategory;
+	private final Types moveType;
+	private final int priority;
+	private final int pp;
+	private final String description;
+	private final boolean affectedByProtect;
+	private final boolean makesContact;
 	
 	
-	
-	public Move(String newName, int newBasePower, int newAccuracy) {
-		name = newName;
-		basePower = newBasePower;
-		accuracy = newAccuracy;
+	public Move(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
+			int pp, String description, boolean affectedByProtect, boolean makesContact) {
+		this.name = name;
+		this.basePower = basePower;
+		this.accuracy = accuracy;
+		this.moveCategory = moveCategory;
+		this.moveType = moveType;
+		this.priority = priority;
+		this.pp = pp;
+		this.description = description;
+		this.affectedByProtect = affectedByProtect;
+		this.makesContact = makesContact;
 	}
-	
-	// set-get functions
-	public void setBasePower(int newBasePower) { basePower = newBasePower; }
-	public int getBasePower() { return basePower; }
-	
-	public void setAccuracy(int newAccuracy) { accuracy = newAccuracy; }
-	public int getAccuracy() { return accuracy; }
-	
-	public void setName(String newName) { name = newName; }
+
+	public abstract void beforeExecution(Pokemon user, Pokemon target, BattleInstance battleInst);
+	public abstract void afterExecution(Pokemon user, Pokemon target, BattleInstance battleInst);
+
+	// set-get methods
 	public String getName() { return name; }
+	public int getBasePower() { return basePower; }
+	public int getAccuracy() { return accuracy; }
+	public MoveCategory getMoveCategory() { return moveCategory; }
+	public Types getMoveType() { return moveType; }
+	public int getPriority() { return priority; }
+	public int getPp() { return pp; }
+	public String getDescription() { return description; }
+	public boolean isAffectedByProtect() { return affectedByProtect; }
+	public boolean makesContact() { return makesContact; }
+	
 }

@@ -8,9 +8,12 @@ public class Globals {
 	public static int defWinHeight = (720 / 3) * 2;
 	public static Color defBgColor = Color.darkGray;
 	
-	enum Types {
+	public enum Types {
 		WATER, FIRE, GRASS, ELECTRIC, ICE, DARK, PSYCHIC, FAIRY, GHOST,
 		DRAGON, NORMAL, FIGHTING, GROUND, ROCK, STEEL, FLYING, POISON, BUG
 	}
 	
+	public enum MoveCategory {
+		PHYSICAL, SPECIAL, STATUS
+	}
 }

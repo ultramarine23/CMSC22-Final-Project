@@ -17,9 +17,8 @@ public abstract class Ability {
 	private Pokemon user;
 	private Event triggerEvent; // the event that calls the function trigger()
 	
-	public Ability(String newName, Pokemon newUser, Event newTriggerEvent) {
+	public Ability(String newName, Event newTriggerEvent) {
 		name = newName;
-		user = newUser;
 		triggerEvent = newTriggerEvent;
 	}
 	
