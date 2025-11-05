@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Random;
 import java.awt.Color;
 
 public class Globals {
@@ -20,4 +21,6 @@ public class Globals {
 	public enum Weather {
 		SUN, RAIN, SNOW, SAND
 	}
+	
+	public static Random randomEngine = new Random();
 }

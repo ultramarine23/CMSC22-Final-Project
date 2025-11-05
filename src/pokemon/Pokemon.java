@@ -18,13 +18,7 @@ public class Pokemon {
 		this.currentStats = pokemonSpecies.getBaseStats().clone();
 		this.type1 = pokemonSpecies.getType1();
 		this.type2 = pokemonSpecies.getType2();
-		this.moves = pokemonSpecies.getLearnableMoves();
-		
-		System.out.println();
-		System.out.println(String.valueOf(getCurrentStats().getHp()));
-		takeDamage(10);
-		System.out.println(String.valueOf(getCurrentStats().getHp()));
-		
+		this.moves = pokemonSpecies.getLearnableMoves();		
 	}
 	
 	public void takeDamage(int amount) {

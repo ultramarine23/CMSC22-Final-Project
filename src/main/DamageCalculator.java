@@ -7,6 +7,7 @@ import pokemon.Pokemon;
 
 public class DamageCalculator {
 	public static int calculateDamage(Pokemon user, Pokemon target, Move move, BattleContext context) {
+		// first calculate main damage using atk/def and move base power
 		float targetDef = 0;
 		float userAtk = 0;
 		
@@ -23,6 +24,8 @@ public class DamageCalculator {
 		float atkdefRatio = userAtk / targetDef;
 		float mainDamage = ((42 * move.getBasePower() * atkdefRatio) / 50) + 2;
 		
+		
+		// apply weather modifiers to the damage
 		if (context.getCurBattle().getWeather() == Weather.RAIN) {
 			if (move.getMoveType() == Types.FIRE) {
 				mainDamage /= 2;
@@ -37,6 +40,22 @@ public class DamageCalculator {
 				mainDamage *= 1.5;
 			}
 		}
+		
+		
+		// apply STAB modifiers to the damage
+		if (user.getType1() == move.getMoveType() || user.getType2() == move.getMoveType()) {
+			mainDamage *= 1.5;
+		}
+		
+		
+		// apply random modifier to the damage
+		mainDamage *= (double) Globals.randomEngine.nextFloat(0.85f, 1.0f);
+		
+		
+		// !@! TBA: apply type effectiveness modifier to the damage
+		// !@! TBA: apply burn modifier to the damage
+		// !@! TBA: apply other modifiers (life orb, expert belt, etc.) to the damage
+		
 		
 		return (int) mainDamage;
 	}

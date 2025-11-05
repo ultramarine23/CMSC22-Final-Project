@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import main.Globals.Weather;
+import moves.Move;
 import pokemon.Pokemon;
+import pokemon.TurnIntent;
 
 public class BattleInstance {
 	private final BattleContext context;
@@ -30,9 +32,29 @@ public class BattleInstance {
 		printBattleStartPreamble();
 		
 		while (!isOver) {
-			System.out.println("Ally turn!");
+			String moveInput = "";
+			Move selectedMove = null;
+			TurnIntent allyTurnIntent = new TurnIntent();
 			
+			System.out.println("Ally turn!");
+			System.out.print("Select move: ");
+			moveInput = scanner.nextLine();
+			
+			for (Move move : activeAlly.getMoves()) {
+				if (move.getName().equals(moveInput)) {
+					selectedMove = move;
+				}
 			}
+			
+			allyTurnIntent.setMove(selectedMove);
+			allyTurnIntent.setUser(activeAlly);
+			allyTurnIntent.setTarget(activeEnemy);
+			allyTurnIntent.setContext(context);
+			allyTurnIntent.runTurn();
+			
+			System.out.println(activeEnemy.getCurrentStats().getHp());
+			scanner.nextLine();
+		}
 	}
 	
 	

@@ -7,7 +7,7 @@ import pokemon.Pokemon;
 
 public class Flamethrower extends Move {
 	// constructor variables
-	private static String name = "Ember";
+	private static String name = "Flamethrower";
 	private static int basePower = 40;
 	private static int accuracy = 100;
 	private static MoveCategory moveCategory = MoveCategory.SPECIAL;
