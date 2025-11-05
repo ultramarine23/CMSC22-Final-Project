@@ -78,6 +78,7 @@ public class Main {
 		alliesArr.add(new Pokemon(SpeciesLibrary.WEEZING));
 		
 		BattleInstance newBattle = new BattleInstance(alliesArr, enemiesArr);
+		newBattle.runBattle();
 	}
 	
 	public static void main(String[] args) {

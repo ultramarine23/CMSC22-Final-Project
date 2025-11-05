@@ -6,10 +6,10 @@ import moves.*;
 
 public class MovesetData {
 	public static final List<Move> WEEZING = List.of(
-			new Ember()
+			new Flamethrower()
 			);
 	
 	public static final List<Move> DRAGAPULT = List.of(
-			new Ember()
+			new Flamethrower()
 			);
 }

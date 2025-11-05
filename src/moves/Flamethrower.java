@@ -5,7 +5,7 @@ import main.Globals.MoveCategory;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class Ember extends Move {
+public class Flamethrower extends Move {
 	// constructor variables
 	private static String name = "Ember";
 	private static int basePower = 40;
@@ -18,16 +18,21 @@ public class Ember extends Move {
 	private static boolean affectedByProtect = true;
 	private static boolean makesContact = false;
 	
-	public Ember() {
+	public Flamethrower() {
 		super(name, basePower, accuracy, moveCategory, moveType, priority,
 			pp, description, affectedByProtect, makesContact);
 	}
 
 	@Override
-	public void beforeExecution(Pokemon user, Pokemon target, BattleInstance battleInst) {}
+	public void beforeExecution(Pokemon user, Pokemon target, BattleInstance battleInst) {
+		// do nothing
+	}
 
 	@Override
-	public void afterExecution(Pokemon user, Pokemon target, BattleInstance battleInst) {}
+	public void afterExecution(Pokemon user, Pokemon target, BattleInstance battleInst) {
+		// do nothing
+		
+	}
 
 	
 }

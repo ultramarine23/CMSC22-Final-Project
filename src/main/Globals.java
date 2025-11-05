@@ -16,4 +16,8 @@ public class Globals {
 	public enum MoveCategory {
 		PHYSICAL, SPECIAL, STATUS
 	}
+	
+	public enum Weather {
+		SUN, RAIN, SNOW, SAND
+	}
 }
