@@ -1,5 +1,6 @@
 package pokemon;
 
+import main.BattleContext;
 import main.DamageCalculator;
 import moves.Move;
 
@@ -7,10 +8,11 @@ public class TurnIntent {
 	private Pokemon user;
 	private Pokemon target;
 	private Move move;
+	private BattleContext context;
 	
 	
 	public void runTurn() {
-		int damageDealt = DamageCalculator.calculateDamage(user, target, move);
+		int damageDealt = DamageCalculator.calculateDamage(user, target, move, context);
 		target.takeDamage(damageDealt);
 	}
 
@@ -25,4 +27,6 @@ public class TurnIntent {
 	
 	public Move getMove() {	return move; }
 	public void setMove(Move move) { this.move = move; }
+	
+	public void setContext(BattleContext context) { this.context = context; } 
 }

@@ -14,6 +14,7 @@ public class Pokemon {
 	
 	
 	public Pokemon(PokemonSpecies pokemonSpecies) {
+		this.pokemonSpecies = pokemonSpecies;
 		this.currentStats = pokemonSpecies.getBaseStats().clone();
 		this.type1 = pokemonSpecies.getType1();
 		this.type2 = pokemonSpecies.getType2();
@@ -47,6 +48,14 @@ public class Pokemon {
 		
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Pokemon [\n\tSPECIES : " + pokemonSpecies.getName() + "\n\tSTATS : " + currentStats.toString() + "\n\tTYPE : " + type1
+				+ " / " + type2 + "\n\tMOVES : " + moves + "\n]";
+	}
+
 	// set-get functions
 	public Types getType1() { return type1; }
 	public Types getType2() { return type2; }

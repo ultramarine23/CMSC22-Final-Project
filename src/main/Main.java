@@ -68,7 +68,6 @@ public class Main {
 		titleNamePanel.add(titleLabel);
 		con.add(titleNamePanel);
 		con.add(titleButPanel);
-		// good
 		
 		
 		// create battle
@@ -76,6 +75,7 @@ public class Main {
 		ArrayList<Pokemon> enemiesArr = new ArrayList<Pokemon>();
 		
 		alliesArr.add(new Pokemon(SpeciesLibrary.WEEZING));
+		enemiesArr.add(new Pokemon(SpeciesLibrary.WEEZING));
 		
 		BattleInstance newBattle = new BattleInstance(alliesArr, enemiesArr);
 		newBattle.runBattle();

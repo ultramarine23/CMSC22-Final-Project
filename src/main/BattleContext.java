@@ -7,11 +7,13 @@ import pokemon.Pokemon;
 // can interact with the battleinstance (setting weather, applying damage, etc.)
 
 public class BattleContext {
-	private BattleInstance curBattle;
+	private final BattleInstance curBattle;
 	
 	public BattleContext(BattleInstance curBattle) {
 		this.curBattle = curBattle;
 	}
+	
+	public BattleInstance getCurBattle() { return curBattle; }
 	
 	public void applyDamage(Pokemon target, int damage) {
 		target.takeDamage(damage);

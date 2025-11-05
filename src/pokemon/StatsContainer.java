@@ -91,4 +91,12 @@ public class StatsContainer {
 		
 		return clonedStats;
 	}
+
+
+	@Override
+	public String toString() {
+		return "HP = " + hp + " / ATK = " + physAtk + " / DEF = " + physDef + " / SPE = " + speed
+				+ " / SPA = " + specAtk + " / SPD = " + specDef;
+	}
+	
 }
