@@ -22,5 +22,9 @@ public class Globals {
 		SUN, RAIN, SNOW, SAND
 	}
 	
+	public enum Stats {
+		HP, ATK, DEF, SPA, SPD, SPE
+	}
+	
 	public static Random randomEngine = new Random();
 }

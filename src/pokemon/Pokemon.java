@@ -3,6 +3,7 @@ package pokemon;
 import java.util.List;
 
 import main.Globals.Types;
+import main.StatsCalculator;
 import moves.Move;
 
 public class Pokemon {
@@ -15,7 +16,7 @@ public class Pokemon {
 	
 	public Pokemon(PokemonSpecies pokemonSpecies) {
 		this.pokemonSpecies = pokemonSpecies;
-		this.currentStats = pokemonSpecies.getBaseStats().clone();
+		this.currentStats = StatsCalculator.realizeAllStats(pokemonSpecies.getBaseStats());
 		this.type1 = pokemonSpecies.getType1();
 		this.type2 = pokemonSpecies.getType2();
 		this.moves = pokemonSpecies.getLearnableMoves();		
