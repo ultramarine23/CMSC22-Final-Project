@@ -2,6 +2,7 @@ package pokemon;
 
 import java.util.List;
 
+import main.Globals.Stats;
 import main.Globals.Types;
 import main.StatsCalculator;
 import moves.Move;
@@ -47,8 +48,30 @@ public class Pokemon {
 	
 	@Override
 	public String toString() {
-		return "Pokemon [\n\tSPECIES : " + pokemonSpecies.getName() + "\n\tSTATS : " + currentStats.toString() + "\n\tTYPE : " + type1
-				+ " / " + type2 + "\n\tMOVES : " + moves + "\n]";
+		// add string repr of name, types and HP vs. total HP
+		String repr = pokemonSpecies.getName();
+		repr += "\n  " + type1 + " / " + type2;
+		repr += "\n  HP : " + getCurrentStats().getHp() + " / " + StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp());
+		
+		// add string repr of stats aside from HP
+		repr += "\n  Atk " + getCurrentStats().getAtk() + " | Def " + getCurrentStats().getDef() + " | SpA " + getCurrentStats().getSpAtk() + " | SpD " + getCurrentStats().getSpDef() + " | Spe " + getCurrentStats().getSpeed();
+		
+		// add string repr of moves
+		repr += "\n    ";
+		for (int i = 0; i < 4; i++) {
+			if (moves.size() > i) {
+				Move move = moves.get(i);
+				repr += "• " + move.getName() + " ".repeat(20 - move.getName().length());
+				
+			} else {
+				repr += "• [no move]           ";
+			}
+			
+			if (i % 2 == 1) {
+				repr += "\n    ";
+			}
+		}
+		return repr;
 	}
 
 	// set-get functions
