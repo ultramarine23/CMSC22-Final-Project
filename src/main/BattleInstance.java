@@ -29,30 +29,19 @@ public class BattleInstance {
 	}
 	
 	public void runBattle() {
-		printBattleStartPreamble();
+		runBattleInitialization();
 		
 		while (!isOver) {
-			String moveInput = "";
-			Move selectedMove = null;
-			TurnIntent allyTurnIntent = new TurnIntent();
-			
-			System.out.println("Ally turn!");
-			System.out.print("Select move: ");
-			moveInput = scanner.nextLine();
-			
-			for (Move move : activeAlly.getMoves()) {
-				if (move.getName().equals(moveInput)) {
-					selectedMove = move;
-				}
-			}
-			
-			allyTurnIntent.setMove(selectedMove);
-			allyTurnIntent.setUser(activeAlly);
-			allyTurnIntent.setTarget(activeEnemy);
-			allyTurnIntent.setContext(context);
+			TurnIntent allyTurnIntent = buildTurnIntent(true);
 			allyTurnIntent.runTurn();
 			
-			System.out.println(activeEnemy.getCurrentStats().getHp());
+			printBattleStatus();
+			scanner.nextLine();
+			
+			TurnIntent enemyTurnIntent = buildTurnIntent(false);
+			enemyTurnIntent.runTurn();
+			
+			printBattleStatus();
 			scanner.nextLine();
 		}
 	}
@@ -77,7 +66,8 @@ public class BattleInstance {
 	public void setActiveEnemy(Pokemon activeEnemy) { this.activeEnemy = activeEnemy; }
 
 	
-	public void printBattleStartPreamble() {
+	// runBattle subfunctions
+	public void runBattleInitialization() {
 		String allyLeadInput;
 		String enemyLeadInput;
 		
@@ -90,25 +80,65 @@ public class BattleInstance {
 		for (Pokemon poke : enemies) {
 			System.out.println(poke.toString());
 		}
-		System.out.println("\nAlly, choose your lead: ");
+		System.out.print("\nAlly, choose your lead: ");
 		allyLeadInput = scanner.nextLine();
-		System.out.println("\nEnemy, choose your lead: ");
-		enemyLeadInput = scanner.nextLine();
 		
 		for (Pokemon poke : allies) {
 			if (poke.getPokemonSpecies().getName().equals(allyLeadInput)) {
-				System.out.println("Ally selected as lead!");
+				System.out.println(poke.getPokemonSpecies().getName() + " selected as lead!");
 				activeAlly = poke;
 				break;
 			}
 		}
 		
+		System.out.print("\nEnemy, choose your lead: ");
+		enemyLeadInput = scanner.nextLine();
+		
 		for (Pokemon poke : enemies) {
 			if (poke.getPokemonSpecies().getName().equals(enemyLeadInput)) {
-				System.out.println("Enemy selected as lead!");
+				System.out.println(poke.getPokemonSpecies().getName() + " selected as lead!");
 				activeEnemy = poke;
 				break;
 			}
 		}
+	}
+	
+	
+	public void printBattleStatus() {
+		System.out.println("Ally side: ");
+		System.out.println(activeAlly.toString());
+		System.out.println("\nEnemy side: ");
+		System.out.println(activeEnemy.toString());
+	}
+	
+	
+	public TurnIntent buildTurnIntent(boolean isForAlly) {
+		String moveInput = "";
+		TurnIntent turnIntent = new TurnIntent();
+		
+		// set the user and target depending on passed in field isForAlly
+		if (isForAlly) {
+			System.out.println("\nAlly turn!");
+			turnIntent.setUser(activeAlly);
+			turnIntent.setTarget(activeEnemy);
+		} else {
+			System.out.println("\nEnemy turn!");
+			turnIntent.setUser(activeEnemy);
+			turnIntent.setTarget(activeAlly);
+		}
+		
+		System.out.print("Select move: ");
+		moveInput = scanner.nextLine();
+		
+		// note: if no matching move is found this will result in an error
+		for (Move move : activeAlly.getMoves()) {
+			if (move.getName().equals(moveInput)) {
+				turnIntent.setMove(move);
+			}
+		}
+		
+		turnIntent.setContext(context);
+		
+		return turnIntent;
 	}
 }
