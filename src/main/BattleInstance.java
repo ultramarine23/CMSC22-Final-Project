@@ -19,6 +19,7 @@ public class BattleInstance {
 	private int weatherDuration;
 	private Pokemon activeAlly;
 	private Pokemon activeEnemy;
+	private int roundCount;
 	
 	public BattleInstance(ArrayList<Pokemon> allies, ArrayList<Pokemon> enemies) {
 		this.allies = allies;
@@ -26,23 +27,45 @@ public class BattleInstance {
 		this.activeAlly = allies.get(0);
 		this.activeEnemy = enemies.get(0);
 		this.context = new BattleContext(this);
+		this.roundCount = 0;
 	}
 	
 	public void runBattle() {
 		runBattleInitialization();
 		
 		while (!isOver) {
-			TurnIntent allyTurnIntent = buildTurnIntent(true);
+			// true corresponds to ally, false to enemy; first in array = first to move
+			boolean[] turnOrder; 
+			
+			if (activeAlly.getCurrentStats().getSpeed() > activeEnemy.getCurrentStats().getSpeed()) {
+				turnOrder = new boolean[] {true, false};
+			} else if (activeAlly.getCurrentStats().getSpeed() < activeEnemy.getCurrentStats().getSpeed()) {
+				turnOrder = new boolean[] {false, true};
+			} else {
+				// generate randomized turn order if speeds are equal
+				boolean randomBool = Globals.randomEngine.nextBoolean();
+				turnOrder = new boolean[] {randomBool, !randomBool};
+			}
+			
+			// run the current round
+			TurnIntent allyTurnIntent = buildTurnIntent(turnOrder[0]);
 			allyTurnIntent.runTurn();
 			
 			printBattleStatus();
 			scanner.nextLine();
 			
-			TurnIntent enemyTurnIntent = buildTurnIntent(false);
+			TurnIntent enemyTurnIntent = buildTurnIntent(turnOrder[1]);
 			enemyTurnIntent.runTurn();
 			
 			printBattleStatus();
 			scanner.nextLine();
+			
+			// tick down weather turns, remove weather if turns tick down to zero
+			if (weatherDuration != 0) {
+				weatherDuration--;
+			} else {
+				curWeather = Weather.NONE;
+			}
 		}
 	}
 	
@@ -61,6 +84,7 @@ public class BattleInstance {
 	public Pokemon getActiveAlly() { return activeAlly; }
 	public Pokemon getActiveEnemy() { return activeEnemy; }
 	public BattleContext getContext() { return context; }
+	public int getRoundCount() { return roundCount; }
 	
 	public void setActiveAlly(Pokemon activeAlly) { this.activeAlly = activeAlly; }
 	public void setActiveEnemy(Pokemon activeEnemy) { this.activeEnemy = activeEnemy; }

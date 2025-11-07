@@ -48,10 +48,22 @@ public class Pokemon {
 	
 	@Override
 	public String toString() {
-		// add string repr of name, types and HP vs. total HP
+		// add string repr of name, types
 		String repr = pokemonSpecies.getName();
 		repr += "\n  " + type1 + " / " + type2;
+		
+		// add string repr of HP bar
 		repr += "\n  HP : " + getCurrentStats().getHp() + " / " + StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp());
+		repr += "  [";
+		for (int i = 0; i < 15; i++) {
+			double threshold = i * StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp()) / 15;
+			if (getCurrentStats().getHp() >= threshold) {
+				repr += "■";
+			} else {
+				repr += " ";
+			}
+		} 
+		repr += "]";
 		
 		// add string repr of stats aside from HP
 		repr += "\n  Atk " + getCurrentStats().getAtk() + " | Def " + getCurrentStats().getDef() + " | SpA " + getCurrentStats().getSpAtk() + " | SpD " + getCurrentStats().getSpDef() + " | Spe " + getCurrentStats().getSpeed();

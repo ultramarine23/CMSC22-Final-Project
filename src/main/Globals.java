@@ -19,7 +19,7 @@ public class Globals {
 	}
 	
 	public enum Weather {
-		SUN, RAIN, SNOW, SAND
+		SUN, RAIN, SNOW, SAND, NONE
 	}
 	
 	public enum Stats {

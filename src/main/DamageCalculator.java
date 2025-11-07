@@ -5,7 +5,18 @@ import main.Globals.Weather;
 import moves.Move;
 import pokemon.Pokemon;
 
+import java.util.Map;
+import java.util.HashMap;
+
+
 public class DamageCalculator {
+	public static final Map<String, Double> typeEffectivenessMap = new HashMap<>();
+	
+	static {
+		// Task 0001 : Put the entire type chart into this hashmap
+		typeEffectivenessMap.put("FIRE_POISON", 2.0);
+	}
+	
 	public static int calculateDamage(Pokemon user, Pokemon target, Move move, BattleContext context) {
 		// first calculate main damage using atk/def and move base power
 		float targetDef = 0;
@@ -52,8 +63,13 @@ public class DamageCalculator {
 		mainDamage *= (double) Globals.randomEngine.nextFloat(0.85f, 1.0f);
 		
 		
-		// !@! TBA: apply type effectiveness modifier to the damage
+		// apply type effectiveness modifier to the damage
+		String typePairStr1 = move.getMoveType().toString() + "_" + target.getType1().toString();
+		mainDamage *= typeEffectivenessMap.getOrDefault(typePairStr1, 1.0);
+		
 		// !@! TBA: apply burn modifier to the damage
+		
+		
 		// !@! TBA: apply other modifiers (life orb, expert belt, etc.) to the damage
 		
 		
