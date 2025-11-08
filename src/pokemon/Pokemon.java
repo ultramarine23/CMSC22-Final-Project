@@ -2,6 +2,8 @@ package pokemon;
 
 import java.util.List;
 
+import main.Globals;
+import main.Globals.BattleEvent;
 import main.Globals.Stats;
 import main.Globals.Types;
 import main.StatsCalculator;
@@ -28,6 +30,10 @@ public class Pokemon {
 		
 		getCurrentStats().setHp(Integer.max(curHp - amount, 0));
 		
+		if (getCurrentStats().getHp() == 0) {
+			die();
+		}
+		
 	}
 	
 	public void healHealth(int amount) {
@@ -41,7 +47,7 @@ public class Pokemon {
 	public void removeMove(Move move) { moves.remove(move); }
 	
 	public void die() {
-		
+		Globals.curInstance.getEventBus().triggerEvent(BattleEvent.POKEMON_DIED);
 	}
 	
 	

@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import main.Globals.BattleEvent;
 import main.Globals.Weather;
 import moves.Move;
 import pokemon.Pokemon;
@@ -10,6 +11,7 @@ import pokemon.TurnIntent;
 
 public class BattleInstance {
 	private final BattleContext context;
+	private final BattleEventBus eventBus;
 
 	private Scanner scanner = new Scanner(System.in);
 	private boolean isOver = false;
@@ -26,11 +28,16 @@ public class BattleInstance {
 		this.enemies = enemies;
 		this.activeAlly = allies.get(0);
 		this.activeEnemy = enemies.get(0);
-		this.context = new BattleContext(this);
 		this.roundCount = 0;
+		
+		this.context = new BattleContext(this);
+		this.eventBus = new BattleEventBus();
+		
+		eventBus.subscribeToEvent(BattleEvent.POKEMON_DIED, ctx -> {System.out.println("Pokemon died!");});
 	}
 	
 	public void runBattle() {
+		Globals.curInstance = this;
 		runBattleInitialization();
 		
 		while (!isOver) {
@@ -50,13 +57,11 @@ public class BattleInstance {
 			// run the current round
 			TurnIntent allyTurnIntent = buildTurnIntent(turnOrder[0]);
 			allyTurnIntent.runTurn();
-			
 			printBattleStatus();
 			scanner.nextLine();
 			
 			TurnIntent enemyTurnIntent = buildTurnIntent(turnOrder[1]);
 			enemyTurnIntent.runTurn();
-			
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -85,6 +90,7 @@ public class BattleInstance {
 	public Pokemon getActiveEnemy() { return activeEnemy; }
 	public BattleContext getContext() { return context; }
 	public int getRoundCount() { return roundCount; }
+	public BattleEventBus getEventBus() { return eventBus; }
 	
 	public void setActiveAlly(Pokemon activeAlly) { this.activeAlly = activeAlly; }
 	public void setActiveEnemy(Pokemon activeEnemy) { this.activeEnemy = activeEnemy; }
@@ -165,4 +171,5 @@ public class BattleInstance {
 		
 		return turnIntent;
 	}
+	
 }

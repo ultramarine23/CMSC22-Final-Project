@@ -26,5 +26,10 @@ public class Globals {
 		HP, ATK, DEF, SPA, SPD, SPE
 	}
 	
+	public enum BattleEvent {
+		POKEMON_DIED
+	}
+	
 	public static Random randomEngine = new Random();
+	public static BattleInstance curInstance;
 }
