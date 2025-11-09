@@ -33,7 +33,6 @@ public class Pokemon {
 		if (getCurrentStats().getHp() == 0) {
 			die();
 		}
-		
 	}
 	
 	public void healHealth(int amount) {
@@ -47,7 +46,7 @@ public class Pokemon {
 	public void removeMove(Move move) { moves.remove(move); }
 	
 	public void die() {
-		Globals.curInstance.getEventBus().triggerEvent(BattleEvent.POKEMON_DIED);
+		Globals.curInstance.getEventBus().triggerEvent(BattleEvent.POKEMON_DIED, new Object[] {this});
 	}
 	
 	
@@ -61,8 +60,8 @@ public class Pokemon {
 		// add string repr of HP bar
 		repr += "\n  HP : " + getCurrentStats().getHp() + " / " + StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp());
 		repr += "  [";
-		for (int i = 0; i < 15; i++) {
-			double threshold = i * StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp()) / 15;
+		for (int i = 1; i <= 16; i++) {
+			double threshold = i * StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp()) / 16;
 			if (getCurrentStats().getHp() >= threshold) {
 				repr += "■";
 			} else {

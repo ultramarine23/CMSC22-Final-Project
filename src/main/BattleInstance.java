@@ -23,6 +23,10 @@ public class BattleInstance {
 	private Pokemon activeEnemy;
 	private int roundCount;
 	
+	// flags
+	private boolean hasBattleEnded;
+	private boolean isAlliedVictory;
+	
 	public BattleInstance(ArrayList<Pokemon> allies, ArrayList<Pokemon> enemies) {
 		this.allies = allies;
 		this.enemies = enemies;
@@ -33,7 +37,7 @@ public class BattleInstance {
 		this.context = new BattleContext(this);
 		this.eventBus = new BattleEventBus();
 		
-		eventBus.subscribeToEvent(BattleEvent.POKEMON_DIED, ctx -> {System.out.println("Pokemon died!");});
+		eventBus.subscribeToEvent(BattleEvent.POKEMON_DIED, args -> onPokemonDied(args));
 	}
 	
 	public void runBattle() {
@@ -44,6 +48,7 @@ public class BattleInstance {
 			// true corresponds to ally, false to enemy; first in array = first to move
 			boolean[] turnOrder; 
 			
+			// calculate turn order
 			if (activeAlly.getCurrentStats().getSpeed() > activeEnemy.getCurrentStats().getSpeed()) {
 				turnOrder = new boolean[] {true, false};
 			} else if (activeAlly.getCurrentStats().getSpeed() < activeEnemy.getCurrentStats().getSpeed()) {
@@ -60,10 +65,18 @@ public class BattleInstance {
 			printBattleStatus();
 			scanner.nextLine();
 			
+			if (hasBattleEnded) {
+				return;
+			}
+			
 			TurnIntent enemyTurnIntent = buildTurnIntent(turnOrder[1]);
 			enemyTurnIntent.runTurn();
 			printBattleStatus();
 			scanner.nextLine();
+			
+			if (hasBattleEnded) {
+				return;
+			}
 			
 			// tick down weather turns, remove weather if turns tick down to zero
 			if (weatherDuration != 0) {
@@ -172,4 +185,24 @@ public class BattleInstance {
 		return turnIntent;
 	}
 	
+	
+	// EVENT-TRIGGERED FUNCTIONS
+	private void onPokemonDied(Object[] deadMons) {
+		Pokemon deadPoke = (Pokemon) deadMons[0];
+		
+		allies.remove(deadPoke);
+		enemies.remove(deadPoke);
+		
+		if (allies.size() == 0) {
+			endBattle(false);
+		} else if (enemies.size() == 0) {
+			endBattle(true);
+		}
+		// then, check if battle ended
+	}
+	
+	private void endBattle(boolean didAlliesWin) {
+		hasBattleEnded = true;
+		isAlliedVictory = didAlliesWin;
+	}
 }

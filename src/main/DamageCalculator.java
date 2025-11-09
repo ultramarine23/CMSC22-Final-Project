@@ -14,7 +14,7 @@ public class DamageCalculator {
 	
 	static {
 		// Task 0001 : Put the entire type chart into this hashmap
-		typeEffectivenessMap.put("FIRE_POISON", 2.0);
+		typeEffectivenessMap.put("FIRE_POISON", 10.0);
 	}
 	
 	public static int calculateDamage(Pokemon user, Pokemon target, Move move, BattleContext context) {
