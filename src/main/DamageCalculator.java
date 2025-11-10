@@ -1,5 +1,7 @@
 package main;
 
+import main.Globals.MoveCategory;
+import main.Globals.Status;
 import main.Globals.Types;
 import main.Globals.Weather;
 import moves.Move;
@@ -21,6 +23,12 @@ public class DamageCalculator {
 		// first calculate main damage using atk/def and move base power
 		float targetDef = 0;
 		float userAtk = 0;
+		float basePwr = move.getBasePower();
+		
+		// handle burned case
+		if (user.getCurStatus() == Status.BURN && move.getMoveCategory() == MoveCategory.PHYSICAL) {
+			basePwr /= 2;
+		}
 		
 		if (move.getMoveCategory() == Globals.MoveCategory.PHYSICAL) {
 			targetDef = target.getCurrentStats().getDef();
@@ -33,7 +41,7 @@ public class DamageCalculator {
 		}
 		
 		float atkdefRatio = userAtk / targetDef;
-		float mainDamage = ((42 * move.getBasePower() * atkdefRatio) / 50) + 2;
+		float mainDamage = ((42 * basePwr * atkdefRatio) / 50) + 2;
 		
 		
 		// apply weather modifiers to the damage

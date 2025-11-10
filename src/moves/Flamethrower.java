@@ -4,6 +4,7 @@ import main.BattleContext;
 import main.BattleInstance;
 import main.Globals;
 import main.Globals.MoveCategory;
+import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
@@ -16,7 +17,7 @@ public class Flamethrower extends Move {
 	private static Types moveType = Types.FIRE;
 	private static int priority = 0;
 	private static int pp = 32;
-	private static String description = "No additional effect.";
+	private static String description = "10% chance to burn the opponent.";
 	private static boolean affectedByProtect = true;
 	private static boolean makesContact = false;
 	
@@ -33,9 +34,8 @@ public class Flamethrower extends Move {
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		if (Globals.randomEngine.nextDouble() < 0.1) {
-			
+			target.applyStatus(Status.BURN);
 		}
-		
 	}
 
 	
