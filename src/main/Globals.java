@@ -30,6 +30,10 @@ public class Globals {
 		POKEMON_DIED
 	}
 	
+	public enum Status {
+		BURN, PARALYSIS, FREEZE, SLEEP, NONE, POISON, TOXIC
+	}
+	
 	public static Random randomEngine = new Random();
 	public static BattleInstance curInstance;
 }

@@ -1,7 +1,7 @@
 package moves;
 
 import pokemon.Pokemon;
-
+import main.BattleContext;
 import main.BattleInstance;
 import main.Globals.Types;
 import main.Globals.MoveCategory;
@@ -33,9 +33,10 @@ public abstract class Move {
 		this.makesContact = makesContact;
 	}
 
-	public abstract void beforeExecution(Pokemon user, Pokemon target, BattleInstance battleInst);
-	public abstract void afterExecution(Pokemon user, Pokemon target, BattleInstance battleInst);
+	public abstract void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx);
+	public abstract void afterExecution(Pokemon user, Pokemon target, BattleContext ctx);
 
+	
 	// set-get methods
 	public String getName() { return name; }
 	public int getBasePower() { return basePower; }

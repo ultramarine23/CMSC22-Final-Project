@@ -1,6 +1,8 @@
 package moves;
 
+import main.BattleContext;
 import main.BattleInstance;
+import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.Types;
 import pokemon.Pokemon;
@@ -24,13 +26,15 @@ public class Flamethrower extends Move {
 	}
 
 	@Override
-	public void beforeExecution(Pokemon user, Pokemon target, BattleInstance battleInst) {
+	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		// do nothing
 	}
 
 	@Override
-	public void afterExecution(Pokemon user, Pokemon target, BattleInstance battleInst) {
-		// do nothing
+	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
+		if (Globals.randomEngine.nextDouble() < 0.1) {
+			
+		}
 		
 	}
 

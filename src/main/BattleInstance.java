@@ -193,12 +193,12 @@ public class BattleInstance {
 		allies.remove(deadPoke);
 		enemies.remove(deadPoke);
 		
+		// then, check if battle ended
 		if (allies.size() == 0) {
 			endBattle(false);
 		} else if (enemies.size() == 0) {
 			endBattle(true);
 		}
-		// then, check if battle ended
 	}
 	
 	private void endBattle(boolean didAlliesWin) {

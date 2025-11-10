@@ -4,9 +4,8 @@ import java.util.List;
 
 import main.Globals;
 import main.Globals.BattleEvent;
-import main.Globals.Stats;
+import main.Globals.Status;
 import main.Globals.Types;
-import main.StatsCalculator;
 import moves.Move;
 
 public class Pokemon {
@@ -15,15 +14,24 @@ public class Pokemon {
 	private Types type1;
 	private Types type2;
 	private List<Move> moves;
-	
+	private Status curStatus;
 	
 	public Pokemon(PokemonSpecies pokemonSpecies) {
 		this.pokemonSpecies = pokemonSpecies;
-		this.currentStats = StatsCalculator.realizeAllStats(pokemonSpecies.getBaseStats());
+		this.currentStats = pokemonSpecies.getBaseStats().clone();
 		this.type1 = pokemonSpecies.getType1();
 		this.type2 = pokemonSpecies.getType2();
-		this.moves = pokemonSpecies.getLearnableMoves();		
+		this.moves = pokemonSpecies.getLearnableMoves();	
+		this.curStatus = Status.NONE;
 	}
+	
+	
+	public void applyStatus(Status status) {
+		if (curStatus == Status.NONE) {
+			curStatus = status;
+		}
+	}
+	
 	
 	public void takeDamage(int amount) {
 		int curHp = getCurrentStats().getHp();
@@ -58,10 +66,10 @@ public class Pokemon {
 		repr += "\n  " + type1 + " / " + type2;
 		
 		// add string repr of HP bar
-		repr += "\n  HP : " + getCurrentStats().getHp() + " / " + StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp());
+		repr += "\n  HP : " + getCurrentStats().getHp() + " / " + pokemonSpecies.getBaseStats().getHp();
 		repr += "  [";
 		for (int i = 1; i <= 16; i++) {
-			double threshold = i * StatsCalculator.realizeStat(Stats.HP, pokemonSpecies.getBaseStats().getHp()) / 16;
+			double threshold = i * pokemonSpecies.getBaseStats().getHp() / 16;
 			if (getCurrentStats().getHp() >= threshold) {
 				repr += "■";
 			} else {
@@ -98,6 +106,7 @@ public class Pokemon {
 	public StatsContainer getBaseStats() { return pokemonSpecies.getBaseStats(); }
 	public StatsContainer getCurrentStats() { return currentStats; }
 	public List<Move> getMoves() { return moves; }
+	public Status getCurStatus() { return curStatus; }
 
 	public void setType1(Types type1) { this.type1 = type1; }
 	public void setType2(Types type2) { this.type2 = type2; }
