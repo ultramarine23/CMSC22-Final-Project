@@ -29,6 +29,7 @@ public class Pokemon {
 	public void applyStatus(Status status) {
 		if (curStatus == Status.NONE) {
 			curStatus = status;
+			System.out.println(pokemonSpecies.getName() + " was inflicted with " + curStatus.name() + "!");
 		}
 	}
 	
@@ -62,11 +63,11 @@ public class Pokemon {
 	@Override
 	public String toString() {
 		// add string repr of name, types
-		String repr = pokemonSpecies.getName();
-		repr += "\n  " + type1 + " / " + type2;
+		String repr = "\t" + pokemonSpecies.getName();
+		repr += "\n\t  " + type1 + " / " + type2;
 		
 		// add string repr of HP bar
-		repr += "\n  HP : " + getCurrentStats().getHp() + " / " + pokemonSpecies.getBaseStats().getHp();
+		repr += "\n\t  HP : " + getCurrentStats().getHp() + " / " + pokemonSpecies.getBaseStats().getHp();
 		repr += "  [";
 		for (int i = 1; i <= 16; i++) {
 			double threshold = i * pokemonSpecies.getBaseStats().getHp() / 16;
@@ -78,11 +79,14 @@ public class Pokemon {
 		} 
 		repr += "]";
 		
+		// add string repr of status
+		repr += " [ Status : " + curStatus.name() + " ]";
+		
 		// add string repr of stats aside from HP
-		repr += "\n  Atk " + getCurrentStats().getAtk() + " | Def " + getCurrentStats().getDef() + " | SpA " + getCurrentStats().getSpAtk() + " | SpD " + getCurrentStats().getSpDef() + " | Spe " + getCurrentStats().getSpeed();
+		repr += "\n\t  Atk " + getCurrentStats().getAtk() + " | Def " + getCurrentStats().getDef() + " | SpA " + getCurrentStats().getSpAtk() + " | SpD " + getCurrentStats().getSpDef() + " | Spe " + getCurrentStats().getSpeed();
 		
 		// add string repr of moves
-		repr += "\n    ";
+		repr += "\n\t    ";
 		for (int i = 0; i < 4; i++) {
 			if (moves.size() > i) {
 				Move move = moves.get(i);
@@ -93,7 +97,7 @@ public class Pokemon {
 			}
 			
 			if (i % 2 == 1) {
-				repr += "\n    ";
+				repr += "\n\t    ";
 			}
 		}
 		return repr;
@@ -111,9 +115,4 @@ public class Pokemon {
 	public void setType1(Types type1) { this.type1 = type1; }
 	public void setType2(Types type2) { this.type2 = type2; }
 	public void setCurrentStats(StatsContainer currentStats) { this.currentStats = currentStats; }
-
-	
-	public static void main(String[] args) {
-		
-	}
 }

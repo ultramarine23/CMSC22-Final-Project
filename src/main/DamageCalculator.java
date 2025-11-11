@@ -16,7 +16,9 @@ public class DamageCalculator {
 	
 	static {
 		// Task 0001 : Put the entire type chart into this hashmap
-		typeEffectivenessMap.put("FIRE_POISON", 10.0);
+		// First type is the attacker, second type is the defender
+		typeEffectivenessMap.put("FIRE_POISON", 1.0);
+		typeEffectivenessMap.put("NORMAL_POISON", 2.0);
 	}
 	
 	public static int calculateDamage(Pokemon user, Pokemon target, Move move, BattleContext context) {
@@ -48,7 +50,7 @@ public class DamageCalculator {
 		if (context.getCurBattle().getWeather() == Weather.RAIN) {
 			if (move.getMoveType() == Types.FIRE) {
 				mainDamage /= 2;
-			} else if (move.getMoveType() == Types.WATER) {
+			} else if (move.getMoveType() == Types.WATER || move.getName() == "Hydro Steam") {
 				mainDamage *= 1.5;
 			}
 		}
@@ -75,8 +77,8 @@ public class DamageCalculator {
 		String typePairStr1 = move.getMoveType().toString() + "_" + target.getType1().toString();
 		mainDamage *= typeEffectivenessMap.getOrDefault(typePairStr1, 1.0);
 		
-		// !@! TBA: apply burn modifier to the damage
-		
+		String typePairStr2 = move.getMoveType().toString() + "_" + target.getType2().toString();
+		mainDamage *= typeEffectivenessMap.getOrDefault(typePairStr2, 1.0);
 		
 		// !@! TBA: apply other modifiers (life orb, expert belt, etc.) to the damage
 		

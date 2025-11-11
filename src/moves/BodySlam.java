@@ -7,19 +7,19 @@ import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class Flamethrower extends Move {	
-	public Flamethrower() {
+public class BodySlam extends Move {	
+	public BodySlam() {
 		super(
-			"Flamethrower", // name
-			90, // basePower
+			"Body Slam", // name
+			85, // basePower
 			100, // accuracy
-			MoveCategory.SPECIAL, // moveCategory
-			Types.FIRE, // moveType
+			MoveCategory.PHYSICAL, // moveCategory
+			Types.NORMAL, // moveType
 			0, // priority
-			32, // pp
-			"10% chance to burn the opponent", // description
+			24, // pp
+			"30% chance to paralyze the opponent", // description
 			true, // affectedByProtect
-			false // makesContact
+			true // makesContact
 		);
 	}
 
@@ -30,8 +30,8 @@ public class Flamethrower extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		if (Globals.randomEngine.nextDouble() < 0.1) {
-			target.applyStatus(Status.BURN);
+		if (Globals.randomEngine.nextDouble() < 0.3) {
+			target.applyStatus(Status.PARALYSIS);
 		}
 	}
 }

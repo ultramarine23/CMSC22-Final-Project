@@ -26,7 +26,6 @@ public class Paralyzed extends Move {
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

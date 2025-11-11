@@ -62,9 +62,11 @@ public class BattleInstance {
 			}
 			
 			// run the current round
-			// !@! FIX THIS!! WHY IS ALLY ALWAYS HARD CODED TO GO FIRST
-			TurnIntent allyTurnIntent = buildAllyTurnIntent();
-			allyTurnIntent.runTurn();
+			// get turn inputs first, then run simultaneously
+			TurnIntent firstIntent = buildTurnIntent(turnOrder[0]);			
+			TurnIntent secondIntent = buildTurnIntent(turnOrder[1]);
+			
+			firstIntent.runTurn();
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -72,8 +74,7 @@ public class BattleInstance {
 				return;
 			}
 			
-			TurnIntent enemyTurnIntent = buildEnemyTurnIntent();
-			enemyTurnIntent.runTurn();
+			secondIntent.runTurn();
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -158,50 +159,43 @@ public class BattleInstance {
 	}
 	
 	
-	public TurnIntent buildAllyTurnIntent() {
-		String moveInput = "";
+	public TurnIntent buildTurnIntent(boolean isForAlly) {
 		TurnIntent turnIntent = new TurnIntent();
 		
-		// set the user and target depending on passed in field isForAlly
-		System.out.println("\nAlly turn!");
-		turnIntent.setUser(activeAlly);
-		turnIntent.setTarget(activeEnemy);
-		
-		System.out.print("Select move: ");
-		moveInput = scanner.nextLine();
-		
-		// note: if no matching move is found this will result in an error
-		for (Move move : activeAlly.getMoves()) {
-			if (move.getName().equals(moveInput)) {
-				turnIntent.setMove(move);
+		if (isForAlly) {
+			String moveInput = "";
+			
+			// set the user and target depending on passed in field isForAlly
+			System.out.println("\nAlly turn!");
+			turnIntent.setUser(activeAlly);
+			turnIntent.setTarget(activeEnemy);
+			
+			System.out.print("Select move: ");
+			moveInput = scanner.nextLine();
+			
+			// note: if no matching move is found this will result in an error
+			for (Move move : activeAlly.getMoves()) {
+				if (move.getName().equals(moveInput)) {
+					turnIntent.setMove(move);
+				}
 			}
-		}
-		
-		// apply paralysis check
-		
-		turnIntent.setContext(context);
-		
-		return turnIntent;
-	}
-	
-	
-	public TurnIntent buildEnemyTurnIntent() {
-		String moveInput = "";
-		TurnIntent turnIntent = new TurnIntent();
-		
-		// set the user and target depending on passed in field isForAlly
-		System.out.println("\nEnemy turn!");
-		turnIntent.setUser(activeEnemy);
-		turnIntent.setTarget(activeAlly);
-		
-		System.out.print("Select move: ");
-		moveInput = scanner.nextLine();
-		
-		// note: if no matching move is found this will result in an error
-		for (Move move : activeEnemy.getMoves()) {
-			if (move.getName().equals(moveInput)) {
-				turnIntent.setMove(move);
-			}
+		} else {
+			String moveInput = "";
+			
+			// set the user and target depending on passed in field isForAlly
+			System.out.println("\nEnemy turn!");
+			turnIntent.setUser(activeEnemy);
+			turnIntent.setTarget(activeAlly);
+			
+			System.out.print("Select move: ");
+			moveInput = scanner.nextLine();
+			
+			// note: if no matching move is found this will result in an error
+			for (Move move : activeEnemy.getMoves()) {
+				if (move.getName().equals(moveInput)) {
+					turnIntent.setMove(move);
+				}
+			}		
 		}
 		
 		// apply paralysis check
@@ -212,7 +206,6 @@ public class BattleInstance {
 		}
 		
 		turnIntent.setContext(context);
-		
 		return turnIntent;
 	}
 	

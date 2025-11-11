@@ -2,7 +2,6 @@ package moves;
 
 import pokemon.Pokemon;
 import main.BattleContext;
-import main.BattleInstance;
 import main.Globals.Types;
 import main.Globals.MoveCategory;
 

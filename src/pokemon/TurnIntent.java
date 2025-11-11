@@ -13,7 +13,21 @@ public class TurnIntent {
 	
 	public void runTurn() {
 		int damageDealt = DamageCalculator.calculateDamage(user, target, move, context);
+		
+		if (move.getName() != "[Paralyzed]") {
+			System.out.println(user.getPokemonSpecies().getName() + " used " + move.getName() + "!");
+		} else {
+			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
+		}
+		
+		move.beforeExecution(user, target, context);
 		target.takeDamage(damageDealt);
+		
+		if (damageDealt != 0) {
+			System.out.println(user.getPokemonSpecies().getName() + " took " + damageDealt + " damage!");
+		}
+		
+		move.afterExecution(user, target, context);
 	}
 
 	public int getEffectiveSpeed() { return user.getCurrentStats().getSpeed() + (move.getPriority() * 5000); }
