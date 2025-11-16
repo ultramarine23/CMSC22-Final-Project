@@ -31,7 +31,8 @@ public class Globals {
 	}
 	
 	public enum Status {
-		BURN, PARALYSIS, FREEZE, SLEEP, NONE, POISON, TOXIC
+		BURN, PARALYSIS, FREEZE, SLEEP, NONE, POISON, TOXIC, // non-volatile statuses
+		FLINCH, CONFUSE // volatile statuses
 	}
 	
 	public static Random randomEngine = new Random();

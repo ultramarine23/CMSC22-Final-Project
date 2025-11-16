@@ -15,19 +15,39 @@ public class Pokemon {
 	private Types type2;
 	private List<Move> moves;
 	private Status curStatus;
+	private int statusTurns;
+	private boolean isAllied;
 	
-	public Pokemon(PokemonSpecies pokemonSpecies) {
+	public Pokemon(PokemonSpecies pokemonSpecies, boolean isAllied) {
 		this.pokemonSpecies = pokemonSpecies;
 		this.currentStats = pokemonSpecies.getBaseStats().clone();
 		this.type1 = pokemonSpecies.getType1();
 		this.type2 = pokemonSpecies.getType2();
 		this.moves = pokemonSpecies.getLearnableMoves();	
 		this.curStatus = Status.NONE;
+		this.statusTurns = 0;
+		this.isAllied = isAllied;
 	}
 	
 	
 	public void applyStatus(Status status) {
 		if (curStatus == Status.NONE) {
+			// poison types cannot be poisoned/toxiced
+			if ((status == Status.POISON || status == Status.TOXIC) && (type1 == Types.POISON || type2 == Types.POISON)) {
+				return;
+			} 
+			
+			// fire types cannot be burned
+			if (status == Status.BURN && (type1 == Types.FIRE || type2 == Types.FIRE)) {
+				return;
+			}
+			
+			// ice types cannot be frozens
+			if (status == Status.FREEZE && (type1 == Types.ICE || type2 == Types.ICE)) {
+				return;
+			}
+			
+			statusTurns = 0;
 			curStatus = status;
 			System.out.println(pokemonSpecies.getName() + " was inflicted with " + curStatus.name() + "!");
 		}
@@ -111,8 +131,11 @@ public class Pokemon {
 	public StatsContainer getCurrentStats() { return currentStats; }
 	public List<Move> getMoves() { return moves; }
 	public Status getCurStatus() { return curStatus; }
+	public boolean isAllied() { return isAllied; }
+	public int getStatusTurns() { return statusTurns; }
 
 	public void setType1(Types type1) { this.type1 = type1; }
 	public void setType2(Types type2) { this.type2 = type2; }
 	public void setCurrentStats(StatsContainer currentStats) { this.currentStats = currentStats; }
+	public void incrementStatusTurns() { statusTurns++; } 
 }

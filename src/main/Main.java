@@ -74,8 +74,8 @@ public class Main {
 		ArrayList<Pokemon> alliesArr = new ArrayList<Pokemon>();
 		ArrayList<Pokemon> enemiesArr = new ArrayList<Pokemon>();
 		
-		alliesArr.add(new Pokemon(SpeciesLibrary.WEEZING));
-		enemiesArr.add(new Pokemon(SpeciesLibrary.WEEZING));
+		alliesArr.add(new Pokemon(SpeciesLibrary.WEEZING, true));
+		enemiesArr.add(new Pokemon(SpeciesLibrary.WEEZING, false));
 		
 		BattleInstance newBattle = new BattleInstance(alliesArr, enemiesArr);
 		newBattle.runBattle();

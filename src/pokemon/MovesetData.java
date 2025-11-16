@@ -7,7 +7,8 @@ import moves.*;
 public class MovesetData {
 	public static final List<Move> WEEZING = List.of(
 			new Flamethrower(),
-			new BodySlam()
+			new BodySlam(),
+			new SludgeBomb()
 			);
 	
 	public static final List<Move> DRAGAPULT = List.of(

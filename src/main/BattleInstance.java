@@ -66,6 +66,7 @@ public class BattleInstance {
 			TurnIntent firstIntent = buildTurnIntent(turnOrder[0]);			
 			TurnIntent secondIntent = buildTurnIntent(turnOrder[1]);
 			
+			// perform the round routine, with regular battle end checks
 			firstIntent.runTurn();
 			printBattleStatus();
 			scanner.nextLine();
@@ -77,6 +78,12 @@ public class BattleInstance {
 			secondIntent.runTurn();
 			printBattleStatus();
 			scanner.nextLine();
+			
+			if (hasBattleEnded) {
+				return;
+			}
+			
+			runTransitionPhase();
 			
 			if (hasBattleEnded) {
 				return;
@@ -210,6 +217,31 @@ public class BattleInstance {
 	}
 	
 	
+	public void runTransitionPhase() {
+		// runs the transition phase that sets up the following turn of battle
+		// trigger poison/burn damage
+		Pokemon[] activePokemons = new Pokemon[] {activeAlly, activeEnemy};
+		
+		for (Pokemon activeMon : activePokemons) {
+			if (activeMon.getCurStatus() == Status.BURN) {
+				activeMon.takeDamage(activeMon.getBaseStats().getHp() / 16);
+				System.out.println(activeMon.getPokemonSpecies().getName() + " took burn damage!");
+			} else if (activeMon.getCurStatus() == Status.POISON) {
+				activeMon.takeDamage(activeMon.getBaseStats().getHp() / 8);
+				System.out.println(activeMon.getPokemonSpecies().getName() + " took poison damage!");
+			} else if (activeMon.getCurStatus() == Status.TOXIC) {
+				activeMon.takeDamage(activeMon.getBaseStats().getHp() * activeMon.getStatusTurns() / 16);
+				System.out.println(activeMon.getPokemonSpecies().getName() + " took poison damage!");
+			}
+			
+			activeMon.incrementStatusTurns();
+		}
+		
+		// increment round count
+		roundCount++;
+	}
+	
+	
 	// EVENT-TRIGGERED FUNCTIONS
 	private void onPokemonDied(Object[] deadMons) {
 		Pokemon deadPoke = (Pokemon) deadMons[0];
@@ -228,5 +260,11 @@ public class BattleInstance {
 	private void endBattle(boolean didAlliesWin) {
 		hasBattleEnded = true;
 		isAlliedVictory = didAlliesWin;
+		
+		if (didAlliesWin) {
+			System.out.println("YOU WIN!");
+		} else {
+			System.out.println("YOU LOSE!");
+		}
 	}
 }
