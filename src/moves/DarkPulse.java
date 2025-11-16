@@ -30,8 +30,8 @@ public class DarkPulse extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		if (Globals.randomEngine.nextDouble() < 0.3) {
-			target.applyStatus(Status.PARALYSIS);
+		if (Globals.randomEngine.nextDouble() < 0.99) {
+			target.setFlinched(true);
 		}
 	}
 }

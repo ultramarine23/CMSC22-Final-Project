@@ -32,6 +32,9 @@ public class Globals {
 	
 	public enum Status {
 		BURN, PARALYSIS, FREEZE, SLEEP, NONE, POISON, TOXIC, // non-volatile statuses
+	}
+	
+	public enum VolatileStatus {
 		FLINCH, CONFUSE // volatile statuses
 	}
 	

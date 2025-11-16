@@ -8,7 +8,8 @@ public class MovesetData {
 	public static final List<Move> WEEZING = List.of(
 			new Flamethrower(),
 			new BodySlam(),
-			new SludgeBomb()
+			new SludgeBomb(),
+			new DarkPulse()
 			);
 	
 	public static final List<Move> DRAGAPULT = List.of(

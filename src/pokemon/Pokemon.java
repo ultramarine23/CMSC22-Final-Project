@@ -1,11 +1,13 @@
 package pokemon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import main.Globals;
 import main.Globals.BattleEvent;
 import main.Globals.Status;
 import main.Globals.Types;
+import main.Globals.VolatileStatus;
 import moves.Move;
 
 public class Pokemon {
@@ -15,8 +17,11 @@ public class Pokemon {
 	private Types type2;
 	private List<Move> moves;
 	private Status curStatus;
-	private int statusTurns;
+	private ArrayList<VolatileStatus> volatileStatus;
+	private int statusTurns; // used for computation of toxic damage
 	private boolean isAllied;
+	private List<Move> previousMoves;
+	private boolean isFlinched;
 	
 	public Pokemon(PokemonSpecies pokemonSpecies, boolean isAllied) {
 		this.pokemonSpecies = pokemonSpecies;
@@ -26,9 +31,11 @@ public class Pokemon {
 		this.moves = pokemonSpecies.getLearnableMoves();	
 		this.curStatus = Status.NONE;
 		this.statusTurns = 0;
+		this.volatileStatus = new ArrayList<VolatileStatus>();
 		this.isAllied = isAllied;
+		this.isFlinched = false;
+		this.previousMoves = new ArrayList<Move>();
 	}
-	
 	
 	public void applyStatus(Status status) {
 		if (curStatus == Status.NONE) {
@@ -122,7 +129,7 @@ public class Pokemon {
 		}
 		return repr;
 	}
-
+	
 	// set-get functions
 	public Types getType1() { return type1; }
 	public Types getType2() { return type2; }
@@ -133,9 +140,12 @@ public class Pokemon {
 	public Status getCurStatus() { return curStatus; }
 	public boolean isAllied() { return isAllied; }
 	public int getStatusTurns() { return statusTurns; }
+	public List<VolatileStatus> getVolatileStatus() { return volatileStatus; }
+	public boolean isFlinched() { return isFlinched; }
 
 	public void setType1(Types type1) { this.type1 = type1; }
 	public void setType2(Types type2) { this.type2 = type2; }
 	public void setCurrentStats(StatsContainer currentStats) { this.currentStats = currentStats; }
 	public void incrementStatusTurns() { statusTurns++; } 
+	public void setFlinched(boolean newStatus) { isFlinched = newStatus; }
 }

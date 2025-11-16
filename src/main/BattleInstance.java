@@ -223,6 +223,10 @@ public class BattleInstance {
 		Pokemon[] activePokemons = new Pokemon[] {activeAlly, activeEnemy};
 		
 		for (Pokemon activeMon : activePokemons) {
+			// remove flinch from pokemon
+			activeMon.setFlinched(false);
+			
+			
 			if (activeMon.getCurStatus() == Status.BURN) {
 				activeMon.takeDamage(activeMon.getBaseStats().getHp() / 16);
 				System.out.println(activeMon.getPokemonSpecies().getName() + " took burn damage!");

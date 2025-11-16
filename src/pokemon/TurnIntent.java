@@ -13,6 +13,17 @@ public class TurnIntent {
 	
 	
 	public void runTurn() {
+		if (user.isFlinched()) {
+			user.setFlinched(false);
+			if (user.isAllied()) {
+				System.out.print("Your ");
+			} else {
+				System.out.print("Enemy ");
+			System.out.println(user.getPokemonSpecies().getName() + " flinched!");
+			return;
+			}
+		}
+		
 		int damageDealt = DamageCalculator.calculateDamage(user, target, move, context);
 		
 		// print used move message
