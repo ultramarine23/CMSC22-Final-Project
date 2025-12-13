@@ -7,12 +7,12 @@ import main.Globals.MoveCategory;
 
 public abstract class Move {
 	private final String name;
-	private final int basePower;
-	private final int accuracy;
+	private int basePower; //can be modified
+	private int accuracy; //can be modified
 	private final MoveCategory moveCategory;
 	private final Types moveType;
-	private final int priority;
-	private final int pp;
+	private int priority; //can be modified
+	private int pp; //can be modified
 	private final String description;
 	private final boolean affectedByProtect;
 	private final boolean makesContact;
@@ -21,7 +21,7 @@ public abstract class Move {
 	public Move(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
 			int pp, String description, boolean affectedByProtect, boolean makesContact) {
 		this.name = name;
-		this.basePower = basePower;
+		this.basePower = basePower; 
 		this.accuracy = accuracy;
 		this.moveCategory = moveCategory;
 		this.moveType = moveType;
@@ -40,7 +40,7 @@ public abstract class Move {
 	public String getName() { return name; }
 	public int getBasePower() { return basePower; }
 	public int getAccuracy() { return accuracy; }
-	public MoveCategory getMoveCategory() { return moveCategory; }
+	public MoveCategory getMoveCategory() { return moveCategory;}
 	public Types getMoveType() { return moveType; }
 	public int getPriority() { return priority; }
 	public int getPp() { return pp; }
@@ -48,4 +48,10 @@ public abstract class Move {
 	public boolean isAffectedByProtect() { return affectedByProtect; }
 	public boolean makesContact() { return makesContact; }
 	
+	
+	public void setPower(int power) {this.basePower = power;}
+	public void setAccuracy(int accuracy) {this.accuracy = accuracy;}
+	public void setPriority (int prio) {this.priority = prio;}
+	public void setPP(int pp) {this.pp = pp;}
+	 
 }
