@@ -49,7 +49,7 @@ public class Pokemon {
 				return;
 			}
 			
-			// ice types cannot be frozens
+			// ice types cannot be frozen
 			if (status == Status.FREEZE && (type1 == Types.ICE || type2 == Types.ICE)) {
 				return;
 			}

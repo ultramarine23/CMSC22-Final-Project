@@ -33,5 +33,6 @@ public class DarkPulse extends Move {
 		if (Globals.randomEngine.nextDouble() < 0.99) {
 			target.setFlinched(true);
 		}
+		
 	}
 }
