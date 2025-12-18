@@ -1,18 +1,28 @@
 package moves;
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
 public class ThunderWave extends Move {
 
-	public ThunderWave(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType,
-			int priority, int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Thunder Wave", 0, 90, MoveCategory.STATUS, Types.ELECTRIC, 0, 32, "Paralyzes the target.", true,
-				false);
-		// TODO Auto-generated constructor stub
+	public ThunderWave() {
+		super(
+				"Thunder Wave", 
+				0, 
+				90, 
+				MoveCategory.STATUS, 
+				Types.ELECTRIC, 
+				0, 
+				32, 
+				"Paralyzes the target.", 
+				EnumSet.noneOf(MoveFlags.class)
+			);
 	}
 
 	@Override

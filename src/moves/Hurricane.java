@@ -1,19 +1,29 @@
 package moves;
 
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
 public class Hurricane extends Move {
 
-	public Hurricane(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Hurricane", 110, 70, MoveCategory.SPECIAL, Types.FLYING, 0, 32, "30% chance to confuse target. Can't miss in rain. ", true,
-				false);
-		// TODO Auto-generated constructor stub
+	public Hurricane() {
+		super(
+				"Hurricane", 
+				110, 
+				70, 
+				MoveCategory.SPECIAL, 
+				Types.FLYING, 
+				0, 
+				32, 
+				"30% chance to confuse target. Can't miss in rain. ", 
+				EnumSet.noneOf(MoveFlags.class)
+			);
 	}
 
 	@Override

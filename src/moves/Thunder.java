@@ -1,19 +1,29 @@
 package moves;
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
 public class Thunder extends Move {
 
-	public Thunder(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Thunder", 110, 70, MoveCategory.SPECIAL, Types.ELECTRIC, 0, 16, "30% chance to paralyze. Can't miss in rain.", true,
-				true);
-		// TODO Auto-generated constructor stub
+	public Thunder() {
+		super(
+				"Thunder", 
+				110, 
+				70, 
+				MoveCategory.SPECIAL, 
+				Types.ELECTRIC, 
+				0, 
+				16, 
+				"30% chance to paralyze. Can't miss in rain.", 
+				EnumSet.noneOf(MoveFlags.class)
+			);
 	}
 
 	@Override
@@ -27,7 +37,6 @@ public class Thunder extends Move {
 		if (Globals.randomEngine.nextDouble() < 0.3) {
 			target.applyStatus(Status.PARALYSIS);
 		}
-
 	}
 
 }
