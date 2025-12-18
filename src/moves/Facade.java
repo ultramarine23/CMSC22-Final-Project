@@ -2,8 +2,11 @@ package moves;
 
 
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
@@ -13,9 +16,17 @@ public class Facade extends Move {
 
 	public Facade(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
 			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Facade", 70, 100, MoveCategory.PHYSICAL, Types.NORMAL, 0, 32, "Power doubles if user is burn/poison/paralyzed.", true,
-				true);
-		
+		super(
+				"Facade", 
+				70, 
+				100, 
+				MoveCategory.PHYSICAL, 
+				Types.NORMAL, 
+				0, 
+				32, 
+				"Power doubles if user is burn/poison/paralyzed.", 
+				EnumSet.of(MoveFlags.CONTACT_MOVE)
+			);
 	}
 
 	@Override

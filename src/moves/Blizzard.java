@@ -1,5 +1,8 @@
 package moves;
 
+import main.Globals.MoveFlags;
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals;
 import main.Globals.MoveCategory;
@@ -11,8 +14,16 @@ public class Blizzard extends Move {
 
 	public Blizzard(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
 			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super(name, 110, 70, MoveCategory.SPECIAL, Types.ICE, 0, 8, "10% chance to freeze foe(s). Can't miss in Snow.", true,
-				false);
+		super(
+				"Blizzard", 
+				110, 
+				70, 
+				MoveCategory.SPECIAL, 
+				Types.ICE, 
+				0, 
+				8, 
+				"10% chance to freeze foe(s). Can't miss in Snow.", 
+				EnumSet.noneOf(MoveFlags.class));
 		// TODO Auto-generated constructor stub
 	}
 

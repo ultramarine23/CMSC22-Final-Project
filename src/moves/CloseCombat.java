@@ -1,19 +1,29 @@
 package moves;
 
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 import pokemon.StatsContainer;
 
 public class CloseCombat extends Move {
 
-	public CloseCombat(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType,
-			int priority, int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Close Combat", 120, 100, MoveCategory.PHYSICAL, Types.FIGHTING, 0, 8, "Lowers the user's Defense and Sp. Def by 1.", true,
-				true);
-		// TODO Auto-generated constructor stub
+	public CloseCombat() {
+		super(
+				"Close Combat", 
+				120, 
+				100, 
+				MoveCategory.PHYSICAL, 
+				Types.FIGHTING, 
+				0, 
+				8, 
+				"Lowers the user's Defense and Sp. Def by 1.", 
+				EnumSet.noneOf(MoveFlags.class)
+			);
 	}
 
 	@Override

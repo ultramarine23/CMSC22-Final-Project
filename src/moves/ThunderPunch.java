@@ -1,19 +1,28 @@
 package moves;
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
 public class ThunderPunch extends Move {
 
-	public ThunderPunch(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType,
-			int priority, int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Thunder Punch", 75, 100, MoveCategory.PHYSICAL, Types.ELECTRIC, 0, 24, "10% chance to paralyze the target.", true,
-				true);
-		// TODO Auto-generated constructor stub
+	public ThunderPunch() {
+		super(
+				"Thunder Punch", 
+				75, 
+				100, 
+				MoveCategory.PHYSICAL, 
+				Types.ELECTRIC, 
+				0, 
+				24, 
+				"10% chance to paralyze the target.", 
+				EnumSet.of(MoveFlags.CONTACT_MOVE));
 	}
 
 	@Override

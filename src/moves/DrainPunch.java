@@ -1,19 +1,24 @@
 package moves;
 
-
-
+import java.util.EnumSet;
 import main.BattleContext;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
 public class DrainPunch extends Move {
-
-	public DrainPunch(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Drain Punch", 75, 100, moveCategory.PHYSICAL, Types.FIGHTING, 0, 16, "User recovers 50% of the damage dealt.", true,
-				true);
-		// TODO Auto-generated constructor stub
+	public DrainPunch() {
+		super(
+				"Drain Punch", 
+				75, 
+				100, 
+				MoveCategory.PHYSICAL, 
+				Types.FIGHTING, 
+				0, 
+				16, 
+				"User recovers 50% of the damage dealt.", 
+				EnumSet.of(MoveFlags.HEALING_MOVE, MoveFlags.CONTACT_MOVE));
 	}
 
 	@Override
