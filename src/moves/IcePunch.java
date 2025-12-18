@@ -1,8 +1,11 @@
 package moves;
 
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
@@ -10,10 +13,18 @@ import main.Globals;
 
 public class IcePunch extends Move {
 
-	public IcePunch(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Ice Punch", 75, 100, MoveCategory.PHYSICAL, Types.ICE, 0, 24, "Has a 10% chance of freezing the target.", affectedByProtect,
-				makesContact);
+	public IcePunch() {
+		super(
+				"Ice Punch", 
+				75, 
+				100, 
+				MoveCategory.PHYSICAL, 
+				Types.ICE, 
+				0, 
+				24, 
+				"Has a 10% chance of freezing the target.", 
+				EnumSet.of(MoveFlags.CONTACT_MOVE)
+			);
 		// TODO Auto-generated constructor stub
 	}
 
