@@ -1,8 +1,11 @@
 package moves;
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
@@ -18,8 +21,7 @@ public class DarkPulse extends Move {
 			0, // priority
 			24, // pp
 			"20% chance to flinch the opponent", // description
-			true, // affectedByProtect
-			false // makesContact
+			EnumSet.noneOf(MoveFlags.class) // flags
 		);
 	}
 
@@ -30,7 +32,7 @@ public class DarkPulse extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		if (Globals.randomEngine.nextDouble() < 0.99) {
+		if (Globals.randomEngine.nextDouble() < 0.2) {
 			target.setFlinched(true);
 		}
 		

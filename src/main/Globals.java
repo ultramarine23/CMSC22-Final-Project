@@ -38,6 +38,10 @@ public class Globals {
 		FLINCH, CONFUSE // volatile statuses
 	}
 	
+	public enum MoveFlags {
+		BREAKS_PROTECT, BYPASSES_PROTECT, HIGH_CRIT, DANCE_MOVE, HEALING_MOVE, CONTACT_MOVE
+	}
+	
 	public static Random randomEngine = new Random();
 	public static BattleInstance curInstance;
 }

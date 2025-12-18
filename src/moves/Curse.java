@@ -6,34 +6,35 @@ import main.BattleContext;
 import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
+import main.Globals.Stats;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class SludgeBomb extends Move {	
-	public SludgeBomb() {
+public class Curse extends Move {	
+	public Curse() {
 		super(
-			"Sludge Bomb", // name
-			90, // basePower
-			100, // accuracy
-			MoveCategory.SPECIAL, // moveCategory
-			Types.POISON, // moveType
+			"Curse", // name
+			0, // basePower
+			999, // accuracy
+			MoveCategory.STATUS, // moveCategory
+			Types.GHOST, // moveType
 			0, // priority
-			24, // pp
-			"30% chance to poison the opponent", // description
+			16, // pp
+			"-1 Speed, +1 Attack and Defense", // description
 			EnumSet.noneOf(MoveFlags.class) // flags
 		);
 	}
 
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		// do nothing
+		user.incrementStatStage(Stats.ATK, 1);
+		user.incrementStatStage(Stats.DEF, 1);
+		user.incrementStatStage(Stats.SPE, -1);
 	}
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		if (Globals.randomEngine.nextDouble() < 0.3) {
-			target.applyStatus(Status.POISON);
-		}
+		// do nothing
 	}
 }

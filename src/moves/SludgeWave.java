@@ -10,17 +10,17 @@ import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class SludgeBomb extends Move {	
-	public SludgeBomb() {
+public class SludgeWave extends Move {	
+	public SludgeWave() {
 		super(
-			"Sludge Bomb", // name
-			90, // basePower
+			"Sludge Wave", // name
+			95, // basePower
 			100, // accuracy
 			MoveCategory.SPECIAL, // moveCategory
 			Types.POISON, // moveType
 			0, // priority
-			24, // pp
-			"30% chance to poison the opponent", // description
+			16, // pp
+			"10% chance to poison the opponent", // description
 			EnumSet.noneOf(MoveFlags.class) // flags
 		);
 	}
@@ -32,7 +32,7 @@ public class SludgeBomb extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		if (Globals.randomEngine.nextDouble() < 0.3) {
+		if (Globals.randomEngine.nextDouble() < 0.1) {
 			target.applyStatus(Status.POISON);
 		}
 	}

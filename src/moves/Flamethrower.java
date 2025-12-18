@@ -1,8 +1,11 @@
 package moves;
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
@@ -18,8 +21,7 @@ public class Flamethrower extends Move {
 			0, // priority
 			32, // pp
 			"10% chance to burn the opponent", // description
-			true, // affectedByProtect
-			false // makesContact
+			EnumSet.noneOf(MoveFlags.class) // flags
 		);
 	}
 

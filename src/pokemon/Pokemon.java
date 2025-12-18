@@ -1,13 +1,16 @@
 package pokemon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import main.Globals;
 import main.Globals.BattleEvent;
 import main.Globals.Status;
 import main.Globals.Types;
 import main.Globals.VolatileStatus;
+import main.Globals.Stats;
 import moves.Move;
 
 public class Pokemon {
@@ -20,6 +23,7 @@ public class Pokemon {
 	private ArrayList<VolatileStatus> volatileStatus;
 	private int statusTurns; // used for computation of toxic damage
 	private boolean isAllied;
+	private Map<Stats, Integer> statChanges;
 	private List<Move> previousMoves;
 	private boolean isFlinched;
 	
@@ -35,6 +39,14 @@ public class Pokemon {
 		this.isAllied = isAllied;
 		this.isFlinched = false;
 		this.previousMoves = new ArrayList<Move>();
+		
+		// initialize statChanges
+		this.statChanges = new HashMap<Stats, Integer>();
+		this.statChanges.put(Stats.ATK, 0);
+		this.statChanges.put(Stats.DEF, 0);
+		this.statChanges.put(Stats.SPA, 0);
+		this.statChanges.put(Stats.SPD, 0);
+		this.statChanges.put(Stats.SPE, 0);
 	}
 	
 	public void applyStatus(Status status) {
@@ -86,6 +98,44 @@ public class Pokemon {
 	}
 	
 	
+	public void incrementStatStage(Stats stat, int incrementAmount) {
+		Integer statStage = statChanges.get(stat);
+		statStage += incrementAmount;
+	}
+	
+	
+	public void calculateCurrentStats() {
+		// temporarily reset current stats
+		setCurrentStats(getBaseStats());
+		
+		// calculate stat stage changes
+		for (Stats stat : Stats.values()) {
+			int value = statChanges.get(stat);
+			
+			switch (stat) {
+			case Stats.ATK:
+				currentStats.setAtk((int)(currentStats.getAtk() * ((0.5 * value) + 1)));
+				return;
+			case Stats.DEF:
+				currentStats.setDef((int)(currentStats.getDef() * ((0.5 * value) + 1)));
+				return;
+			case Stats.SPA:
+				currentStats.setSpAtk((int)(currentStats.getSpAtk() * ((0.5 * value) + 1)));
+				return;
+			case Stats.SPD:
+				currentStats.setSpDef((int)(currentStats.getSpDef() * ((0.5 * value) + 1)));
+				return;
+			case Stats.SPE:
+				currentStats.setSpeed((int)(currentStats.getSpeed() * ((0.5 * value) + 1)));
+				return;
+			case Stats.HP:
+				return;
+					
+			}
+		}
+		
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -135,7 +185,7 @@ public class Pokemon {
 	public Types getType2() { return type2; }
 	public PokemonSpecies getPokemonSpecies() { return pokemonSpecies; } 
 	public StatsContainer getBaseStats() { return pokemonSpecies.getBaseStats(); }
-	public StatsContainer getCurrentStats() { return currentStats; }
+	public StatsContainer getCurrentStats() { calculateCurrentStats(); return currentStats; }
 	public List<Move> getMoves() { return moves; }
 	public Status getCurStatus() { return curStatus; }
 	public boolean isAllied() { return isAllied; }

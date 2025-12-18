@@ -1,7 +1,10 @@
 package moves;
 
+import java.util.EnumSet;
+
 import main.BattleContext;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
@@ -15,12 +18,11 @@ public class Paralyzed extends Move {
 	private static int priority = 0;
 	private static int pp = 32;
 	private static String description = "No additional effect.";
-	private static boolean affectedByProtect = false;
-	private static boolean makesContact = false;
+	private static EnumSet<MoveFlags> flags = EnumSet.noneOf(MoveFlags.class);
 	
 	public Paralyzed() {
 		super(name, basePower, accuracy, moveCategory, moveType, priority, 
-				pp, description, affectedByProtect, makesContact);
+				pp, description, flags);
 	}
 
 	@Override

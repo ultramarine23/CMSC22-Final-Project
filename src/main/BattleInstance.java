@@ -14,6 +14,7 @@ import pokemon.TurnIntent;
 public class BattleInstance {
 	private final BattleContext context;
 	private final BattleEventBus eventBus;
+	private final MoveExecutor moveExecutor;
 
 	private Scanner scanner = new Scanner(System.in);
 	private boolean isOver = false;
@@ -38,6 +39,7 @@ public class BattleInstance {
 		
 		this.context = new BattleContext(this);
 		this.eventBus = new BattleEventBus();
+		this.moveExecutor = new MoveExecutor();
 		
 		eventBus.subscribeToEvent(BattleEvent.POKEMON_DIED, args -> onPokemonDied(args));
 	}
@@ -67,7 +69,7 @@ public class BattleInstance {
 			TurnIntent secondIntent = buildTurnIntent(turnOrder[1]);
 			
 			// perform the round routine, with regular battle end checks
-			firstIntent.runTurn();
+			moveExecutor.executeMove(firstIntent);
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -75,7 +77,7 @@ public class BattleInstance {
 				return;
 			}
 			
-			secondIntent.runTurn();
+			moveExecutor.executeMove(secondIntent);
 			printBattleStatus();
 			scanner.nextLine();
 			

@@ -3,25 +3,23 @@ package moves;
 import java.util.EnumSet;
 
 import main.BattleContext;
-import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
-import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class BodySlam extends Move {	
-	public BodySlam() {
+public class StoneEdge extends Move {	
+	public StoneEdge() {
 		super(
-			"Body Slam", // name
-			85, // basePower
-			100, // accuracy
+			"Stone Edge", // name
+			100, // basePower
+			80, // accuracy
 			MoveCategory.PHYSICAL, // moveCategory
-			Types.NORMAL, // moveType
+			Types.ROCK, // moveType
 			0, // priority
-			24, // pp
-			"30% chance to paralyze the opponent", // description
-			EnumSet.of(MoveFlags.CONTACT_MOVE) // flags
+			8, // pp
+			"High critical hit ratio.", // description
+			EnumSet.of(MoveFlags.HIGH_CRIT) // flags
 		);
 	}
 
@@ -32,8 +30,6 @@ public class BodySlam extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		if (Globals.randomEngine.nextDouble() < 0.3) {
-			target.applyStatus(Status.PARALYSIS);
-		}
+		// do nothing
 	}
 }

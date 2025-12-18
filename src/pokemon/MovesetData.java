@@ -9,6 +9,7 @@ public class MovesetData {
 			new Flamethrower(),
 			new BodySlam(),
 			new SludgeBomb(),
+			new Curse(),
 			new DarkPulse()
 			);
 	
