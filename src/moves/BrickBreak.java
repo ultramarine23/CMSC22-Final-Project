@@ -21,7 +21,6 @@ public class BrickBreak extends Move {
 				"Destroys screens, unless the target is immune.", 
 				EnumSet.of(MoveFlags.BREAKS_SCREENS)
 				);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

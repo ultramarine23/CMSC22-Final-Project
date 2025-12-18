@@ -33,7 +33,6 @@ public class Counter extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		// TASK 03	
+		// TASK 03
 	}
-
 }

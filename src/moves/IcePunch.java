@@ -31,7 +31,6 @@ public class IcePunch extends Move {
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -39,8 +38,5 @@ public class IcePunch extends Move {
 		if (Globals.randomEngine.nextDouble() < 0.1) {
 			target.applyStatus(Status.FREEZE);
 		}
-
-
 	}
-
 }

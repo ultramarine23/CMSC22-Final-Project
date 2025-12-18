@@ -12,8 +12,7 @@ import pokemon.Pokemon;
 
 public class Blizzard extends Move {
 
-	public Blizzard(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
+	public Blizzard() {
 		super(
 				"Blizzard", 
 				110, 
