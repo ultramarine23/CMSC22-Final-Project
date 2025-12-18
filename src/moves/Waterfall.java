@@ -37,9 +37,6 @@ public class Waterfall extends Move {
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		//set flinch to true
-		if (Globals.randomEngine.nextDouble() < 0.2) {
-			target.setFlinched(true);
-		}
 
 	}
 

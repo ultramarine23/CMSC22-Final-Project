@@ -32,6 +32,6 @@ public class Paralyzed extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		// TODO Auto-generated method stub
+		System.out.println(user.getPokemonSpecies().getName() + "is paralyzed");
 	}
 }
