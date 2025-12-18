@@ -25,13 +25,10 @@ public class Pokemon {
 	private boolean isAllied;
 	private Map<Stats, Integer> statChanges;
 	private List<Move> previousMoves;
-<<<<<<< HEAD
 	private boolean isFlinched; //not used??
-	
-=======
-	private boolean isFlinched;
 
->>>>>>> 25ee9f50a54aa669415b68540c1b7660413e58c2
+
+
 	public Pokemon(PokemonSpecies pokemonSpecies, boolean isAllied) {
 		this.pokemonSpecies = pokemonSpecies;
 		this.currentStats = pokemonSpecies.getBaseStats().clone();
@@ -76,7 +73,7 @@ public class Pokemon {
 			if (status == Status.FREEZE && (type1 == Types.ICE || type2 == Types.ICE)) {
 				return;
 			}
-<<<<<<< HEAD
+
 		
 			//SET STATS depending on current status, after the immune type check
 			//paralysis
@@ -95,11 +92,11 @@ public class Pokemon {
 				//do nothing
 			}
 			
-=======
+
 
 			statusTurns = 0;
 			curStatus = status;
->>>>>>> 25ee9f50a54aa669415b68540c1b7660413e58c2
+
 			System.out.println(pokemonSpecies.getName() + " was inflicted with " + curStatus.name() + "!");
 		}
 	}
@@ -214,7 +211,7 @@ public class Pokemon {
 		}
 		return repr;
 	}
-<<<<<<< HEAD
+
 	
 	// getters
 	public Types getType1() { return type1; }
@@ -239,73 +236,5 @@ public class Pokemon {
 	public boolean isAllied() { return isAllied; }
 	public boolean isFlinched() { return isFlinched; }
 	public void incrementStatusTurns() { statusTurns++; } 
-	
-=======
 
-	// set-get functions
-	public Types getType1() {
-		return type1;
-	}
-
-	public Types getType2() {
-		return type2;
-	}
-
-	public PokemonSpecies getPokemonSpecies() {
-		return pokemonSpecies;
-	}
-
-	public StatsContainer getBaseStats() {
-		return pokemonSpecies.getBaseStats();
-	}
-
-	public StatsContainer getCurrentStats() {
-		calculateCurrentStats();
-		return currentStats;
-	}
-
-	public List<Move> getMoves() {
-		return moves;
-	}
-
-	public Status getCurStatus() {
-		return curStatus;
-	}
-
-	public boolean isAllied() {
-		return isAllied;
-	}
-
-	public int getStatusTurns() {
-		return statusTurns;
-	}
-
-	public List<VolatileStatus> getVolatileStatus() {
-		return volatileStatus;
-	}
-
-	public boolean isFlinched() {
-		return isFlinched;
-	}
-
-	public void setType1(Types type1) {
-		this.type1 = type1;
-	}
-
-	public void setType2(Types type2) {
-		this.type2 = type2;
-	}
-
-	public void setCurrentStats(StatsContainer currentStats) {
-		this.currentStats = currentStats;
-	}
-
-	public void incrementStatusTurns() {
-		statusTurns++;
-	}
-
-	public void setFlinched(boolean newStatus) {
-		isFlinched = newStatus;
-	}
->>>>>>> 25ee9f50a54aa669415b68540c1b7660413e58c2
 }
