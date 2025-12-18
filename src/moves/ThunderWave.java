@@ -34,7 +34,6 @@ public class ThunderWave extends Move {
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		target.applyStatus(Status.PARALYSIS);
-
 	}
 
 }

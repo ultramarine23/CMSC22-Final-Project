@@ -1,7 +1,6 @@
 package moves;
 
 import main.Globals.MoveFlags;
-
 import java.util.EnumSet;
 
 import main.BattleContext;
