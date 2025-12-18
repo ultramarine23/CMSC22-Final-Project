@@ -82,6 +82,7 @@ public class Pokemon {
 				int newSpd = currentStats.getSpeed()/2;
 				currentStats.setSpeed(newSpd);
 			} else {
+				//set to the orig stats
 				StatsContainer currentStats = this.getCurrentStats();
 				int newSpd = this.getPokemonSpecies().getBaseStats().getSpeed();
 				currentStats.setSpeed(newSpd);
@@ -217,8 +218,8 @@ public class Pokemon {
 	public Types getType1() { return type1; }
 	public Types getType2() { return type2; }
 	public PokemonSpecies getPokemonSpecies() { return pokemonSpecies; } 
-	public StatsContainer getBaseStats() { return pokemonSpecies.getBaseStats(); }
-	public StatsContainer getCurrentStats() { calculateCurrentStats(); return currentStats; }
+	public StatsContainer getBaseStats() { return pokemonSpecies.getBaseStats(); } //get the orig stats
+	public StatsContainer getCurrentStats() { calculateCurrentStats(); return currentStats; } 
 	public List<Move> getMoves() { return moves; }
 	public Status getCurStatus() { return curStatus; }
 	public int getStatusTurns() { return statusTurns; }

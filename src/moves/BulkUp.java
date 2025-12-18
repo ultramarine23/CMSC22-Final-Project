@@ -35,8 +35,8 @@ public class BulkUp extends Move {
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		StatsContainer stats = user.getCurrentStats();
-		stats.setAtk(stats.getAtk() + 1);
-		stats.setDef(stats.getDef() + 1);
+		stats.applyModStat("physAtk", 1);
+		
 		
 	}
 
