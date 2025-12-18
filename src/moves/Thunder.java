@@ -8,6 +8,7 @@ import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
 import main.Globals.Status;
 import main.Globals.Types;
+import main.Globals.Weather;
 import pokemon.Pokemon;
 
 public class Thunder extends Move {
@@ -34,8 +35,12 @@ public class Thunder extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		if (Globals.randomEngine.nextDouble() < 0.3) {
+		if (ctx.getCurBattle().getWeather() == Weather.RAIN) {
 			target.applyStatus(Status.PARALYSIS);
+			
+		} else if (Globals.randomEngine.nextDouble() < 0.3) {
+			target.applyStatus(Status.PARALYSIS);
+			
 		}
 	}
 

@@ -12,6 +12,7 @@ import moves.Move;
 //used for checking FailedMoves
 import moves.Paralyzed;
 import moves.FailFreezed;
+import moves.FailSleep;
 
 import pokemon.Pokemon;
 import pokemon.TurnIntent;
@@ -139,6 +140,8 @@ public class BattleInstance {
 		for (Pokemon poke : allies) {
 			System.out.println(poke.toString());
 		}
+		
+		//chooses poke
 		System.out.println("\nEnemies: ");
 		for (Pokemon poke : enemies) {
 			System.out.println(poke.toString());
@@ -146,6 +149,7 @@ public class BattleInstance {
 		System.out.print("\nAlly, choose your lead: ");
 		allyLeadInput = scanner.nextLine();
 		
+		//checks your roster
 		for (Pokemon poke : allies) {
 			if (poke.getPokemonSpecies().getName().equals(allyLeadInput)) {
 				System.out.println(poke.getPokemonSpecies().getName() + " selected as lead!");
@@ -174,7 +178,7 @@ public class BattleInstance {
 		System.out.println(activeEnemy.toString());
 	}
 	
-	
+	//during the turn
 	public TurnIntent buildTurnIntent(boolean isForAlly) {
 		TurnIntent turnIntent = new TurnIntent();
 		
@@ -215,15 +219,23 @@ public class BattleInstance {
 		}
 		
 		// apply paralysis check
-		if (activeEnemy.getCurStatus() == Status.PARALYSIS) {
+		if (activeAlly.getCurStatus() == Status.PARALYSIS) {
 			if (Globals.randomEngine.nextDouble() < 0.25) {
 				turnIntent.setMove(new Paralyzed());
 			}
 		}
 		
-		if (activeEnemy.getCurStatus() == Status.FREEZE) {
-			if (Globals.randomEngine.nextDouble() < 0.25) {
+		//apply freezed check
+		if (activeAlly.getCurStatus() == Status.FREEZE) {
+			if (Globals.randomEngine.nextDouble() < 0.10) {
 				turnIntent.setMove(new FailFreezed());
+			}
+		}
+		
+		//apply sleeping check
+		if (activeAlly.getCurStatus() == Status.SLEEP){
+			if (Globals.randomEngine.nextDouble() <= 1) {
+				turnIntent.setMove(new FailSleep());
 			}
 		}
 		
@@ -232,6 +244,7 @@ public class BattleInstance {
 	}
 	
 	
+	//before the turn begins
 	public void runTransitionPhase() {
 		// runs the transition phase that sets up the following turn of battle
 		// trigger poison/burn damage
@@ -241,7 +254,17 @@ public class BattleInstance {
 			// remove flinch from pokemon
 			activeMon.setFlinched(false);
 			
+			int allyStatusTurn = activeMon.getStatusTurns();
 			
+			if (activeMon.getCurStatus() == Status.FREEZE & allyStatusTurn >= 3) {
+				activeMon.applyStatus(Status.NONE);
+			} else if (activeMon.getCurStatus() == Status.SLEEP & allyStatusTurn >= 4) {
+				activeMon.applyStatus(Status.NONE);
+			} else if (activeMon.getCurStatus() == Status.FREEZE & allyStatusTurn >= 3) {
+				activeMon.applyStatus(Status.NONE);
+			}
+			
+			//checks for various status effects
 			if (activeMon.getCurStatus() == Status.BURN) {
 				activeMon.takeDamage(activeMon.getBaseStats().getHp() / 16);
 				System.out.println(activeMon.getPokemonSpecies().getName() + " took burn damage!");
@@ -254,8 +277,20 @@ public class BattleInstance {
 			} else if (activeMon.getCurStatus() == Status.FREEZE) {
 				if (Globals.randomEngine.nextDouble() < 0.33) {
 					activeMon.applyStatus(Status.NONE);
+					System.out.println(activeMon.getPokemonSpecies().getName() + " thawed");
 				}
-			} else if (activeMon.getCurStatus() == Status.SLEEP)
+			} else if (activeMon.getCurStatus() == Status.SLEEP) {
+				if(Globals.randomEngine.nextDouble() < 0.25) {
+					activeMon.applyStatus(Status.NONE);
+					System.out.println(activeMon.getPokemonSpecies().getName() + " woke up");
+				}
+			} else if (activeMon.getCurStatus() == Status.PARALYSIS) {
+				if(Globals.randomEngine.nextDouble() < 0.25) {
+					activeMon.applyStatus(Status.NONE);
+					System.out.println(activeMon.getPokemonSpecies().getName() + " woke up");
+				}
+			}
+			
 			
 			activeMon.incrementStatusTurns();
 		}

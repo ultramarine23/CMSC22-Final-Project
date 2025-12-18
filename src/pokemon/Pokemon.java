@@ -20,12 +20,12 @@ public class Pokemon {
 	private Types type2;
 	private List<Move> moves;
 	private Status curStatus;
-	private ArrayList<VolatileStatus> volatileStatus;
+	private ArrayList<VolatileStatus> volatileStatus; 
 	private int statusTurns; // used for computation of toxic damage
 	private boolean isAllied;
 	private Map<Stats, Integer> statChanges;
 	private List<Move> previousMoves;
-	private boolean isFlinched;
+	private boolean isFlinched; //not used??
 	
 	public Pokemon(PokemonSpecies pokemonSpecies, boolean isAllied) {
 		this.pokemonSpecies = pokemonSpecies;
@@ -50,6 +50,11 @@ public class Pokemon {
 	}
 	
 	public void applyStatus(Status status) {
+		//init first
+		statusTurns = 0;
+		curStatus = status;
+		
+		//check for type immunity
 		if (curStatus == Status.NONE) {
 			// poison types cannot be poisoned/toxiced
 			if ((status == Status.POISON || status == Status.TOXIC) && (type1 == Types.POISON || type2 == Types.POISON)) {
@@ -65,9 +70,24 @@ public class Pokemon {
 			if (status == Status.FREEZE && (type1 == Types.ICE || type2 == Types.ICE)) {
 				return;
 			}
+		
+			//SET STATS depending on current status, after the immune type check
+			//paralysis
+			if (curStatus == Status.PARALYSIS) {
+				StatsContainer currentStats = getCurrentStats();
+				int newSpd = currentStats.getSpeed()/2;
+				currentStats.setSpeed(newSpd);
+			} else {
+				StatsContainer currentStats = this.getCurrentStats();
+				int newSpd = this.getPokemonSpecies().getBaseStats().getSpeed();
+				currentStats.setSpeed(newSpd);
+			}
 			
-			statusTurns = 0;
-			curStatus = status;
+			//freeze
+			if (curStatus == Status.FREEZE) {
+				//do nothing
+			}
+			
 			System.out.println(pokemonSpecies.getName() + " was inflicted with " + curStatus.name() + "!");
 		}
 	}
@@ -180,7 +200,7 @@ public class Pokemon {
 		return repr;
 	}
 	
-	// set-get functions
+	// getters
 	public Types getType1() { return type1; }
 	public Types getType2() { return type2; }
 	public PokemonSpecies getPokemonSpecies() { return pokemonSpecies; } 
@@ -188,14 +208,20 @@ public class Pokemon {
 	public StatsContainer getCurrentStats() { calculateCurrentStats(); return currentStats; }
 	public List<Move> getMoves() { return moves; }
 	public Status getCurStatus() { return curStatus; }
-	public boolean isAllied() { return isAllied; }
 	public int getStatusTurns() { return statusTurns; }
 	public List<VolatileStatus> getVolatileStatus() { return volatileStatus; }
-	public boolean isFlinched() { return isFlinched; }
-
+	public void setFlinched(boolean newStatus) { isFlinched = newStatus; }
+	
+	
+	//setters
 	public void setType1(Types type1) { this.type1 = type1; }
 	public void setType2(Types type2) { this.type2 = type2; }
 	public void setCurrentStats(StatsContainer currentStats) { this.currentStats = currentStats; }
+	public void setStatusTurns(int turn) {this.statusTurns = turn;}
+	
+	//helper funcs
+	public boolean isAllied() { return isAllied; }
+	public boolean isFlinched() { return isFlinched; }
 	public void incrementStatusTurns() { statusTurns++; } 
-	public void setFlinched(boolean newStatus) { isFlinched = newStatus; }
+	
 }
