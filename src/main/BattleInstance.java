@@ -3,13 +3,20 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import main.Globals;
 import main.Globals.BattleEvent;
 import main.Globals.Status;
 import main.Globals.Weather;
 import moves.Move;
+
+//used for checking FailedMoves
 import moves.Paralyzed;
+import moves.FailFreezed;
+
 import pokemon.Pokemon;
 import pokemon.TurnIntent;
+
+
 
 public class BattleInstance {
 	private final BattleContext context;
@@ -214,6 +221,12 @@ public class BattleInstance {
 			}
 		}
 		
+		if (activeEnemy.getCurStatus() == Status.FREEZE) {
+			if (Globals.randomEngine.nextDouble() < 0.25) {
+				turnIntent.setMove(new FailFreezed());
+			}
+		}
+		
 		turnIntent.setContext(context);
 		return turnIntent;
 	}
@@ -238,7 +251,11 @@ public class BattleInstance {
 			} else if (activeMon.getCurStatus() == Status.TOXIC) {
 				activeMon.takeDamage(activeMon.getBaseStats().getHp() * activeMon.getStatusTurns() / 16);
 				System.out.println(activeMon.getPokemonSpecies().getName() + " took poison damage!");
-			}
+			} else if (activeMon.getCurStatus() == Status.FREEZE) {
+				if (Globals.randomEngine.nextDouble() < 0.33) {
+					activeMon.applyStatus(Status.NONE);
+				}
+			} else if (activeMon.getCurStatus() == Status.SLEEP)
 			
 			activeMon.incrementStatusTurns();
 		}
