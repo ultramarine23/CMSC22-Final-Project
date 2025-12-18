@@ -39,7 +39,7 @@ public class Globals {
 	}
 	
 	public enum MoveFlags {
-		BREAKS_PROTECT, BYPASSES_PROTECT, HIGH_CRIT, DANCE_MOVE, HEALING_MOVE, CONTACT_MOVE
+		IGNORES_PROTECT, HIGH_CRIT, DANCE_MOVE, HEALING_MOVE, CONTACT_MOVE, BREAKS_SCREENS
 	}
 	
 	public static Random randomEngine = new Random();

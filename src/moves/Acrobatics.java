@@ -1,6 +1,8 @@
 package moves;
 
+import main.Globals.MoveFlags;
 
+import java.util.EnumSet;
 
 import main.BattleContext;
 import main.Globals.MoveCategory;
@@ -18,9 +20,7 @@ public class Acrobatics extends Move {
 				0, 
 				24, 
 				"Power doubles if the user has no held item", 
-				true,
-				true);
-		
+				EnumSet.of(MoveFlags.CONTACT_MOVE));
 	}
 
 	@Override
@@ -32,7 +32,6 @@ public class Acrobatics extends Move {
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		//items not implemented yet
-
 	}
 
 }

@@ -1,6 +1,7 @@
 package moves;
 
-
+import main.Globals.MoveFlags;
+import java.util.EnumSet;
 
 import main.BattleContext;
 import main.Globals.MoveCategory;
@@ -18,8 +19,8 @@ public class BrickBreak extends Move {
 				0, 
 				24, 
 				"Destroys screens, unless the target is immune.", 
-				true,
-				true);
+				EnumSet.of(MoveFlags.BREAKS_SCREENS)
+				);
 		// TODO Auto-generated constructor stub
 	}
 

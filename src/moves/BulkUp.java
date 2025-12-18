@@ -1,6 +1,7 @@
 package moves;
 
-
+import main.Globals.MoveFlags;
+import java.util.EnumSet;
 
 import main.BattleContext;
 import pokemon.Pokemon;
@@ -10,10 +11,9 @@ import main.Globals.Types;
 
 
 public class BulkUp extends Move {
-
-	public BulkUp(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super("Bulk Up", 
+	public BulkUp() {
+		super(
+				"Bulk Up", 
 				0, 
 				100, 
 				MoveCategory.STATUS, 
@@ -21,8 +21,8 @@ public class BulkUp extends Move {
 				0, 
 				32, 
 				"Raises the user's Attack and Defense by 1.", 
-				false,
-				false);
+				EnumSet.noneOf(MoveFlags.class)
+			);
 		// TODO Auto-generated constructor stub
 	}
 
