@@ -19,10 +19,12 @@ public abstract class Move {
 	private int pp; //can be modified
 	private final String description;
 	private final EnumSet<MoveFlags> flags;
+	private final boolean affectedByProtect;
+	private final boolean makesContact;
 	
 	
 	public Move(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, EnumSet<MoveFlags> flags) {
+			int pp, String description, boolean affectedByProtect, boolean makesContact) {
 		this.name = name;
 		this.basePower = basePower; 
 		this.accuracy = accuracy;
@@ -31,7 +33,8 @@ public abstract class Move {
 		this.priority = priority;
 		this.pp = pp;
 		this.description = description;
-		this.flags = flags;
+		this.affectedByProtect = affectedByProtect;
+		this.makesContact = makesContact;
 	}
 
 	public abstract void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx);
@@ -47,7 +50,6 @@ public abstract class Move {
 	public int getPriority() { return priority; }
 	public int getPp() { return pp; }
 	public String getDescription() { return description; }
-<<<<<<< Updated upstream
 	public boolean isAffectedByProtect() { return affectedByProtect; }
 	public boolean makesContact() { return makesContact; }
 	
@@ -56,8 +58,4 @@ public abstract class Move {
 	public void setAccuracy(int accuracy) {this.accuracy = accuracy;}
 	public void setPriority (int prio) {this.priority = prio;}
 	public void setPP(int pp) {this.pp = pp;}
-	 
-=======
-	public EnumSet<MoveFlags> getFlags() { return flags; }
->>>>>>> Stashed changes
-}
+	
