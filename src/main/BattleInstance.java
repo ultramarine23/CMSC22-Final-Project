@@ -178,7 +178,7 @@ public class BattleInstance {
 		System.out.println(activeEnemy.toString());
 	}
 	
-	//during the turn
+	//Determines the order of turns, and checks for current Status of both ally and enemy poke
 	public TurnIntent buildTurnIntent(boolean isForAlly) {
 		TurnIntent turnIntent = new TurnIntent();
 		
@@ -218,6 +218,8 @@ public class BattleInstance {
 			}		
 		}
 		
+		//CHECK CURRENT STATUS
+		
 		// apply paralysis check
 		if (activeAlly.getCurStatus() == Status.PARALYSIS) {
 			if (Globals.randomEngine.nextDouble() < 0.25) {
@@ -256,13 +258,12 @@ public class BattleInstance {
 			
 			int allyStatusTurn = activeMon.getStatusTurns();
 			
+			//checks if status timer has run out
 			if (activeMon.getCurStatus() == Status.FREEZE & allyStatusTurn >= 3) {
 				activeMon.applyStatus(Status.NONE);
 			} else if (activeMon.getCurStatus() == Status.SLEEP & allyStatusTurn >= 4) {
 				activeMon.applyStatus(Status.NONE);
-			} else if (activeMon.getCurStatus() == Status.FREEZE & allyStatusTurn >= 3) {
-				activeMon.applyStatus(Status.NONE);
-			}
+			} 
 			
 			//checks for various status effects
 			if (activeMon.getCurStatus() == Status.BURN) {
@@ -274,24 +275,26 @@ public class BattleInstance {
 			} else if (activeMon.getCurStatus() == Status.TOXIC) {
 				activeMon.takeDamage(activeMon.getBaseStats().getHp() * activeMon.getStatusTurns() / 16);
 				System.out.println(activeMon.getPokemonSpecies().getName() + " took poison damage!");
+				
+				
 			} else if (activeMon.getCurStatus() == Status.FREEZE) {
 				if (Globals.randomEngine.nextDouble() < 0.33) {
 					activeMon.applyStatus(Status.NONE);
 					System.out.println(activeMon.getPokemonSpecies().getName() + " thawed");
 				}
 			} else if (activeMon.getCurStatus() == Status.SLEEP) {
-				if(Globals.randomEngine.nextDouble() < 0.25) {
+				if(Globals.randomEngine.nextDouble() < 0.125) {
 					activeMon.applyStatus(Status.NONE);
 					System.out.println(activeMon.getPokemonSpecies().getName() + " woke up");
 				}
 			} else if (activeMon.getCurStatus() == Status.PARALYSIS) {
 				if(Globals.randomEngine.nextDouble() < 0.25) {
 					activeMon.applyStatus(Status.NONE);
-					System.out.println(activeMon.getPokemonSpecies().getName() + " woke up");
+					System.out.println(activeMon.getPokemonSpecies().getName() + " recovered from paralysis");
 				}
 			}
 			
-			
+			//each status turns will increment
 			activeMon.incrementStatusTurns();
 		}
 		
