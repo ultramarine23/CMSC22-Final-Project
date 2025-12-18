@@ -1,18 +1,27 @@
 package moves;
 
-import java.lang.Object.Move;
+import java.util.EnumSet;
 
 import main.BattleContext;
 import main.Globals.MoveCategory;
+import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
 public class Avalanche extends Move {
 
-	public Avalanche(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
-		super(name, 60, 100, MoveCategory.PHYSICAL, Types.ICE, -4, 16, "Power doubles if user is damaged by the target.", affectedByProtect,
-				makesContact);
+	public Avalanche() {
+		super(
+				"Avalanche", 
+				60, 
+				100, 
+				MoveCategory.PHYSICAL, 
+				Types.ICE, 
+				-4,
+				16, 
+				"Power doubles if user is damaged by the target.", 
+				EnumSet.noneOf(MoveFlags.class)
+			);
 		// TODO Auto-generated constructor stub
 	}
 	
