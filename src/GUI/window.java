@@ -30,12 +30,21 @@ public class window extends JFrame {
     private JTextArea battleLog;
     private Consumer<String> inputCallback; // Handles sending commands to the game loop
 
+    // UI References for dynamic updates
+    // UI References for dynamic updates
+    private JLabel playerSpriteLabel;
+    private JLabel enemySpriteLabel;
+    private JLabel playerHudName;
+    private JLabel enemyHudName;
+    private JProgressBar playerHPBar;
+    private JProgressBar enemyHPBar;
+    private JButton[] moveButtons = new JButton[4];
+
     // Custom Font
     private static Font pokemonFont;
     private static boolean fontLoaded = false;
 
     // Callbacks
-    private Runnable onStartGame;
     private Consumer<Integer> onPokemonSelected;
 
     public window() {
@@ -140,8 +149,7 @@ public class window extends JFrame {
         btn.setBackground(Color.WHITE);
         btn.setFocusPainted(false);
 
-        // ✅ load image
-        ImageIcon icon = loadPokemonIcon(name, 32);
+        ImageIcon icon = loadPokemonIconSelect(name, 32);
         if (icon != null) {
             btn.setIcon(icon);
 
@@ -163,7 +171,8 @@ public class window extends JFrame {
         return btn;
     }
 
-    private ImageIcon loadPokemonIcon(String pokemonName, int size) {
+    // gets pokemon icons from images folder and return it
+    private ImageIcon loadPokemonIconSelect(String pokemonName, int size) {
         String path = "/GUI/images/" + pokemonName + ".png";
 
         try (InputStream is = getClass().getResourceAsStream(path)) {
@@ -190,38 +199,38 @@ public class window extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        // ==TOP HALF: BATTLE SCENE==
+        // --- TOP HALF: BATTLE SCENE ---
         JPanel scenePanel = new JPanel(null);
         scenePanel.setPreferredSize(new Dimension(Globals.defWinWidth, 300));
-        scenePanel.setBackground(new Color(240, 240, 240)); // Light gray background
+        scenePanel.setBackground(new Color(240, 240, 240));
 
-        // Enemy HUD (Top Left)
-        JPanel enemyHud = createHud("Enemy");
+        // Enemy HUD
+        JPanel enemyHud = createHud("Enemy", false);
         enemyHud.setBounds(20, 30, 250, 60);
         scenePanel.add(enemyHud);
 
-        // Enemy Sprite Placeholder (Top Right)
-        JLabel enemySprite = new JLabel("Enemy", SwingConstants.CENTER);
-        enemySprite.setOpaque(true);
-        enemySprite.setBackground(new Color(200, 100, 100)); // Reddish
-        enemySprite.setBounds(Globals.defWinWidth - 180, 50, 120, 120);
-        scenePanel.add(enemySprite);
+        // Enemy Sprite
+        enemySpriteLabel = new JLabel("Enemy", SwingConstants.CENTER);
+        enemySpriteLabel.setOpaque(true);
+        enemySpriteLabel.setBackground(new Color(200, 100, 100)); // Fallback color
+        enemySpriteLabel.setBounds(Globals.defWinWidth - 180, 50, 120, 120);
+        scenePanel.add(enemySpriteLabel);
 
-        // Player Sprite Placeholder (Bottom Left)
-        JLabel playerSprite = new JLabel("Player", SwingConstants.CENTER);
-        playerSprite.setOpaque(true);
-        playerSprite.setBackground(new Color(100, 100, 200)); // Blueish
-        playerSprite.setBounds(60, 150, 120, 120);
-        scenePanel.add(playerSprite);
+        // Player Sprite
+        playerSpriteLabel = new JLabel("Player", SwingConstants.CENTER);
+        playerSpriteLabel.setOpaque(true);
+        playerSpriteLabel.setBackground(new Color(100, 100, 200)); // Fallback color
+        playerSpriteLabel.setBounds(60, 150, 120, 120);
+        scenePanel.add(playerSpriteLabel);
 
-        // Player HUD (Bottom Right)
-        JPanel playerHud = createHud("Player");
+        // Player HUD
+        JPanel playerHud = createHud("Player", true);
         playerHud.setBounds(Globals.defWinWidth - 270, 200, 250, 60);
         scenePanel.add(playerHud);
 
         panel.add(scenePanel, BorderLayout.CENTER);
 
-        // ==BOTTOM HALF: DIALOG & CONTROLS==
+        // --- BOTTOM HALF: DIALOG & CONTROLS ---
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setPreferredSize(new Dimension(Globals.defWinWidth, 200));
         bottomPanel.setBackground(new Color(50, 50, 50));
@@ -236,7 +245,6 @@ public class window extends JFrame {
         battleLog.setLineWrap(true);
         battleLog.setWrapStyleWord(true);
 
-        // Auto-scroll logic
         DefaultCaret caret = (DefaultCaret)battleLog.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
@@ -246,38 +254,46 @@ public class window extends JFrame {
         scroll.getViewport().setOpaque(false);
         bottomPanel.add(scroll, BorderLayout.CENTER);
 
-        // Control Grid (Fight, Bag, etc.)
+        // Control Grid (MOVES ONLY)
         JPanel controls = new JPanel(new GridLayout(2, 2, 5, 5));
-        controls.setPreferredSize(new Dimension(250, 0));
+        controls.setPreferredSize(new Dimension(300, 0));
         controls.setBackground(new Color(100, 100, 100));
         controls.setBorder(new EmptyBorder(5,5,5,5));
 
-        // Mapping buttons to Game Inputs (1, 2, 3, 4)
-        controls.add(createGameInputButton("FIGHT", "1"));
-        controls.add(createGameInputButton("BAG", "2"));
-        controls.add(createGameInputButton("POKEMON", "3"));
-        controls.add(createGameInputButton("RUN", "4"));
+        // Initialize Move Buttons
+        for (int i = 0; i < 4; i++) {
+            int moveIndex = i;
+            moveButtons[i] = createGameInputButton("-", String.valueOf(moveIndex));
+            controls.add(moveButtons[i]);
+        }
 
         bottomPanel.add(controls, BorderLayout.EAST);
-
         panel.add(bottomPanel, BorderLayout.SOUTH);
-
         return panel;
     }
 
-    private JPanel createHud(String label) {
+    private JPanel createHud(String label, boolean isPlayer) {
         JPanel hud = new JPanel(new GridLayout(2, 1));
         hud.setBorder(new LineBorder(Color.BLACK, 2));
         hud.setBackground(Color.WHITE);
 
-        JLabel name = new JLabel(" " + label);
-        name.setFont(pokemonFont.deriveFont(14f));
+        JLabel nameLbl = new JLabel(" " + label);
+        nameLbl.setFont(pokemonFont.deriveFont(14f));
+
+        // Save references so we can update names later
+        if (isPlayer) playerHudName = nameLbl;
+        else enemyHudName = nameLbl;
 
         JProgressBar hp = new JProgressBar(0, 100);
         hp.setValue(100);
         hp.setForeground(Color.GREEN);
 
-        hud.add(name);
+        // Save references to HP bars
+        if (isPlayer) playerHPBar = hp;
+        else enemyHPBar = hp;
+
+        hud.add(nameLbl);
+        hud.add(hp);
         return hud;
     }
 
@@ -291,7 +307,8 @@ public class window extends JFrame {
 
     private JButton createGameInputButton(String text, String command) {
         JButton btn = new JButton(text);
-        btn.setFont(pokemonFont.deriveFont(14f));
+        // Smaller font for moves to fit
+        btn.setFont(pokemonFont.deriveFont(12f));
         btn.setBackground(new Color(240, 240, 240));
         btn.setFocusPainted(false);
         btn.addActionListener(e -> {
@@ -303,6 +320,60 @@ public class window extends JFrame {
     }
 
     // ====LOGIC METHODS====
+
+    public void setupBattleUI(String pName, String eName, String[] moves) {
+        // Update Names
+        playerHudName.setText(" Your " + pName);
+        enemyHudName.setText(" Enemy " + eName);
+
+        // Update Icons
+        updateSprite(playerSpriteLabel, pName);
+        updateSprite(enemySpriteLabel, eName);
+
+        // Update Buttons with Move Names
+        for (int i = 0; i < 4; i++) {
+            if (moves[i] != null && !moves[i].isEmpty() && !moves[i].equals("-")) {
+                moveButtons[i].setText(moves[i]);
+                moveButtons[i].setEnabled(true);
+            } else {
+                moveButtons[i].setText("-");
+                moveButtons[i].setEnabled(false);
+            }
+        }
+    }
+
+    private void updateSprite(JLabel label, String name) {
+        ImageIcon icon = loadPokemonIconBattle(name);
+        if (icon != null) {
+            label.setIcon(icon);
+            label.setText("");
+            label.setOpaque(false); // Make background transparent if image loaded
+        } else {
+            label.setIcon(null);
+            label.setText(name);
+            label.setOpaque(true); // Show fallback color if image failed
+        }
+    }
+
+    private ImageIcon loadPokemonIconBattle(String pokemonName) {
+        String path = "/GUI/images/" + pokemonName + ".png";
+
+        try (InputStream is = getClass().getResourceAsStream(path)) {
+            if (is == null) {
+                System.err.println("Missing image: " + path);
+                return null;
+            }
+
+            byte[] bytes = is.readAllBytes();
+            ImageIcon raw = new ImageIcon(bytes);
+            Image scaled = raw.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            return new ImageIcon(scaled);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     //Appends text to the battle log
     public void appendBattleText(String text) {
@@ -336,5 +407,38 @@ public class window extends JFrame {
         }
 
         fontLoaded = true;
+    }
+
+    // Updates HP bars
+    public void updateHealthBars(int playerHP, int playerMaxHP, int enemyHP, int enemyMaxHP) {
+        SwingUtilities.invokeLater(() -> {
+            // Update player HP bar
+            int playerPercent = (int)((double)playerHP / playerMaxHP * 100);
+            playerHPBar.setValue(playerPercent);
+            playerHPBar.setMaximum(100);
+
+            // Color based on HP
+            if (playerPercent > 50) {
+                playerHPBar.setForeground(Color.GREEN);
+            } else if (playerPercent > 20) {
+                playerHPBar.setForeground(Color.YELLOW);
+            } else {
+                playerHPBar.setForeground(Color.RED);
+            }
+
+            // Update enemy HP bar
+            int enemyPercent = (int)((double)enemyHP / enemyMaxHP * 100);
+            enemyHPBar.setValue(enemyPercent);
+            enemyHPBar.setMaximum(100);
+
+            // Color based on HP
+            if (enemyPercent > 50) {
+                enemyHPBar.setForeground(Color.GREEN);
+            } else if (enemyPercent > 20) {
+                enemyHPBar.setForeground(Color.YELLOW);
+            } else {
+                enemyHPBar.setForeground(Color.RED);
+            }
+        });
     }
 }
