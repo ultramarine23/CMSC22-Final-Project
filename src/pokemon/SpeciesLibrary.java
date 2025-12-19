@@ -13,7 +13,7 @@ public class SpeciesLibrary {
 			9, 
 			Types.POISON, 
 			Types.NONE,
-			List.of(new FlameBody()),
+			List.of(new SwiftSwim()),
 			MovesetData.WEEZING);
 	
 	public static final PokemonSpecies ZAMAZENTA = new PokemonSpecies(
@@ -22,7 +22,7 @@ public class SpeciesLibrary {
 			210,
 			Types.FIGHTING,
 			Types.NONE,
-			List.of(new SpeedBoost()),
+			List.of(new Levitate()),
 			MovesetData.ZAMAZENTA);
 	
 	public static final PokemonSpecies ALOMOMOLA = new PokemonSpecies(
