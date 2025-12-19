@@ -36,7 +36,8 @@ public class PyroBall extends Move {
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		if (Globals.randomEngine.nextDouble() < 0.1) {
 			target.applyStatus(Status.BURN);
-		} else if (user.getCurStatus() == Status.FREEZE) {
+		}
+		if (user.getCurStatus() == Status.FREEZE) {
 			user.applyStatus(Status.NONE);
 		}
 

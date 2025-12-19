@@ -1,5 +1,7 @@
 package pokemon;
 
+import main.Globals.Stats;
+
 public class StatsContainer {
 	private int hp = 0;
 	private int physAtk = 0;
@@ -50,8 +52,26 @@ public class StatsContainer {
 		
 		default:
 			throw new RuntimeException("Invalid stat name.");
-
-
+		}
+	}
+	
+	public int getStat(Stats statName) {
+		switch (statName) {
+		case Stats.HP:
+			return this.hp;
+		case Stats.ATK:
+			return this.physAtk;
+		case Stats.DEF:
+			return this.physDef;
+		case Stats.SPE:
+			return this.speed;
+		case Stats.SPA:
+			return this.specAtk;
+		case Stats.SPD:
+			return this.specDef;
+		
+		default:
+			throw new RuntimeException("Invalid stat name.");
 		}
 	}
 	
@@ -82,6 +102,60 @@ public class StatsContainer {
 			throw new RuntimeException("Invalid stat name: " + statName);
 		}
 	}
+	
+	// overloaded method
+	public void setStat(Stats statName, int value) {
+		switch (statName) {
+			case Stats.HP:
+				hp = value;
+				break;
+			case Stats.ATK:
+				physAtk = value;
+				break;
+			case Stats.DEF:
+				physDef = value;
+				break;
+			case Stats.SPE:
+				speed = value;
+				break;
+			case Stats.SPA:
+				specAtk = value;
+				break;
+			case Stats.SPD:
+				specDef = value;
+				break;
+		
+		default:
+			throw new RuntimeException("Invalid stat name: " + statName);
+		}
+	}
+	
+	
+	public void modifyStat(Stats statName, double multiplier) {
+		switch (statName) {
+		case Stats.HP:
+			hp *= multiplier;
+			break;
+		case Stats.ATK:
+			physAtk *= multiplier;
+			break;
+		case Stats.DEF:
+			physDef *= multiplier;
+			break;
+		case Stats.SPE:
+			speed *= multiplier;
+			break;
+		case Stats.SPA:
+			specAtk *= multiplier;
+			break;
+		case Stats.SPD:
+			specDef *= multiplier;
+			break;
+		default:
+			throw new RuntimeException("Invalid stat name: " + statName);
+		}
+	}
+	
 	
 	//this is the Pokemon's mutable stats, the original is at PokemonSpecies
 	public StatsContainer clone() {

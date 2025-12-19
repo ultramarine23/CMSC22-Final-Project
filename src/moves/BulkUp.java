@@ -36,13 +36,8 @@ public class BulkUp extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		user.incrementStatStage(Stats.ATK, 1);
-		int atkMod = user.getStatMod(Stats.ATK);
-		user.applyModStat(Stats.ATK, atkMod);
-		
 		user.incrementStatStage(Stats.DEF, 1);
-		int defMod = user.getStatMod(Stats.DEF);
-		user.applyModStat(Stats.DEF, defMod);
+		user.incrementStatStage(Stats.ATK, 1);
 	}
 
 }

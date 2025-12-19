@@ -42,6 +42,10 @@ public class Globals {
 		IGNORES_PROTECT, HIGH_CRIT, DANCE_MOVE, HEALING_MOVE, CONTACT_MOVE, BREAKS_SCREENS
 	}
 	
+	public enum StatMods {
+		PARALYSIS, BURN
+	}
+	
 	public static Random randomEngine = new Random();
 	public static BattleInstance curInstance;
 }

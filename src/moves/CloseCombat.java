@@ -37,14 +37,7 @@ public class CloseCombat extends Move {
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		//lower the def and sdef by 1
 		user.incrementStatStage(Stats.DEF, -1);
-		int defMod = user.getStatMod(Stats.DEF);
-		user.applyModStat(Stats.DEF, defMod);
-		
-		user.incrementStatStage(Stats.SPD, 1);
-		int spdMod = user.getStatMod(Stats.SPD);
-		user.applyModStat(Stats.SPD, spdMod);
-		
-
+		user.incrementStatStage(Stats.SPD, -1);
 	}
 
 }

@@ -38,10 +38,9 @@ public class Moonblast extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		target.incrementStatStage(Stats.SPA, -1);
-		int spaMod = target.getStatMod(Stats.SPA);
-		target.applyModStat(Stats.SPA, spaMod);
-
+		if (Globals.randomEngine.nextDouble() < 0.3) {
+			target.incrementStatStage(Stats.SPA, -1);
+		}
 	}
 
 }

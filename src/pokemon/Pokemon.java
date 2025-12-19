@@ -16,7 +16,6 @@ import abilities.Ability;
 
 public class Pokemon {
 	private PokemonSpecies pokemonSpecies;
-	private StatsContainer currentStats;
 	private Types type1;
 	private Types type2;
 	private List<Move> moves;
@@ -24,16 +23,14 @@ public class Pokemon {
 	private ArrayList<VolatileStatus> volatileStatus; 
 	private int statusTurns; // used for computation of toxic damage
 	private boolean isAllied;
-	private Map<Stats, Integer> statChanges;
-	private List<Move> previousMoves;
+	private final StatsManager statsManager;
 	private boolean isFlinched; 
 	private Ability ability;
 
 
-
 	public Pokemon(PokemonSpecies pokemonSpecies, boolean isAllied) {
 		this.pokemonSpecies = pokemonSpecies;
-		this.currentStats = pokemonSpecies.getBaseStats().clone();
+		this.statsManager = new StatsManager(pokemonSpecies.getBaseStats());
 		this.type1 = pokemonSpecies.getType1();
 		this.type2 = pokemonSpecies.getType2();
 		this.moves = pokemonSpecies.getLearnableMoves();
@@ -42,16 +39,8 @@ public class Pokemon {
 		this.volatileStatus = new ArrayList<VolatileStatus>();
 		this.isAllied = isAllied;
 		this.isFlinched = false;
-		this.previousMoves = new ArrayList<Move>();
 		this.ability = pokemonSpecies.getAbilities().getFirst(); //temporary
 
-		// initialize statChanges
-		this.statChanges = new HashMap<Stats, Integer>();
-		this.statChanges.put(Stats.ATK, 0);
-		this.statChanges.put(Stats.DEF, 0);
-		this.statChanges.put(Stats.SPA, 0);
-		this.statChanges.put(Stats.SPD, 0);
-		this.statChanges.put(Stats.SPE, 0);
 	}
 
 	public void applyStatus(Status status) {
@@ -91,12 +80,6 @@ public class Pokemon {
 				currentStats.setSpeed(newSpd);
 			}
 			
-			//freeze
-			if (curStatus == Status.FREEZE) {
-				//do nothing
-			}
-			
-
 
 			statusTurns = 0;
 			curStatus = status;
@@ -121,7 +104,8 @@ public class Pokemon {
 
 		getCurrentStats().setStat("hp", Integer.min(maxHp, curHp + amount));
 	}
-
+	
+	
 	public void addMove(Move move) {
 		moves.add(move);
 	}
@@ -134,46 +118,6 @@ public class Pokemon {
 		Globals.curInstance.getEventBus().triggerEvent(BattleEvent.POKEMON_DIED, new Object[] { this });
 	}
 
-	public void incrementStatStage(Stats stat, int incrementAmount) {
-		Integer statStage = statChanges.get(stat);
-		statStage += incrementAmount;
-		statStage = this.limitMod(statStage); //limit from -4 to 4
-	}
-	
-	//return modified value
-	private int applyModifier(int stat, int mod) {
-        if (mod >= 0) {
-            return (int)Math.round(stat * (2+mod) / 2); //buff
-        } else {
-            return (int)Math.round((stat * 2 / (2+mod))); //debuff
-        }
-    }
-	
-	//used for moves that increases atk for example
-	public void applyModStat(Stats stat, int modifier) {
-		
-		switch (stat) {
-		case Stats.ATK:
-			this.currentStats.setAtk(applyModifier(this.currentStats.getAtk(), modifier));
-		case Stats.DEF:
-			this.currentStats.setDef(applyModifier(this.currentStats.getDef(), modifier));
-		case Stats.SPA:
-			this.currentStats.setSpAtk(applyModifier(this.currentStats.getSpAtk(), modifier));
-		case Stats.SPD:
-			this.currentStats.setSpDef(applyModifier(this.currentStats.getSpDef(), modifier));
-		case Stats.SPE:
-			this.currentStats.setSpeed(applyModifier(this.currentStats.getSpeed(), modifier));
-		case Stats.HP:
-			return;
-		default:
-			throw new RuntimeException("Invalid stat name.");
-		}
-	}
-		
-	//this func is to limit the modifiers to -4 to +4
-    private int limitMod(int mod) {
-        return Math.max(-4, Math.min(4, mod));
-    }
 
 	@Override
 	public String toString() {
@@ -226,16 +170,14 @@ public class Pokemon {
 	public Types getType2() { return type2; }
 	public PokemonSpecies getPokemonSpecies() { return pokemonSpecies; } 
 	public StatsContainer getBaseStats() { return pokemonSpecies.getBaseStats(); } //get the orig stats
-	public StatsContainer getCurrentStats() { return currentStats; } 
+	public StatsContainer getCurrentStats() { return statsManager.getCurrentStats(); } 
 	public List<Move> getMoves() { return moves; }
 	public Status getCurStatus() { return curStatus; }
 	public int getStatusTurns() { return statusTurns; }
 	public List<VolatileStatus> getVolatileStatus() { return volatileStatus; }
 	public void setFlinched(boolean newStatus) { isFlinched = newStatus; }
 	
-	public int getStatMod(Stats stat) {
-	    return statChanges.getOrDefault(stat, 0);
-	}
+
 	public Ability getAbilty() {
 		return this.ability;
 	}
@@ -244,7 +186,6 @@ public class Pokemon {
 	//setters
 	public void setType1(Types type1) { this.type1 = type1; }
 	public void setType2(Types type2) { this.type2 = type2; }
-	public void setCurrentStats(StatsContainer currentStats) { this.currentStats = currentStats; }
 	public void setStatusTurns(int turn) {this.statusTurns = turn;}
 	
 	
@@ -253,6 +194,13 @@ public class Pokemon {
 	public boolean isFlinched() { return isFlinched; }
 	public void incrementStatusTurns() { statusTurns++; } 
 	
+	public void incrementStatStage(Stats stat, int amount) {
+		statsManager.incrementStatStage(stat, amount);
+	}
+	
+	public void resetStatStages() {
+		statsManager.resetStatStages();
+	}
 	
 
 }

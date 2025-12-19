@@ -32,6 +32,6 @@ public class ClearSmog extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		target.setCurrentStats(target.getBaseStats());
+		target.resetStatStages();
 	}
 }
