@@ -16,8 +16,8 @@ public abstract class Ability {
 	
 	
 	public Ability(String newName, Event newTriggerEvent) {
-		name = newName;
-		triggerEvent = newTriggerEvent;
+		this.name = newName;
+		this.triggerEvent = newTriggerEvent;
 	}
 	
 	//this is different for every ability, since they have different Event triggers

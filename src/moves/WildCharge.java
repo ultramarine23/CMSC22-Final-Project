@@ -15,7 +15,7 @@ public class WildCharge extends Move {
 
 	public WildCharge() {
 		super(
-				"WildCharge", 
+				"Wild Charge", 
 				90, 
 				100, 
 				MoveCategory.PHYSICAL, 
