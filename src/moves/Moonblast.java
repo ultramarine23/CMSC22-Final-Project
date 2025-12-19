@@ -23,9 +23,9 @@ public class Moonblast extends Move {
 				MoveCategory.SPECIAL, 
 				Types.FAIRY, 
 				0, 
-				15, 
+				24, 
 				"Blast from the moon that may lower the target's special attack", 
-				EnumSet.of(MoveFlags.CONTACT_MOVE)
+				EnumSet.noneOf(MoveFlags.class)
 			);
 		// TODO Auto-generated constructor stub
 	}
@@ -38,8 +38,9 @@ public class Moonblast extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-        StatsContainer stats = user.getCurrentStats();
-		stats.setAtk(stats.getSpAtk() - 1);
+		target.incrementStatStage(Stats.SPA, -1);
+		int spaMod = target.getStatMod(Stats.SPA);
+		target.applyModStat(Stats.SPA, spaMod);
 
 	}
 
