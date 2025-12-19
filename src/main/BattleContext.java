@@ -34,4 +34,9 @@ public class BattleContext {
 	public void setTurnSnapshot(TurnSnapshot newSnapshot) {
 		curTurnSnapshot = newSnapshot;
 	}
+	
+	public void requestSwitch(Pokemon switched, Pokemon replacer) {
+		curBattle.switchPokemon(switched, replacer);
+	}
 }
+

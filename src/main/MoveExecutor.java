@@ -89,7 +89,7 @@ public class MoveExecutor {
 			} else {
 				System.out.print("Enemy ");
 			}
-			System.out.println(user.getPokemonSpecies().getName() + " took " + damageDealt + " damage!");
+			System.out.println(target.getPokemonSpecies().getName() + " took " + damageDealt + " damage!");
 		}
 		
 		

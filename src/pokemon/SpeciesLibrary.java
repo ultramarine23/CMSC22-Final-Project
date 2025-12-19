@@ -22,7 +22,7 @@ public class SpeciesLibrary {
 			210,
 			Types.FIGHTING,
 			Types.NONE,
-			List.of(),
+			List.of(new Levitate()),
 			MovesetData.ZAMAZENTA);
 	
 	public static final PokemonSpecies ALOMOMOLA = new PokemonSpecies(
@@ -94,7 +94,7 @@ public class SpeciesLibrary {
 		116, 
 		Types.ELECTRIC, 
 		Types.FLYING, 
-		List.of(), 
+		List.of(new FlameBody()), 
 		MovesetData.ZAPDOS);
 
 	public static final PokemonSpecies GLIMMORA = new PokemonSpecies(

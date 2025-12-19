@@ -11,6 +11,7 @@ import moves.Move;
 
 //used for checking FailedMoves
 import moves.Paralyzed;
+import moves.Switch;
 import moves.FailFreezed;
 import moves.FailSleep;
 
@@ -188,8 +189,25 @@ public class BattleInstance {
 	public void printBattleStatus() {
 		System.out.println("Ally side: ");
 		System.out.println(activeAlly.toString());
+		System.out.print("\tROSTER:\n\t" + activeAlly.getPokemonSpecies().getName() + " (ACTIVE)");
+		
+		for (Pokemon poke : allies) {
+			if (poke != activeAlly) {
+				System.out.print("  /  " + poke.getPokemonSpecies().getName());
+			}
+		}
+		
+		System.out.println();
 		System.out.println("\nEnemy side: ");
 		System.out.println(activeEnemy.toString());
+		System.out.print("\tROSTER:\n\t" + activeEnemy.getPokemonSpecies().getName() + " (ACTIVE)");
+		for (Pokemon poke : enemies) {
+			if (poke != activeEnemy) {
+				System.out.print("  /  " + poke.getPokemonSpecies().getName());
+			}
+		}
+		
+		System.out.println();
 	}
 	
 	//Determines the order of turns, and checks for current Status of both ally and enemy poke
@@ -211,10 +229,34 @@ public class BattleInstance {
 		System.out.print("Select move: ");
 		moveInput = scanner.nextLine();
 		
-		// note: if no matching move is found this will result in an error
-		for (Move move : user.getMoves()) {
-			if (move.getName().equals(moveInput)) {
-				turnIntent.setMove(move);
+		// handle case where we switch
+		if (moveInput.equals("switch")) {
+			System.out.print("Switch with which ally: ");
+			String replacerInput = scanner.nextLine();
+			Pokemon replacer = null;
+			
+			if (user == activeAlly) {
+				for (Pokemon ally : allies) {
+					if (ally.getPokemonSpecies().getName().equals(replacerInput)) {
+						replacer = ally;
+					}
+				}
+			} else {
+				for (Pokemon enemy : enemies) {
+					if (enemy.getPokemonSpecies().getName().equals(replacerInput)) {
+						replacer = enemy;
+					}
+				}
+			}
+			
+			turnIntent.setMove(new Switch(replacer));
+		} else {
+			// if not switch, we handle regular move picking
+			// note: if no matching move is found this will result in an error
+			for (Move move : user.getMoves()) {
+				if (move.getName().equals(moveInput)) {
+					turnIntent.setMove(move);
+				}
 			}
 		}
 		
@@ -324,6 +366,20 @@ public class BattleInstance {
 			System.out.println("YOU WIN!");
 		} else {
 			System.out.println("YOU LOSE!");
+		}
+	}
+	
+	public void switchPokemon(Pokemon switched, Pokemon replacer) {
+		if (switched == activeAlly) {
+			activeAlly = replacer;
+		} else {
+			activeEnemy = replacer;
+		}
+		
+		for (TurnIntent intent : curTurnSnapshot.getTurnOrder()) {
+			if (intent.getTarget() == switched) {
+				intent.setTarget(replacer);
+			}
 		}
 	}
 }
