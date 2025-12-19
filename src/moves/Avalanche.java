@@ -28,15 +28,14 @@ public class Avalanche extends Move {
 
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		//check the health of pokemon
-		
-
+		if (ctx.getHistory().wasHitThisTurn(user)) {
+			this.setPower(getBasePower() * 2);
+		}
 	}
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		//if health changed -> poke is damage; then double the power
-
+		
 	}
 
 }
