@@ -97,21 +97,6 @@ public class StatsContainer {
 		
 		return clonedStats;
 	}
-
-	// Apply modifier formula 
-    private int applyModifier(int stat, int mod) {
-        if (mod >= 0) {
-            return (int)Math.round(stat * (2+mod) / 2); //buff
-        } else {
-            return (int)Math.round((stat * 2 / (2+mod))); //debuff
-        }
-    }
-    
-    
-    //this func is to limit the modifiers to -4 to +4
-    private int limitMod(int mod) {
-        return Math.max(-4, Math.min(4, mod));
-    }
     
     
 	@Override

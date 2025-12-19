@@ -6,6 +6,7 @@ import java.util.EnumSet;
 import main.BattleContext;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
+import main.Globals.Stats;
 import main.Globals.Types;
 import pokemon.Pokemon;
 import pokemon.StatsContainer;
@@ -35,9 +36,14 @@ public class CloseCombat extends Move {
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		//lower the def and sdef by 1
-		StatsContainer stats = user.getCurrentStats();
-		stats.setDef(stats.getDef() - 1);
-		stats.setSpDef(stats.getSpDef() - 1);
+		user.incrementStatStage(Stats.DEF, -1);
+		int defMod = user.getStatMod(Stats.DEF);
+		user.applyModStat(Stats.DEF, defMod);
+		
+		user.incrementStatStage(Stats.SPD, 1);
+		int spdMod = user.getStatMod(Stats.SPD);
+		user.applyModStat(Stats.SPD, spdMod);
+		
 
 	}
 
