@@ -17,8 +17,8 @@ public class Bite extends Move {
 				100, 
 				MoveCategory.PHYSICAL, 
 				Types.DARK, 
-				-4,
-				25, 
+				0,
+				20, 
 				"An attack that may cause flinching", 
 				EnumSet.noneOf(MoveFlags.class)
 			);
@@ -36,7 +36,7 @@ public class Bite extends Move {
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
         //set flinch to true
-        user.isFlinched();
+        target.setFlinched(true);
 	}
 
 }
