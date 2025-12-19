@@ -50,12 +50,7 @@ public class MoveExecutor {
 			System.out.println(user.getPokemonSpecies().getName() + " used " + move.getName() + "!");
 		}
 		
-		System.out.println(move.getClass());
 		
-		
-		
-		
-	
 		
 		
 		//check for abilities before move execution by the the user

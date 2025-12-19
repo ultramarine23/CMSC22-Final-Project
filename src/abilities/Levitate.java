@@ -16,10 +16,11 @@ public class Levitate extends Ability {
 	 //used in move Execution
 	 public void trigger(BattleContext btx, Pokemon user, Pokemon target) {
 		 //make the target pokemon target not take damage from ground type moves
-		 Types type = btx.getSnapshot().getIntentsMap().get(user).getMove().getMoveType();
+
 		 TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user);
+		 Types type = userIntent.getMove().getMoveType();
 		 
-		 
+
 		 if (type == Types.GROUND) { //takes the attacker move type
 			 /*
 			 int curPow = btx.getSnapshot().getIntentsMap().get(target).getMove().getBasePower(); //makes it so that will attack, but cant do damage */

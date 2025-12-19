@@ -32,7 +32,18 @@ public class MovesetData {
 			new BrickBreak(),
 			new SandsearStorm(),
 			new WildCharge(),
-			new SelfDestruct()
+			new SelfDestruct(),
+			//added for testing purposes
+			new Earthquake(),
+			new BulkUp(),
+			new Flamethrower(),
+			new BodySlam(),
+			new SludgeBomb(),
+			new Curse(),
+			new DarkPulse(),
+			new SelfDestruct(),
+			new Hypnosis()
+			
 
 	);
 

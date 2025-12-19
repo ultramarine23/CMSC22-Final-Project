@@ -93,14 +93,20 @@ public class BattleInstance {
 			
 			// perform the round routine, with regular battle end checks
 			moveExecutor.executeMove(this.getContext(),turnOrder[0]);
-			printBattleStatus();
-			scanner.nextLine();
 			
 			if (hasBattleEnded) {
 				return;
 			}
 			
+			printBattleStatus();
+			scanner.nextLine();
+			
 			moveExecutor.executeMove(this.getContext(),turnOrder[1]);
+			
+			if (hasBattleEnded) {
+				return;
+			}
+			
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -231,24 +237,7 @@ public class BattleInstance {
 		
 		// handle case where we switch
 		if (moveInput.equals("switch")) {
-			System.out.print("Switch with which ally: ");
-			String replacerInput = scanner.nextLine();
-			Pokemon replacer = null;
-			
-			if (user == activeAlly) {
-				for (Pokemon ally : allies) {
-					if (ally.getPokemonSpecies().getName().equals(replacerInput)) {
-						replacer = ally;
-					}
-				}
-			} else {
-				for (Pokemon enemy : enemies) {
-					if (enemy.getPokemonSpecies().getName().equals(replacerInput)) {
-						replacer = enemy;
-					}
-				}
-			}
-			
+			Pokemon replacer = promptForReplacement(user);
 			turnIntent.setMove(new Switch(replacer));
 		} else {
 			// if not switch, we handle regular move picking
@@ -329,7 +318,6 @@ public class BattleInstance {
 				}
 			} else if (activeMon.getCurStatus() == Status.PARALYSIS) {
 				if(Globals.randomEngine.nextDouble() < 0.25) {
-					activeMon.applyStatus(Status.NONE);
 					System.out.println(activeMon.getPokemonSpecies().getName() + " recovered from paralysis");
 				}
 			}
@@ -347,19 +335,29 @@ public class BattleInstance {
 	private void onPokemonDied(Object[] deadMons) {
 		Pokemon deadPoke = (Pokemon) deadMons[0];
 		
+		if (allies.contains(deadPoke)) {
+			if (allies.size() > 1) {
+				Pokemon replacer = promptForReplacement(deadPoke);
+				switchPokemon(deadPoke, replacer);
+			}
+		} else if (enemies.contains(deadPoke)) {
+			if (enemies.size() > 1) {
+				Pokemon replacer = promptForReplacement(deadPoke);
+				switchPokemon(deadPoke, replacer);}
+		}
+		
 		allies.remove(deadPoke);
 		enemies.remove(deadPoke);
 		
 		// then, check if battle ended
 		if (allies.size() == 0) {
-			endBattle(false);
+			
 		} else if (enemies.size() == 0) {
 			endBattle(true);
 		}
 	}
 	
 	private void endBattle(boolean didAlliesWin) {
-		hasBattleEnded = true;
 		isAlliedVictory = didAlliesWin;
 		
 		if (didAlliesWin) {
@@ -367,6 +365,30 @@ public class BattleInstance {
 		} else {
 			System.out.println("YOU LOSE!");
 		}
+		
+		hasBattleEnded = true;
+	}
+	
+	public Pokemon promptForReplacement(Pokemon switched) {
+		System.out.print("Switch with which ally: ");
+		String replacerInput = scanner.nextLine();
+		Pokemon replacer = null;
+		
+		if (switched == activeAlly) {
+			for (Pokemon ally : allies) {
+				if (ally.getPokemonSpecies().getName().equals(replacerInput)) {
+					replacer = ally;
+				}
+			}
+		} else {
+			for (Pokemon enemy : enemies) {
+				if (enemy.getPokemonSpecies().getName().equals(replacerInput)) {
+					replacer = enemy;
+				}
+			}
+		}
+		
+		return replacer;
 	}
 	
 	public void switchPokemon(Pokemon switched, Pokemon replacer) {

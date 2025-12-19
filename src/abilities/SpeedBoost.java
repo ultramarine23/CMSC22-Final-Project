@@ -18,10 +18,10 @@ public class SpeedBoost extends Ability {
 	//The Pokémon's Speed stat is boosted every turn. 
 	@Override
 	public void trigger(BattleContext btx, Pokemon user, Pokemon target) {
-		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType();
-		TurnIntent intent = btx.getSnapshot().getIntentsMap().get(user);
+		TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user);
 		
-		intent.getUser().incrementStatStage(Stats.SPE, 1);
+		userIntent.getUser().incrementStatStage(Stats.SPE, 1); //increases speed by 1
+		System.out.println(this.getName()+" passive is triggered");
 		
 
 	}

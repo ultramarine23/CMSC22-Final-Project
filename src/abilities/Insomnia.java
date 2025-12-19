@@ -18,11 +18,12 @@ public class Insomnia extends Ability {
 	@Override
 	public void trigger(BattleContext btx, Pokemon user, Pokemon target) {
 		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType();
-		TurnIntent curIntent= btx.getSnapshot().getIntentsMap().get(target);
+		TurnIntent curIntent= btx.getSnapshot().getIntentsMap().get(user); //get the user Intent
 		
 		
 		if (curIntent.getTarget().getCurStatus() == Status.SLEEP) {
 			curIntent.getTarget().applyStatus(Status.NONE);
+			System.out.println("Insomnia passive is triggered");
 		}
 
 	}

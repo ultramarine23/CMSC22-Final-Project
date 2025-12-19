@@ -179,7 +179,7 @@ public class Pokemon {
 	
 
 	public Ability getAbilty() {
-		return this.ability;
+		return ability;
 	}
 	
 	
