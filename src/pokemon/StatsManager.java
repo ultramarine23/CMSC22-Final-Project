@@ -28,7 +28,7 @@ public class StatsManager {
 	
 	public void calculateStats() {
 		for (Stats stat : statChanges.keySet()) {
-			int modifier = statChanges.get(stat);
+			double modifier = (double)statChanges.get(stat);
 			double multiplier;
 			
 			if (modifier > 0) {
@@ -39,7 +39,7 @@ public class StatsManager {
 				multiplier = 1.0;
 			}
 			
-			currentStats.setStat(stat, (int)(baseStats.getStat(stat) * multiplier));
+			currentStats.setStat(stat, (int)((double)(baseStats.getStat(stat)) * multiplier));
 		}
 		
 		// handle miscellaneous stat modifiers
@@ -63,14 +63,14 @@ public class StatsManager {
 	
 	//used when applying status mods to pokemon
 	public void incrementStatStage(Stats stat, int amount) {
-		Integer statStage = statChanges.get(stat); 
-		statStage += amount;
+		int statStage = statChanges.get(stat).intValue() + amount; 
 		statStage = this.limitMod(statStage);
+		statChanges.put(stat, Integer.valueOf(statStage));
 		calculateStats();
 	}
 	
 	private int limitMod(int mod) {
-        return Math.max(-4, Math.min(4, mod));
+        return Math.max(-6, Math.min(6, mod));
     }
 	
 	
