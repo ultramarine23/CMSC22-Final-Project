@@ -149,7 +149,7 @@ public class SpeciesLibrary {
 		97, 
 		Types.WATER, 
 		Types.FAIRY, 
-		List.of(), 
+		List.of(new SwiftSwim()), 
 		MovesetData.PRIMARINA);
 
 	public static final PokemonSpecies CLEFABLE = new PokemonSpecies(
@@ -158,7 +158,7 @@ public class SpeciesLibrary {
 		88, 
 		Types.FAIRY, 
 		Types.NONE, 
-		List.of(), 
+		List.of(new Insomnia()), 
 		MovesetData.CLEFABLE);
 
 	public static final PokemonSpecies DEOXYS_SPEED = new PokemonSpecies(
