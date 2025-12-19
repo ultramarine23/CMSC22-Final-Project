@@ -152,5 +152,13 @@ public class MovesetData {
 		new ThunderPunch()
 	);
 
+	public static List<Move> SCIZOR = List.of(
+		new Acrobatics(),
+		new CloseCombat(),
+		new Counter(),
+		new Curse(),
+		new Facade(),
+		new SelfDestruct()
+	);
 
 }

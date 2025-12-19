@@ -133,5 +133,13 @@ public class SpeciesLibrary {
 		Types.GHOST, 
 		List.of(), 
 		MovesetData.HOOPA_UNBOUND);
-	
+
+	public static final PokemonSpecies SCIZOR = new PokemonSpecies(
+		"Scizor", 
+		StatsCalculator.realizeAllStats(StatsData.SCIZOR), 
+		260, 
+		Types.BUG, 
+		TYpes.STEEL, 
+		List.of(), 
+		MovesetData.SCIZOR);	
 }
