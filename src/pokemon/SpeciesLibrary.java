@@ -60,4 +60,13 @@ public class SpeciesLibrary {
 		Types.FLYING,
 		List.of(),
 		MovesetData.ENAMORUS);
+		
+	public static final PokemonSpecies URSALUNA = new PokemonSpecies(
+		"Ursaluma", 
+		StatsCalculator.realizeAllStats(StatsData.URSALUNA), 
+		200,
+		Types.NORMAL, 
+		Types.GROUND, 
+		List.of(), 
+		MovesetData.URSALUNA);
 }
