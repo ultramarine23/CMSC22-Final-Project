@@ -116,8 +116,8 @@ public class SpeciesLibrary {
 		MovesetData.DARKRAI);
 	
 	public static final PokemonSpecies PELLIPER = new PokemonSpecies(
-		"Pelliper", 
-		StatsCalculator.realizeAllStats(StatsData.PELLIPER), 
+		"Pelipper", 
+		StatsCalculator.realizeAllStats(StatsData.PELIPPER), 
 		61, 
 		Types.WATER, 
 		Types.FLYING, 
