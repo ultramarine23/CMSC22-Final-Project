@@ -174,6 +174,35 @@ public class MovesetData {
 		new IceBeam()
 	);
 
+<<<<<<< HEAD
 	
+=======
+	public static List<Move> CLEFABLE = List.of(
+		new Blizzard(),
+		new BodySlam(),
+		new BrickBreak(),
+		new DrainPunch(),
+		new Facade(),
+		new Flamethrower(),
+		new SelfDestruct(),
+		new IceBeam(),
+		new IcePunch(),
+		new Moonblast(),
+		new Thunder(),
+		new ThunderPunch(),
+		new Thunderbolt(),
+		new ThunderWave()
+	);
+
+	public static List<Move> DEOXYS_SPEED = List.of(
+		new SelfDestruct(),
+		new BrickBreak(),
+		new DrainPunch(),
+		new Facade(),
+		new IceBeam(),
+		new IcePunch(),
+		new Thunder()
+	);
+>>>>>>> 207b651236a0a4fc51e20273761cc9cb94656580
 
 }

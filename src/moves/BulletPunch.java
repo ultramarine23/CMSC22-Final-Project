@@ -3,25 +3,23 @@ package moves;
 import java.util.EnumSet;
 
 import main.BattleContext;
-import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
-import main.Globals.Stats;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
+public class BulletPunch extends Move {
 
-public class Bite extends Move {
-    	public Bite() {
+	public BulletPunch() {
 		super(
-				"Bite", 
-				60, 
+				"Bullet Punch", 
+				40, 
 				100, 
 				MoveCategory.PHYSICAL, 
-				Types.DARK, 
-				0,
-				20, 
-				"An attack that may cause flinching", 
+				Types.STEEL, 
+				1,
+				16, 
+				"The user strikes the target with tough punches as fast as bullets. This move always goes first.", 
 				EnumSet.of(MoveFlags.CONTACT_MOVE)
 			);
 		// TODO Auto-generated constructor stub
@@ -30,16 +28,12 @@ public class Bite extends Move {
 
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		//check the health of pokemon
-		
-
+	
 	}
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-        		if (Globals.randomEngine.nextDouble() < 0.3) {
-				target.setFlinched(true);
-		}
+		
 	}
 
 }

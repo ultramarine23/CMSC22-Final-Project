@@ -151,4 +151,22 @@ public class SpeciesLibrary {
 		Types.FAIRY, 
 		List.of(), 
 		MovesetData.PRIMARINA);
+
+	public static final PokemonSpecies CLEFABLE = new PokemonSpecies(
+		"Clefable", 
+		StatsCalculator.realizeAllStats(StatsData.CLEFABLE), 
+		88, 
+		Types.FAIRY, 
+		Types.NONE, 
+		List.of(), 
+		MovesetData.CLEFABLE);
+
+	public static final PokemonSpecies DEOXYS_SPEED = new PokemonSpecies(
+		"Deoxys (Speed)", 
+		StatsCalculator.realizeAllStats(StatsData.DEOXYS_SPEED), 
+		134, 
+		Types.PSYCHIC, 
+		Types.NONE,
+		List.of(), 
+		MovesetData.DEOXYS_SPEED);
 }
