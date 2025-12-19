@@ -141,10 +141,6 @@ public class DamageCalculator {
 	
 	//user will deal damage to target
 	public static int calculateDamage(Pokemon user, Pokemon target, Move move, BattleContext context) {
-		// Check for abilities that gives immunity to the target like levitate
-        
-		
-		
   		// first calculate main damage using atk/def and move base power
 		float targetDef = 0;
 		float userAtk = 0;

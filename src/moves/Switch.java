@@ -8,14 +8,25 @@ import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class FailSleep extends Move {
-
-	public FailSleep() {
-		super("[Sleeps]", 0, 100, MoveCategory.STATUS, Types.NONE, 0, 100, "", EnumSet.noneOf(MoveFlags.class));
+public class Switch extends Move {
+	private Pokemon replacer;
+	
+	public Switch(Pokemon replacer) {
+		super(
+				"[Switches out]",
+				0,
+				999, 
+				MoveCategory.STATUS,
+				Types.NONE, 
+				999, 
+				100, 
+				"",
+				EnumSet.noneOf(MoveFlags.class));
+		
+		this.replacer = replacer;
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		// TODO Auto-generated method stub
@@ -24,8 +35,7 @@ public class FailSleep extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		System.out.println(user.getPokemonSpecies().getName() + "is fast asleep");
-
+		ctx.requestSwitch(user, replacer);
 	}
 
 }

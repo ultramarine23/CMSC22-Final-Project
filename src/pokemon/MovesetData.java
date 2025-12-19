@@ -13,7 +13,8 @@ public class MovesetData {
 			new SludgeBomb(),
 			new Curse(),
 			new DarkPulse(),
-			new SelfDestruct()
+			new SelfDestruct(),
+			new Hypnosis()
 			);
 	
 	public static final List<Move> DRAGAPULT = List.of(
@@ -173,6 +174,7 @@ public class MovesetData {
 		new IceBeam()
 	);
 
+
 	public static List<Move> CLEFABLE = List.of(
 		new Blizzard(),
 		new BodySlam(),
@@ -199,5 +201,6 @@ public class MovesetData {
 		new IcePunch(),
 		new Thunder()
 	);
+
 
 }

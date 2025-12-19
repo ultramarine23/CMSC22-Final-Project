@@ -19,12 +19,14 @@ public class FlameBody extends Ability {
 	@Override
 	public void trigger(BattleContext btx, Pokemon user, Pokemon target) {
 		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType(); //move type of attacker
+		TurnIntent targetIntent = btx.getSnapshot().getIntentsMap().get(target);
 		TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user);
 		
 		//get attacker moveType
 		if (userIntent.getMove().getMoveType() == Types.FIRE) {
-			if (Globals.randomEngine.nextDouble() < 0.1) {
-				userIntent.getUser().applyStatus(Status.BURN);
+			if (Globals.randomEngine.nextDouble() < 1) {
+				targetIntent.getUser().applyStatus(Status.BURN);
+				System.out.println("Applied Flame Body Passive");
 			}
 		}
 	

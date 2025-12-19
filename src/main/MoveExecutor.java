@@ -3,8 +3,15 @@ package main;
 import moves.Move;
 import pokemon.Pokemon;
 import pokemon.TurnIntent;
+
+import java.io.ObjectInputFilter.Status;
+
 import abilities.Ability;
 import abilities.Ability.Event;
+import moves.Paralyzed;
+import moves.FailFreezed;
+import moves.FailSleep;
+
 
 
 public class MoveExecutor {
@@ -25,26 +32,33 @@ public class MoveExecutor {
 			}
 		}
 		
-		// print used move message
-		if (move.getName() != "[Paralyzed]") {
+		
+		TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user);
+		//checks for other failedMoves like freeze and sleep, paralyze
+		if (move.getName().equals("[Paralyzed]")) {
+			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
+		} else if(move.getName().equals("[Freezed]")) {
+			System.out.println(user.getPokemonSpecies().getName() + " was frozen solid!");
+		} else if (move.getName() == "[Sleeps]") {
+			System.out.println(user.getPokemonSpecies().getName() + " was asleep");
+		} else {
 			if (user.isAllied()) {
 				System.out.print("Your ");
 			} else {
 				System.out.print("Enemy ");
 			}
 			System.out.println(user.getPokemonSpecies().getName() + " used " + move.getName() + "!");
-		} else {
-			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
 		}
 		
-		//checks for other failedMoves like freeze and sleep
+		System.out.println(move.getClass());
+		
 		
 		
 		
 	
 		
 		
-		//check for abilities before move execution byt the user
+		//check for abilities before move execution by the the user
 		if(user.getAbilty().getTriggerEvent() == Event.BEFORE_ATTACK) {
 			user.getAbilty().trigger(btx, user, target);
 		}
@@ -89,7 +103,7 @@ public class MoveExecutor {
 			} else {
 				System.out.print("Enemy ");
 			}
-			System.out.println(user.getPokemonSpecies().getName() + " took " + damageDealt + " damage!");
+			System.out.println(target.getPokemonSpecies().getName() + " took " + damageDealt + " damage!");
 		}
 		
 		
