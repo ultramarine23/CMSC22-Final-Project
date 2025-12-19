@@ -60,7 +60,7 @@ public class BattleInstance {
 		runBattleInitialization();
 		
 		while (!isOver) {
-			// true corresponds to ally, false to enemy; first in array = first to move
+			// first in array = first to move
 			TurnIntent[] turnOrder; 
 			
 			// run the current round
@@ -82,6 +82,13 @@ public class BattleInstance {
 					turnOrder = new TurnIntent[] {enemyIntent, allyIntent};
 				}
 			}
+			
+			// update snapshot and history
+			curTurnSnapshot = new TurnSnapshot(turnOrder);
+			curTurnHistory = new TurnHistory();
+			
+			context.setTurnSnapshot(curTurnSnapshot);
+			context.setTurnHistory(curTurnHistory);
 			
 			// perform the round routine, with regular battle end checks
 			moveExecutor.executeMove(this.getContext(),turnOrder[0]);
