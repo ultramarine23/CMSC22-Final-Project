@@ -106,6 +106,7 @@ public class BattleInstance {
 			if (hasBattleEnded) {
 				return;
 			}
+			
 			printBattleStatus();
 			scanner.nextLine();
 			
