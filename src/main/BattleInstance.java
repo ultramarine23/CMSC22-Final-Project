@@ -33,6 +33,8 @@ public class BattleInstance {
 	private Pokemon activeAlly;
 	private Pokemon activeEnemy;
 	private int roundCount;
+	private TurnSnapshot curTurnSnapshot;
+	private TurnHistory curTurnHistory;
 	
 	// flags
 	private boolean hasBattleEnded;
@@ -193,9 +195,8 @@ public class BattleInstance {
 		}
 		
 		String moveInput = "";
-			
+		
 		// set the user and target depending on passed in fields user/target
-			
 		turnIntent.setUser(user);
 		turnIntent.setTarget(target);
 			
