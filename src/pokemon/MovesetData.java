@@ -6,15 +6,18 @@ import moves.*;
 
 public class MovesetData {
 	public static final List<Move> WEEZING = List.of(
-			new Earthquake(),
+			new Earthquake(), //ground type
 			new BulkUp(),
 			new Flamethrower(),
-			new BodySlam(),
+			new BodySlam(), //contact move
 			new SludgeBomb(),
 			new Curse(),
 			new DarkPulse(),
-			new SelfDestruct(),
-			new Hypnosis()
+			new SelfDestruct(), 
+			new Hypnosis(), //guranteed sleep
+			//Added for testing
+			new ThunderWave() //guranteed paralysis
+			
 			);
 	
 	public static final List<Move> DRAGAPULT = List.of(
@@ -34,15 +37,17 @@ public class MovesetData {
 			new WildCharge(),
 			new SelfDestruct(),
 			//added for testing purposes
-			new Earthquake(),
+			new Earthquake(), //ground type
 			new BulkUp(),
 			new Flamethrower(),
-			new BodySlam(),
+			new BodySlam(), //contact move
 			new SludgeBomb(),
 			new Curse(),
 			new DarkPulse(),
-			new SelfDestruct(),
-			new Hypnosis()
+			new SelfDestruct(), 
+			new Hypnosis(), //guranteed sleep
+			//Added for testing
+			new ThunderWave() //guranteed paralysis
 			
 
 	);

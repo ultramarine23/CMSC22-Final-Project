@@ -7,12 +7,10 @@ import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 import main.TurnHistory;
-
-
-public class DrainPunch extends Move {
-	public DrainPunch() {
+public class GigaDrain extends Move {
+    	public GigaDrain() {
 		super(
-				"Drain Punch", 
+				"Giga Drain", 
 				75, 
 				100, 
 				MoveCategory.PHYSICAL, 
