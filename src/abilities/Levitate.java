@@ -20,7 +20,6 @@ public class Levitate extends Ability {
 		 TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user);
 		 
 		 
-		 
 		 if (type == Types.GROUND) { //takes the attacker move type
 			 /*
 			 int curPow = btx.getSnapshot().getIntentsMap().get(target).getMove().getBasePower(); //makes it so that will attack, but cant do damage */
