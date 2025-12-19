@@ -60,5 +60,5 @@ public class StatsData {
 	public static StatsContainer URSALUNA = new StatsContainer(new int[] {130, 140, 105, 45, 80, 50});
 	public static StatsContainer ZARUDE = new StatsContainer(new int[] {105, 120, 105, 70, 95, 105});
 	public static StatsContainer ZARUDE_DADA = new StatsContainer(new int[] {105, 120, 105, 70, 95, 105});
-
+	public static StatsContainer MEW = new StatsContainer(new int[] {100, 100, 100, 100, 100, 100});
 }
