@@ -220,12 +220,12 @@ public class window extends JFrame {
         playerSpriteLabel = new JLabel("Player", SwingConstants.CENTER);
         playerSpriteLabel.setOpaque(true);
         playerSpriteLabel.setBackground(new Color(100, 100, 200)); // Fallback color
-        playerSpriteLabel.setBounds(60, 150, 120, 120);
+        playerSpriteLabel.setBounds(60, 125, 120, 120);
         scenePanel.add(playerSpriteLabel);
 
         // Player HUD
         JPanel playerHud = createHud("Player", true);
-        playerHud.setBounds(Globals.defWinWidth - 270, 200, 250, 60);
+        playerHud.setBounds(Globals.defWinWidth - 270, 175, 250, 60);
         scenePanel.add(playerHud);
 
         panel.add(scenePanel, BorderLayout.CENTER);

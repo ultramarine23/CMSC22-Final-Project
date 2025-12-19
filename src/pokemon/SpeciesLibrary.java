@@ -62,7 +62,7 @@ public class SpeciesLibrary {
 		MovesetData.ENAMORUS);
 		
 	public static final PokemonSpecies URSALUNA = new PokemonSpecies(
-		"Ursaluma", 
+		"Ursaluna",
 		StatsCalculator.realizeAllStats(StatsData.URSALUNA), 
 		200,
 		Types.NORMAL, 

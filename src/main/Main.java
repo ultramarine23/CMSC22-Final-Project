@@ -88,7 +88,20 @@ public class Main {
                 }
 
                 // Enemy (Defaulting to Weezing)
-                enemiesArr.add(new Pokemon(SpeciesLibrary.WEEZING, false));
+                int placeHolder = Globals.randomEngine.nextInt(19);
+                i = 0;
+                for (Field field : pokemonFields) {
+                    if (i == placeHolder) {
+                        try {
+                            PokemonSpecies species = (PokemonSpecies) field.get(null);
+                            enemiesArr.add(new Pokemon(species, true));
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
+                    i++;
+                }
 
                 final Pokemon playerMon = alliesArr.get(0);
                 final Pokemon enemyMon = enemiesArr.get(0);
