@@ -24,4 +24,22 @@ public class SpeciesLibrary {
 			Types.NONE,
 			List.of(),
 			MovesetData.ZAMAZENTA);
+	
+	public static final PokemonSpecies ALOMOMOLA = new PokemonSpecies(
+			"Alomomola", 
+			StatsCalculator.realizeAllStats(StatsData.ALOMOMOLA),
+			150, 
+			Types.WATER, 
+			Types.NONE, 
+			List.of(), 
+			MovesetData.ALOMOMOLA);
+
+	public static final PokemonSpecies CERULEDGE = new PokemonSpecies(
+			"Ceruledge",
+			StatsCalculator.realizeAllStats(StatsData.CERULEDGE),
+			100,
+			Types.GHOST,
+			Types.FIRE,
+			List.of(),
+			MovesetData.CERULEDGE);
 }

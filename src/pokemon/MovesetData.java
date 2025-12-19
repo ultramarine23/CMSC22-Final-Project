@@ -17,5 +17,7 @@ public class MovesetData {
 			new Flamethrower()
 			);
 	
-	public static final List<Move> ZAMAZENTA = List.of();
+	public static final List<Move> ZAMAZENTA = List.of(
+			new Bite()
+	);
 }
