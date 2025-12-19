@@ -146,39 +146,6 @@ public class Pokemon {
         }
     }
 	
-
-	public void calculateCurrentStats() {
-		// temporarily reset current stats
-		setCurrentStats(getBaseStats());
-
-		// calculate stat stage changes
-		for (Stats stat : Stats.values()) {
-			int value = statChanges.get(stat);
-
-			switch (stat) {
-			case Stats.ATK:
-				currentStats.setAtk((int) (currentStats.getAtk() * ((0.5 * value) + 1)));
-				return;
-			case Stats.DEF:
-				currentStats.setDef((int) (currentStats.getDef() * ((0.5 * value) + 1)));
-				return;
-			case Stats.SPA:
-				currentStats.setSpAtk((int) (currentStats.getSpAtk() * ((0.5 * value) + 1)));
-				return;
-			case Stats.SPD:
-				currentStats.setSpDef((int) (currentStats.getSpDef() * ((0.5 * value) + 1)));
-				return;
-			case Stats.SPE:
-				currentStats.setSpeed((int) (currentStats.getSpeed() * ((0.5 * value) + 1)));
-				return;
-			case Stats.HP:
-				return;
-
-			}
-		}
-
-	}
-	
 	//used for moves that increases atk for example
 	public void applyModStat(Stats stat, int modifier) {
 		
@@ -256,7 +223,7 @@ public class Pokemon {
 	public Types getType2() { return type2; }
 	public PokemonSpecies getPokemonSpecies() { return pokemonSpecies; } 
 	public StatsContainer getBaseStats() { return pokemonSpecies.getBaseStats(); } //get the orig stats
-	public StatsContainer getCurrentStats() { calculateCurrentStats(); return currentStats; } 
+	public StatsContainer getCurrentStats() { return currentStats; } 
 	public List<Move> getMoves() { return moves; }
 	public Status getCurStatus() { return curStatus; }
 	public int getStatusTurns() { return statusTurns; }
