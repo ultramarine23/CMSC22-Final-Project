@@ -20,6 +20,7 @@ public class Insomnia extends Ability {
 		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType();
 		TurnIntent curIntent= btx.getSnapshot().getIntentsMap().get(target);
 		
+		
 		if (curIntent.getTarget().getCurStatus() == Status.SLEEP) {
 			curIntent.getTarget().applyStatus(Status.NONE);
 		}
