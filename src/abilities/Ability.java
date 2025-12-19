@@ -45,6 +45,9 @@ public abstract class Ability {
 		
 		//used when dealing damage/hits;moves might affect opponent or self -> the target has the abi
 		BEFORE_ATTACK,
-		AFTER_ATTACK
+		AFTER_ATTACK,
+		
+		//used for pokemon that will not have abilities
+		DO_NOTHING
 	}
 }

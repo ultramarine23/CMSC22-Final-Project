@@ -20,7 +20,7 @@ public class TurnHistory {
 	}
 	
 	public int damageTakenThisTurn(Pokemon poke) {
-		return damagesTaken.get(poke).intValue();
+		return damagesTaken.getOrDefault(poke, 0);
 	}
 	
 	// package-private mutating functions to prevent pokemon from being able to modify
@@ -34,5 +34,12 @@ public class TurnHistory {
 		} else {
 			damagesTaken.put(poke, amount);
 		}
+	}
+	
+	//function that clears the entire map
+	void clearDamageHistory() {
+		this.wasHit.clear();
+		this.damagesTaken.clear();
+		
 	}
 }

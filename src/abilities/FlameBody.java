@@ -16,7 +16,8 @@ public class FlameBody extends Ability {
 		super("Flame Body", Event.AFTER_GET_HIT);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	//Contact with the Pokémon may burn the attacker.  
 	@Override
 	public void trigger(BattleContext btx, Pokemon user, Pokemon target) {
 		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType(); 
