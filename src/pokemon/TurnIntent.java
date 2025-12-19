@@ -38,6 +38,14 @@ public class TurnIntent {
 			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
 		}
 		
+		
+		//checks for other failedMoves like freeze and sleep
+		
+		
+		//check for abilities that makes the target immune
+		
+		
+		
 		// deal main damage component
 		move.beforeExecution(user, target, context);
 		target.takeDamage(damageDealt);

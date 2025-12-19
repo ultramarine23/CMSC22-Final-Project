@@ -36,4 +36,5 @@ public class PokemonSpecies {
 	public List<Move> getLearnableMoves() { return learnableMoves; }
 	
 	
+	
 }

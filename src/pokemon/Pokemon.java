@@ -12,6 +12,7 @@ import main.Globals.Types;
 import main.Globals.VolatileStatus;
 import main.Globals.Stats;
 import moves.Move;
+import abilities.Ability;
 
 public class Pokemon {
 	private PokemonSpecies pokemonSpecies;
@@ -26,6 +27,7 @@ public class Pokemon {
 	private Map<Stats, Integer> statChanges;
 	private List<Move> previousMoves;
 	private boolean isFlinched; 
+	private Ability ability;
 
 
 
@@ -41,6 +43,7 @@ public class Pokemon {
 		this.isAllied = isAllied;
 		this.isFlinched = false;
 		this.previousMoves = new ArrayList<Move>();
+		this.ability = pokemonSpecies.getAbilities().getFirst(); //temporary
 
 		// initialize statChanges
 		this.statChanges = new HashMap<Stats, Integer>();
@@ -265,6 +268,9 @@ public class Pokemon {
 	
 	public int getStatMod(Stats stat) {
 	    return statChanges.getOrDefault(stat, 0);
+	}
+	public Ability getAbilty() {
+		return this.ability;
 	}
 	
 	

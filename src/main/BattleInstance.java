@@ -84,7 +84,7 @@ public class BattleInstance {
 			}
 			
 			// perform the round routine, with regular battle end checks
-			moveExecutor.executeMove(turnOrder[0]);
+			moveExecutor.executeMove(this.getContext(),turnOrder[0]);
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -92,7 +92,7 @@ public class BattleInstance {
 				return;
 			}
 			
-			moveExecutor.executeMove(turnOrder[1]);
+			moveExecutor.executeMove(this.getContext(),turnOrder[1]);
 			printBattleStatus();
 			scanner.nextLine();
 			
