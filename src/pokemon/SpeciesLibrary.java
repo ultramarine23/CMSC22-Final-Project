@@ -31,7 +31,7 @@ public class SpeciesLibrary {
 			150, 
 			Types.WATER, 
 			Types.NONE, 
-			List.of(), 
+			List.of(new None()), 
 			MovesetData.ALOMOMOLA);
 
 	public static final PokemonSpecies CERULEDGE = new PokemonSpecies(
@@ -40,7 +40,7 @@ public class SpeciesLibrary {
 			100,
 			Types.GHOST,
 			Types.FIRE,
-			List.of(),
+			List.of(new None()),
 			MovesetData.CERULEDGE);
 		
 	public static final PokemonSpecies DRAGONITE = new PokemonSpecies(
@@ -49,7 +49,7 @@ public class SpeciesLibrary {
 			150, 
 			Types.DRAGON, 
 			Types.NONE, 
-			List.of(), 
+			List.of(new None()), 
 			MovesetData.DRAGONITE);
 
 	public static final PokemonSpecies ENAMORUS = new PokemonSpecies(
@@ -58,7 +58,7 @@ public class SpeciesLibrary {
 		48,
 		Types.FAIRY,
 		Types.FLYING,
-		List.of(),
+		List.of(new None()),
 		MovesetData.ENAMORUS);
 		
 	public static final PokemonSpecies URSALUNA = new PokemonSpecies(
@@ -67,7 +67,7 @@ public class SpeciesLibrary {
 		200,
 		Types.NORMAL, 
 		Types.GROUND, 
-		List.of(), 
+		List.of(new None()), 
 		MovesetData.URSALUNA);
 
 	public static final PokemonSpecies HEATRAN = new PokemonSpecies(
@@ -85,7 +85,7 @@ public class SpeciesLibrary {
 		154, 
 		Types.DARK, 
 		Types.GRASS, 
-		List.of(), 
+		List.of(new None()), 
 		MovesetData.ZARUDE);
 
 	public static final PokemonSpecies ZAPDOS = new PokemonSpecies(
@@ -103,7 +103,7 @@ public class SpeciesLibrary {
 		99,
 		Types.ROCK, 
 		Types.POISON, 
-		List.of(), 
+		List.of(new None()), 
 		MovesetData.GLIMMORA);
 
 	public static final PokemonSpecies DARKRAI = new PokemonSpecies(
@@ -112,7 +112,7 @@ public class SpeciesLibrary {
 		529, 
 		Types.DARK, 
 		Types.NONE, 
-		List.of(), 
+		List.of(new None()), 
 		MovesetData.DARKRAI);
 	
 	public static final PokemonSpecies PELLIPER = new PokemonSpecies(
@@ -121,7 +121,7 @@ public class SpeciesLibrary {
 		61, 
 		Types.WATER, 
 		Types.FLYING, 
-		List.of(),
+		List.of(new None()),
 		MovesetData.PELLIPER 
 	);
 
@@ -131,7 +131,7 @@ public class SpeciesLibrary {
 		19, 
 		Types.PSYCHIC, 
 		Types.GHOST, 
-		List.of(), 
+		List.of(new None()), 
 		MovesetData.HOOPA_UNBOUND);
 
 	public static final PokemonSpecies SCIZOR = new PokemonSpecies(
@@ -140,7 +140,7 @@ public class SpeciesLibrary {
 		260, 
 		Types.BUG, 
 		Types.STEEL, 
-		List.of(), 
+		List.of(new None()), 
 		MovesetData.SCIZOR);	
 
 	public static final PokemonSpecies PRIMARINA = new PokemonSpecies(
@@ -167,6 +167,6 @@ public class SpeciesLibrary {
 		134, 
 		Types.PSYCHIC, 
 		Types.NONE,
-		List.of(), 
+		List.of(new None()), 
 		MovesetData.DEOXYS_SPEED);
 }
