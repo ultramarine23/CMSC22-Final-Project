@@ -76,7 +76,7 @@ public class SpeciesLibrary {
 		948, 
 		Types.STEEL, 
 		Types.FIRE, 
-		List.of(), 
+		List.of(new FlameBody()), 
 		MovesetData.HEATRAN);
 	
 	public static final PokemonSpecies ZARUDE = new PokemonSpecies(
