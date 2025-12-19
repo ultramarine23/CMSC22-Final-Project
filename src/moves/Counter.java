@@ -33,6 +33,9 @@ public class Counter extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		// TASK 03
+		int damageTaken = ctx.getHistory().damageTakenThisTurn(user);
+		if (damageTaken != 0) {
+			target.takeDamage(damageTaken * 2);
+		}
 	}
 }
