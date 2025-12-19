@@ -1,42 +1,42 @@
 package moves;
 
+
+
 import java.util.EnumSet;
 
 import main.BattleContext;
+import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
+public class WildCharge extends Move {
 
-public class Bite extends Move {
-    	public Bite() {
+	public WildCharge() {
 		super(
-				"Bite", 
-				60, 
+				"Waterfall", 
+				90, 
 				100, 
 				MoveCategory.PHYSICAL, 
-				Types.DARK, 
-				-4,
-				25, 
-				"An attack that may cause flinching", 
+				Types.ELECTRIC, 
+				0, 
+				15, 
+				"Deals damage, but the user takes 1/4 damage in recoil.", 
 				EnumSet.noneOf(MoveFlags.class)
 			);
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		//check the health of pokemon
-		
+		// do nothing
 
 	}
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-        //set flinch to true
-        user.isFlinched();
+		user.takeDamage(user.getCurrentStats().getHp() / 4);
 	}
 
 }

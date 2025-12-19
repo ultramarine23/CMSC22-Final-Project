@@ -42,4 +42,22 @@ public class SpeciesLibrary {
 			Types.FIRE,
 			List.of(),
 			MovesetData.CERULEDGE);
+		
+	public static final PokemonSpecies DRAGONITE = new PokemonSpecies(
+			"Dragonite", 
+			StatsCalculator.realizeAllStats(StatsData.DRAGONITE), 
+			150, 
+			Types.DRAGON, 
+			Types.NONE, 
+			List.of(), 
+			MovesetData.DRAGONITE);
+
+	public static final PokemonSpecies ENAMORUS = new PokemonSpecies(
+		"Enamorus",
+		StatsCalculator.realizeAllStats(StatsData.ENAMORUS),
+		48,
+		Types.FAIRY,
+		Types.FLYING,
+		List.of(),
+		MovesetData.ENAMORUS);
 }
