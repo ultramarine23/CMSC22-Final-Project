@@ -125,6 +125,13 @@ public class SpeciesLibrary {
 		MovesetData.PELLIPER 
 	);
 
-	
+	public static final PokemonSpecies HOOPA_UNBOUND = new PokemonSpecies(
+		"Hoopa Unbound", 
+		StatsCalculator.realizeAllStats(StatsData.HOOPA_UNBOUND), 
+		19, 
+		Types.PSYCHIC, 
+		Types.GHOST, 
+		List.of(), 
+		MovesetData.HOOPA_UNBOUND);
 	
 }

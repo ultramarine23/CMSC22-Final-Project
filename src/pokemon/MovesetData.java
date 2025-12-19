@@ -45,7 +45,7 @@ public class MovesetData {
 		new BodySlam(),
 		new SludgeBomb(),
 		new Moonblast(),
-		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
+		new Facade(),
 		new SelfDestruct()
 	);
 
@@ -61,7 +61,7 @@ public class MovesetData {
 		new Avalanche(),
 		new Curse(),
 		new DrainPunch(),
-		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
+		new Facade(),
 		new BrickBreak(),
 		new SelfDestruct()
 	);
@@ -79,7 +79,7 @@ public class MovesetData {
 		new Bite(),
 		new Acrobatics(),
 		new BodySlam(),
-		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
+		new Facade(),
 		new BrickBreak(),
 		new SelfDestruct()
 	);
@@ -90,7 +90,7 @@ public class MovesetData {
 		new CloseCombat(),
 		new BrickBreak(),
 		new Acrobatics(),
-		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
+		new Facade(),
 		new Hurricane(),
 		new SelfDestruct()
 	);
@@ -151,4 +151,6 @@ public class MovesetData {
 		new IcePunch(),
 		new ThunderPunch()
 	);
+
+
 }
