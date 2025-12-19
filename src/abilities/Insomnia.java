@@ -14,7 +14,7 @@ public class Insomnia extends Ability {
 		super("Insomnia", Event.AFTER_GET_HIT);
 		// TODO Auto-generated constructor stub
 	}
-
+	//The Pokémon's insomnia prevents it from falling asleep.
 	@Override
 	public void trigger(BattleContext btx, Pokemon user, Pokemon target) {
 		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType();

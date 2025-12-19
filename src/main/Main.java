@@ -10,10 +10,10 @@ import java.util.Scanner;
 import javax.swing.SwingUtilities;
 
 import GUI.window;
-<<<<<<< Updated upstream
-=======
+
+
 import main.Globals.Weather;
->>>>>>> Stashed changes
+
 import pokemon.Pokemon;
 import pokemon.SpeciesLibrary;
 
@@ -84,14 +84,14 @@ public class Main {
             enemiesArr.add(new Pokemon(SpeciesLibrary.WEEZING, false));
 
             BattleInstance newBattle = new BattleInstance(alliesArr, enemiesArr);
-<<<<<<< Updated upstream
+
 
             // Notify GUI battle has started
             System.out.println("Battle Started!");
 
-=======
+
             newBattle.getContext().applyWeather(Weather.RAIN, 3);
->>>>>>> Stashed changes
+
             newBattle.runBattle();
 
         }, "Battle-Logic-Thread");

@@ -20,6 +20,11 @@ public class MoveExecutor {
 		Pokemon target = intent.getTarget();
 		Move move = intent.getMove();
 		BattleContext context = intent.getContext();
+		TurnHistory history = btx.getHistory();
+		
+		
+		//clear damage history every start of turn
+		history.clearDamageHistory();
 		
 		if (user.isFlinched()) {
 			user.setFlinched(false);
@@ -74,6 +79,8 @@ public class MoveExecutor {
 		
 		int damageDealt = DamageCalculator.calculateDamage(user, target, move, context);
 		target.takeDamage(damageDealt);
+		
+		history._addDamage(target, damageDealt); //add the dmg inflicted to history, we can access this later
 		
 		
 		// trigger post-execution effects, like adding status debuffs, buffs
