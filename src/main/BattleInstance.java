@@ -33,6 +33,8 @@ public class BattleInstance {
 	private Pokemon activeAlly;
 	private Pokemon activeEnemy;
 	private int roundCount;
+	private TurnSnapshot curTurnSnapshot;
+	private TurnHistory curTurnHistory;
 	
 	// flags
 	private boolean hasBattleEnded;
@@ -59,26 +61,30 @@ public class BattleInstance {
 		
 		while (!isOver) {
 			// true corresponds to ally, false to enemy; first in array = first to move
-			boolean[] turnOrder; 
-			
-			// calculate turn order
-			if (activeAlly.getCurrentStats().getSpeed() > activeEnemy.getCurrentStats().getSpeed()) {
-				turnOrder = new boolean[] {true, false};
-			} else if (activeAlly.getCurrentStats().getSpeed() < activeEnemy.getCurrentStats().getSpeed()) {
-				turnOrder = new boolean[] {false, true};
-			} else {
-				// generate randomized turn order if speeds are equal
-				boolean randomBool = Globals.randomEngine.nextBoolean();
-				turnOrder = new boolean[] {randomBool, !randomBool};
-			}
+			TurnIntent[] turnOrder; 
 			
 			// run the current round
 			// get turn inputs first, then run simultaneously
-			TurnIntent firstIntent = buildTurnIntent(turnOrder[0]);			
-			TurnIntent secondIntent = buildTurnIntent(turnOrder[1]);
+			TurnIntent allyIntent = buildTurnIntent(activeAlly, activeEnemy);			
+			TurnIntent enemyIntent = buildTurnIntent(activeEnemy, activeAlly);
+			
+			// calculate turn order
+			if (allyIntent.getEffectiveSpeed() > enemyIntent.getEffectiveSpeed()) {
+				turnOrder = new TurnIntent[] {allyIntent, enemyIntent};
+			} else if (allyIntent.getEffectiveSpeed() < enemyIntent.getEffectiveSpeed()) {
+				turnOrder = new TurnIntent[] {enemyIntent, allyIntent};
+			} else {
+				// generate randomized turn order if speeds are equal
+				boolean randomBool = Globals.randomEngine.nextBoolean();
+				if (randomBool == true) {
+					turnOrder = new TurnIntent[] {allyIntent, enemyIntent};
+				} else {
+					turnOrder = new TurnIntent[] {enemyIntent, allyIntent};
+				}
+			}
 			
 			// perform the round routine, with regular battle end checks
-			moveExecutor.executeMove(firstIntent);
+			moveExecutor.executeMove(turnOrder[0]);
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -86,7 +92,7 @@ public class BattleInstance {
 				return;
 			}
 			
-			moveExecutor.executeMove(secondIntent);
+			moveExecutor.executeMove(turnOrder[1]);
 			printBattleStatus();
 			scanner.nextLine();
 			
@@ -180,66 +186,50 @@ public class BattleInstance {
 	}
 	
 	//Determines the order of turns, and checks for current Status of both ally and enemy poke
-	public TurnIntent buildTurnIntent(boolean isForAlly) {
+	public TurnIntent buildTurnIntent(Pokemon user, Pokemon target) {
 		TurnIntent turnIntent = new TurnIntent();
 		
-		if (isForAlly) {
-			String moveInput = "";
-			
-			// set the user and target depending on passed in field isForAlly
+		if (user == activeAlly) {
 			System.out.println("\nAlly turn!");
-			turnIntent.setUser(activeAlly);
-			turnIntent.setTarget(activeEnemy);
-			
-			System.out.print("Select move: ");
-			moveInput = scanner.nextLine();
-			
-			// note: if no matching move is found this will result in an error
-			for (Move move : activeAlly.getMoves()) {
-				if (move.getName().equals(moveInput)) {
-					turnIntent.setMove(move);
-				}
-			}
-		} else {
-			String moveInput = "";
-			
-			// set the user and target depending on passed in field isForAlly
+		} else if (user == activeEnemy) {
 			System.out.println("\nEnemy turn!");
-			turnIntent.setUser(activeEnemy);
-			turnIntent.setTarget(activeAlly);
+		}
+		
+		String moveInput = "";
+		
+		// set the user and target depending on passed in fields user/target
+		turnIntent.setUser(user);
+		turnIntent.setTarget(target);
 			
-			System.out.print("Select move: ");
-			moveInput = scanner.nextLine();
-			
-			// note: if no matching move is found this will result in an error
-			for (Move move : activeEnemy.getMoves()) {
-				if (move.getName().equals(moveInput)) {
-					turnIntent.setMove(move);
-				}
-			}		
+		System.out.print("Select move: ");
+		moveInput = scanner.nextLine();
+		
+		// note: if no matching move is found this will result in an error
+		for (Move move : user.getMoves()) {
+			if (move.getName().equals(moveInput)) {
+				turnIntent.setMove(move);
+			}
 		}
 		
 		//CHECK CURRENT STATUS
 		
 		// apply paralysis check
-		if (activeAlly.getCurStatus() == Status.PARALYSIS) {
+		if (user.getCurStatus() == Status.PARALYSIS) {
 			if (Globals.randomEngine.nextDouble() < 0.25) {
 				turnIntent.setMove(new Paralyzed());
 			}
 		}
 		
 		//apply freezed check
-		if (activeAlly.getCurStatus() == Status.FREEZE) {
+		if (user.getCurStatus() == Status.FREEZE) {
 			if (Globals.randomEngine.nextDouble() < 0.10) {
 				turnIntent.setMove(new FailFreezed());
 			}
 		}
 		
 		//apply sleeping check
-		if (activeAlly.getCurStatus() == Status.SLEEP){
-			if (Globals.randomEngine.nextDouble() <= 1) {
-				turnIntent.setMove(new FailSleep());
-			}
+		if (user.getCurStatus() == Status.SLEEP){
+			turnIntent.setMove(new FailSleep());
 		}
 		
 		turnIntent.setContext(context);
