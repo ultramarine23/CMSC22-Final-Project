@@ -22,7 +22,7 @@ public class SpeciesLibrary {
 			210,
 			Types.FIGHTING,
 			Types.NONE,
-			List.of(new Levitate()),
+			List.of(new SpeedBoost()),
 			MovesetData.ZAMAZENTA);
 	
 	public static final PokemonSpecies ALOMOMOLA = new PokemonSpecies(

@@ -3,6 +3,7 @@ package abilities;
 
 
 import main.BattleContext;
+import main.Globals.MoveCategory;
 import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
@@ -18,15 +19,14 @@ public class FlameBody extends Ability {
 
 	@Override
 	public void trigger(BattleContext btx, Pokemon user, Pokemon target) {
-		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType(); //move type of attacker
-		TurnIntent targetIntent = btx.getSnapshot().getIntentsMap().get(target);
-		TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user);
+		Types type = btx.getSnapshot().getIntentsMap().get(target).getMove().getMoveType(); 
+		TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user); //get the intent of attacker
 		
 		//get attacker moveType
-		if (userIntent.getMove().getMoveType() == Types.FIRE) {
-			if (Globals.randomEngine.nextDouble() < 1) {
-				targetIntent.getUser().applyStatus(Status.BURN);
-				System.out.println("Applied Flame Body Passive");
+		if (userIntent.getMove().getMoveCategory() == MoveCategory.PHYSICAL) { //if the attacker move category is physical
+			if (Globals.randomEngine.nextDouble() < 1) { //0.33 chance of burn
+				userIntent.getUser().applyStatus(Status.BURN);//apply the status to the attacker
+				System.out.println(this.getName()+" passive is triggered");
 			}
 		}
 	
