@@ -5,23 +5,24 @@ package moves;
 import java.util.EnumSet;
 
 import main.BattleContext;
+import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class Waterfall extends Move {
+public class WildCharge extends Move {
 
-	public Waterfall() {
+	public WildCharge() {
 		super(
 				"Waterfall", 
-				80, 
+				90, 
 				100, 
 				MoveCategory.PHYSICAL, 
-				Types.WATER, 
+				Types.ELECTRIC, 
 				0, 
-				24, 
-				"20% chance to make the target flinch.", 
+				15, 
+				"Deals damage, but the user takes 1/4 damage in recoil.", 
 				EnumSet.noneOf(MoveFlags.class)
 			);
 		// TODO Auto-generated constructor stub
@@ -35,8 +36,7 @@ public class Waterfall extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		//set flinch to true
-
+		user.takeDamage(user.getCurrentStats().getHp() / 4);
 	}
 
 }

@@ -24,4 +24,49 @@ public class SpeciesLibrary {
 			Types.NONE,
 			List.of(),
 			MovesetData.ZAMAZENTA);
+	
+	public static final PokemonSpecies ALOMOMOLA = new PokemonSpecies(
+			"Alomomola", 
+			StatsCalculator.realizeAllStats(StatsData.ALOMOMOLA),
+			150, 
+			Types.WATER, 
+			Types.NONE, 
+			List.of(), 
+			MovesetData.ALOMOMOLA);
+
+	public static final PokemonSpecies CERULEDGE = new PokemonSpecies(
+			"Ceruledge",
+			StatsCalculator.realizeAllStats(StatsData.CERULEDGE),
+			100,
+			Types.GHOST,
+			Types.FIRE,
+			List.of(),
+			MovesetData.CERULEDGE);
+		
+	public static final PokemonSpecies DRAGONITE = new PokemonSpecies(
+			"Dragonite", 
+			StatsCalculator.realizeAllStats(StatsData.DRAGONITE), 
+			150, 
+			Types.DRAGON, 
+			Types.NONE, 
+			List.of(), 
+			MovesetData.DRAGONITE);
+
+	public static final PokemonSpecies ENAMORUS = new PokemonSpecies(
+		"Enamorus",
+		StatsCalculator.realizeAllStats(StatsData.ENAMORUS),
+		48,
+		Types.FAIRY,
+		Types.FLYING,
+		List.of(),
+		MovesetData.ENAMORUS);
+		
+	public static final PokemonSpecies URSALUNA = new PokemonSpecies(
+		"Ursaluma", 
+		StatsCalculator.realizeAllStats(StatsData.URSALUNA), 
+		200,
+		Types.NORMAL, 
+		Types.GROUND, 
+		List.of(), 
+		MovesetData.URSALUNA);
 }

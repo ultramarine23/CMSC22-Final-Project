@@ -1,27 +1,30 @@
 package moves;
 
 
-
 import java.util.EnumSet;
 
 import main.BattleContext;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
+import main.Globals.Stats;
+import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
+import pokemon.StatsContainer;
+import main.Globals;
 
-public class Waterfall extends Move {
+public class Moonblast extends Move {
 
-	public Waterfall() {
+	public Moonblast() {
 		super(
-				"Waterfall", 
-				80, 
+				"Moonblast", 
+				95, 
 				100, 
-				MoveCategory.PHYSICAL, 
-				Types.WATER, 
+				MoveCategory.SPECIAL, 
+				Types.FAIRY, 
 				0, 
 				24, 
-				"20% chance to make the target flinch.", 
+				"Blast from the moon that may lower the target's special attack", 
 				EnumSet.noneOf(MoveFlags.class)
 			);
 		// TODO Auto-generated constructor stub
@@ -29,13 +32,15 @@ public class Waterfall extends Move {
 
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		// do nothing
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		//set flinch to true
+		target.incrementStatStage(Stats.SPA, -1);
+		int spaMod = target.getStatMod(Stats.SPA);
+		target.applyModStat(Stats.SPA, spaMod);
 
 	}
 

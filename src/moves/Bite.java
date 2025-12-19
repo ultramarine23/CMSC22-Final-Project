@@ -1,7 +1,5 @@
 package moves;
 
-
-
 import java.util.EnumSet;
 
 import main.BattleContext;
@@ -10,33 +8,35 @@ import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class Waterfall extends Move {
 
-	public Waterfall() {
+public class Bite extends Move {
+    	public Bite() {
 		super(
-				"Waterfall", 
-				80, 
+				"Bite", 
+				60, 
 				100, 
 				MoveCategory.PHYSICAL, 
-				Types.WATER, 
-				0, 
-				24, 
-				"20% chance to make the target flinch.", 
+				Types.DARK, 
+				0,
+				20, 
+				"An attack that may cause flinching", 
 				EnumSet.noneOf(MoveFlags.class)
 			);
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		// do nothing
+		//check the health of pokemon
+		
 
 	}
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		//set flinch to true
-
+        //set flinch to true
+        target.setFlinched(true);
 	}
 
 }
