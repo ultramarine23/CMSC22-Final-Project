@@ -142,4 +142,13 @@ public class SpeciesLibrary {
 		Types.STEEL, 
 		List.of(), 
 		MovesetData.SCIZOR);	
+
+	public static final PokemonSpecies PRIMARINA = new PokemonSpecies(
+		"Primarina", 
+		StatsCalculator.realizeAllStats(StatsData.PRIMARINA), 
+		97, 
+		Types.WATER, 
+		Types.FAIRY, 
+		List.of(), 
+		MovesetData.PRIMARINA);
 }

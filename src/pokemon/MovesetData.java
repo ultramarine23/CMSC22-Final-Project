@@ -162,4 +162,16 @@ public class MovesetData {
 		new SelfDestruct()
 	);
 
+	public static List<Move> PRIMARINA = List.of(
+		new SelfDestruct(),
+		new Acrobatics(),
+		new Blizzard(),
+		new BodySlam(),
+		new Facade(),
+		new HydroPump(),
+		new IceBeam()
+	);
+
+	public static List<Move> 
+
 }
