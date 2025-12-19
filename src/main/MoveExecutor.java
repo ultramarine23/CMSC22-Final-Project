@@ -62,10 +62,20 @@ public class MoveExecutor {
 		
 		target.takeDamage(damageDealt);
 		
+		
+		// trigger post-execution effects, like adding status debuffs, buffs
+		move.afterExecution(user, target, context);
+		if(user.getAbilty().getTriggerEvent() == Event.AFTER_ATTACK) {
+			user.getAbilty().trigger(btx, user, target);
+		}
+		
+		
 		//checks ability AFTER_GET_HIT event
 		if(target.getAbilty().getTriggerEvent() == Event.AFTER_GET_HIT) {
 			target.getAbilty().trigger(btx, user, target);
 		}
+		
+		
 		
 		
 		// print damaged message
@@ -78,11 +88,6 @@ public class MoveExecutor {
 			System.out.println(user.getPokemonSpecies().getName() + " took " + damageDealt + " damage!");
 		}
 		
-		// trigger post-execution effects, like adding status debuffs, buffs
-		move.afterExecution(user, target, context);
-		if(user.getAbilty().getTriggerEvent() == Event.AFTER_ATTACK) {
-			user.getAbilty().trigger(btx, user, target);
-		}
 		
 	}
 	
