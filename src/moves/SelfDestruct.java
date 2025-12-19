@@ -5,15 +5,14 @@ package moves;
 import java.util.EnumSet;
 
 import main.BattleContext;
-import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
 import main.Globals.Types;
 import pokemon.Pokemon;
 
-public class Self_Destruct extends Move {
+public class SelfDestruct extends Move {
 
-	public Self_Destruct() {
+	public SelfDestruct() {
 		super(
 				"Self-Destruct", 
 				200, 
