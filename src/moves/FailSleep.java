@@ -15,6 +15,7 @@ public class FailSleep extends Move {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	@Override
 	public void beforeExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		// TODO Auto-generated method stub

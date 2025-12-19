@@ -3,8 +3,15 @@ package main;
 import moves.Move;
 import pokemon.Pokemon;
 import pokemon.TurnIntent;
+
+import java.io.ObjectInputFilter.Status;
+
 import abilities.Ability;
 import abilities.Ability.Event;
+import moves.Paralyzed;
+import moves.FailFreezed;
+import moves.FailSleep;
+
 
 
 public class MoveExecutor {
@@ -25,10 +32,12 @@ public class MoveExecutor {
 			}
 		}
 		
+		
+		TurnIntent userIntent = btx.getSnapshot().getIntentsMap().get(user);
 		//checks for other failedMoves like freeze and sleep, paralyze
-		if (move.getName() == "[Paralyzed]") {
+		if (move.getName().equals("[Paralyzed]")) {
 			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
-		} else if(move.getName() == "[Freezed]") {
+		} else if(move.getName().equals("[Freezed]")) {
 			System.out.println(user.getPokemonSpecies().getName() + " was frozen solid!");
 		} else if (move.getName() == "[Sleeps]") {
 			System.out.println(user.getPokemonSpecies().getName() + " was asleep");
@@ -41,6 +50,7 @@ public class MoveExecutor {
 			System.out.println(user.getPokemonSpecies().getName() + " used " + move.getName() + "!");
 		}
 		
+		System.out.println(move.getClass());
 		
 		
 		

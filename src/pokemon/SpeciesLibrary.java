@@ -13,7 +13,7 @@ public class SpeciesLibrary {
 			9, 
 			Types.POISON, 
 			Types.NONE,
-			List.of(new Levitate()),
+			List.of(new FlameBody()),
 			MovesetData.WEEZING);
 	
 	public static final PokemonSpecies ZAMAZENTA = new PokemonSpecies(
