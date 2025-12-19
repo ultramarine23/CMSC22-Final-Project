@@ -25,30 +25,26 @@ public class MoveExecutor {
 			}
 		}
 		
-		//checks for other failedMoves like freeze and sleep, paralyze
-		if (move.getName() == "[Paralyzed]") {
-			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
-		} else if(move.getName() == "[Freezed]") {
-			System.out.println(user.getPokemonSpecies().getName() + " was frozen solid!");
-		} else if (move.getName() == "[Sleeps]") {
-			System.out.println(user.getPokemonSpecies().getName() + " was asleep");
-		} else {
+		// print used move message
+		if (move.getName() != "[Paralyzed]") {
 			if (user.isAllied()) {
 				System.out.print("Your ");
 			} else {
 				System.out.print("Enemy ");
 			}
 			System.out.println(user.getPokemonSpecies().getName() + " used " + move.getName() + "!");
+		} else {
+			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
 		}
 		
-		
+		//checks for other failedMoves like freeze and sleep
 		
 		
 		
 	
 		
 		
-		//check for abilities before move execution by the the user
+		//check for abilities before move execution byt the user
 		if(user.getAbilty().getTriggerEvent() == Event.BEFORE_ATTACK) {
 			user.getAbilty().trigger(btx, user, target);
 		}

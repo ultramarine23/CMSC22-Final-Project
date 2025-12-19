@@ -13,8 +13,7 @@ public class MovesetData {
 			new SludgeBomb(),
 			new Curse(),
 			new DarkPulse(),
-			new SelfDestruct(),
-			new Hypnosis()
+			new SelfDestruct()
 			);
 	
 	public static final List<Move> DRAGAPULT = List.of(
@@ -163,44 +162,5 @@ public class MovesetData {
 		new Facade(),
 		new SelfDestruct()
 	);
-
-	public static List<Move> PRIMARINA = List.of(
-		new SelfDestruct(),
-		new Acrobatics(),
-		new Blizzard(),
-		new BodySlam(),
-		new Facade(),
-		new HydroPump(),
-		new IceBeam()
-	);
-
-
-	public static List<Move> CLEFABLE = List.of(
-		new Blizzard(),
-		new BodySlam(),
-		new BrickBreak(),
-		new DrainPunch(),
-		new Facade(),
-		new Flamethrower(),
-		new SelfDestruct(),
-		new IceBeam(),
-		new IcePunch(),
-		new Moonblast(),
-		new Thunder(),
-		new ThunderPunch(),
-		new Thunderbolt(),
-		new ThunderWave()
-	);
-
-	public static List<Move> DEOXYS_SPEED = List.of(
-		new SelfDestruct(),
-		new BrickBreak(),
-		new DrainPunch(),
-		new Facade(),
-		new IceBeam(),
-		new IcePunch(),
-		new Thunder()
-	);
-
 
 }

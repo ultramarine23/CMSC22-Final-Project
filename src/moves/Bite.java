@@ -22,7 +22,7 @@ public class Bite extends Move {
 				0,
 				20, 
 				"An attack that may cause flinching", 
-				EnumSet.of(MoveFlags.CONTACT_MOVE)
+				EnumSet.noneOf(MoveFlags.class)
 			);
 		// TODO Auto-generated constructor stub
 	}

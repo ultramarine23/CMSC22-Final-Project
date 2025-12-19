@@ -142,31 +142,4 @@ public class SpeciesLibrary {
 		Types.STEEL, 
 		List.of(), 
 		MovesetData.SCIZOR);	
-
-	public static final PokemonSpecies PRIMARINA = new PokemonSpecies(
-		"Primarina", 
-		StatsCalculator.realizeAllStats(StatsData.PRIMARINA), 
-		97, 
-		Types.WATER, 
-		Types.FAIRY, 
-		List.of(), 
-		MovesetData.PRIMARINA);
-
-	public static final PokemonSpecies CLEFABLE = new PokemonSpecies(
-		"Clefable", 
-		StatsCalculator.realizeAllStats(StatsData.CLEFABLE), 
-		88, 
-		Types.FAIRY, 
-		Types.NONE, 
-		List.of(), 
-		MovesetData.CLEFABLE);
-
-	public static final PokemonSpecies DEOXYS_SPEED = new PokemonSpecies(
-		"Deoxys (Speed)", 
-		StatsCalculator.realizeAllStats(StatsData.DEOXYS_SPEED), 
-		134, 
-		Types.PSYCHIC, 
-		Types.NONE,
-		List.of(), 
-		MovesetData.DEOXYS_SPEED);
 }
