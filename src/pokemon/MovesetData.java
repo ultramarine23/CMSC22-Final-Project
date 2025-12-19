@@ -174,9 +174,7 @@ public class MovesetData {
 		new IceBeam()
 	);
 
-<<<<<<< HEAD
-	
-=======
+
 	public static List<Move> CLEFABLE = List.of(
 		new Blizzard(),
 		new BodySlam(),
@@ -203,6 +201,6 @@ public class MovesetData {
 		new IcePunch(),
 		new Thunder()
 	);
->>>>>>> 207b651236a0a4fc51e20273761cc9cb94656580
+
 
 }
