@@ -15,8 +15,6 @@ public abstract class Ability {
 	private Event triggerEvent; // the event that calls the function trigger()
 	
 	
-	public Ability() {}
-	
 	public Ability(String newName, Event newTriggerEvent) {
 		name = newName;
 		triggerEvent = newTriggerEvent;
