@@ -25,7 +25,7 @@ public class Pokemon {
 	private boolean isAllied;
 	private Map<Stats, Integer> statChanges;
 	private List<Move> previousMoves;
-	private boolean isFlinched; //not used??
+	private boolean isFlinched; 
 
 
 
@@ -134,7 +134,18 @@ public class Pokemon {
 	public void incrementStatStage(Stats stat, int incrementAmount) {
 		Integer statStage = statChanges.get(stat);
 		statStage += incrementAmount;
+		statStage = this.limitMod(statStage); //limit from -4 to 4
 	}
+	
+	//return modified value
+	private int applyModifier(int stat, int mod) {
+        if (mod >= 0) {
+            return (int)Math.round(stat * (2+mod) / 2); //buff
+        } else {
+            return (int)Math.round((stat * 2 / (2+mod))); //debuff
+        }
+    }
+	
 
 	public void calculateCurrentStats() {
 		// temporarily reset current stats
@@ -167,6 +178,32 @@ public class Pokemon {
 		}
 
 	}
+	
+	//used for moves that increases atk for example
+	public void applyModStat(Stats stat, int modifier) {
+		
+		switch (stat) {
+		case Stats.ATK:
+			this.currentStats.setAtk(applyModifier(this.currentStats.getAtk(), modifier));
+		case Stats.DEF:
+			this.currentStats.setDef(applyModifier(this.currentStats.getDef(), modifier));
+		case Stats.SPA:
+			this.currentStats.setSpAtk(applyModifier(this.currentStats.getSpAtk(), modifier));
+		case Stats.SPD:
+			this.currentStats.setSpDef(applyModifier(this.currentStats.getSpDef(), modifier));
+		case Stats.SPE:
+			this.currentStats.setSpeed(applyModifier(this.currentStats.getSpeed(), modifier));
+		case Stats.HP:
+			return;
+		default:
+			throw new RuntimeException("Invalid stat name.");
+		}
+	}
+		
+	//this func is to limit the modifiers to -4 to +4
+    private int limitMod(int mod) {
+        return Math.max(-4, Math.min(4, mod));
+    }
 
 	@Override
 	public String toString() {
@@ -226,6 +263,10 @@ public class Pokemon {
 	public List<VolatileStatus> getVolatileStatus() { return volatileStatus; }
 	public void setFlinched(boolean newStatus) { isFlinched = newStatus; }
 	
+	public int getStatMod(Stats stat) {
+	    return statChanges.getOrDefault(stat, 0);
+	}
+	
 	
 	//setters
 	public void setType1(Types type1) { this.type1 = type1; }
@@ -233,9 +274,12 @@ public class Pokemon {
 	public void setCurrentStats(StatsContainer currentStats) { this.currentStats = currentStats; }
 	public void setStatusTurns(int turn) {this.statusTurns = turn;}
 	
+	
 	//helper funcs
 	public boolean isAllied() { return isAllied; }
 	public boolean isFlinched() { return isFlinched; }
 	public void incrementStatusTurns() { statusTurns++; } 
+	
+	
 
 }

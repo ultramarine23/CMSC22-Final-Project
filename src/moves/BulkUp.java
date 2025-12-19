@@ -1,6 +1,8 @@
 package moves;
 
 import main.Globals.MoveFlags;
+import main.Globals.Stats;
+
 import java.util.EnumSet;
 
 import main.BattleContext;
@@ -34,10 +36,13 @@ public class BulkUp extends Move {
 
 	@Override
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
-		StatsContainer stats = user.getCurrentStats();
-		stats.applyModStat("physAtk", 1);
+		user.incrementStatStage(Stats.ATK, 1);
+		int atkMod = user.getStatMod(Stats.ATK);
+		user.applyModStat(Stats.ATK, atkMod);
 		
-		
+		user.incrementStatStage(Stats.DEF, 1);
+		int defMod = user.getStatMod(Stats.DEF);
+		user.applyModStat(Stats.DEF, defMod);
 	}
 
 }

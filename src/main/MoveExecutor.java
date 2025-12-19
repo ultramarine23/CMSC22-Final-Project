@@ -36,7 +36,7 @@ public class MoveExecutor {
 			System.out.println(user.getPokemonSpecies().getName() + " was paralyzed!");
 		}
 		
-		// deal main damage component
+		// deal main damage component, or depending on the move checks something
 		move.beforeExecution(user, target, context);
 		target.takeDamage(damageDealt);
 		
@@ -50,7 +50,9 @@ public class MoveExecutor {
 			System.out.println(user.getPokemonSpecies().getName() + " took " + damageDealt + " damage!");
 		}
 		
-		// trigger post-execution effects
+		// trigger post-execution effects, like adding status debuffs, buffs
 		move.afterExecution(user, target, context);
 	}
+	
 }
+
