@@ -7,10 +7,8 @@ import main.BattleContext;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
 import main.Globals.Stats;
-import main.Globals.Status;
 import main.Globals.Types;
 import pokemon.Pokemon;
-import pokemon.StatsContainer;
 import main.Globals;
 
 public class Moonblast extends Move {

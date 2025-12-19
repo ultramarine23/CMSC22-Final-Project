@@ -5,7 +5,6 @@ package moves;
 import java.util.EnumSet;
 
 import main.BattleContext;
-import main.Globals;
 import main.Globals.MoveCategory;
 import main.Globals.MoveFlags;
 import main.Globals.Types;
