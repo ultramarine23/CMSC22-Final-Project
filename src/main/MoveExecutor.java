@@ -25,8 +25,6 @@ public class MoveExecutor {
 			}
 		}
 		
-		int damageDealt = DamageCalculator.calculateDamage(user, target, move, context);
-		
 		// print used move message
 		if (move.getName() != "[Paralyzed]") {
 			if (user.isAllied()) {
@@ -60,6 +58,12 @@ public class MoveExecutor {
 			target.getAbilty().trigger(btx, user, target);
 		}
 		
+		// update user/target/move to account for after BEFORE ATTACK/ GET HIT
+		user = intent.getUser();
+		target = intent.getTarget();
+		move = intent.getMove();
+		
+		int damageDealt = DamageCalculator.calculateDamage(user, target, move, context);
 		target.takeDamage(damageDealt);
 		
 		

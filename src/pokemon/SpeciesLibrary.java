@@ -139,7 +139,7 @@ public class SpeciesLibrary {
 		StatsCalculator.realizeAllStats(StatsData.SCIZOR), 
 		260, 
 		Types.BUG, 
-		TYpes.STEEL, 
+		Types.STEEL, 
 		List.of(), 
 		MovesetData.SCIZOR);	
 }
