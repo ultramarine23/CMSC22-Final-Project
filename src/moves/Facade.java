@@ -14,8 +14,7 @@ import pokemon.Pokemon;
 
 public class Facade extends Move {
 
-	public Facade(String name, int basePower, int accuracy, MoveCategory moveCategory, Types moveType, int priority,
-			int pp, String description, boolean affectedByProtect, boolean makesContact) {
+	public Facade() {
 		super(
 				"Facade", 
 				70, 

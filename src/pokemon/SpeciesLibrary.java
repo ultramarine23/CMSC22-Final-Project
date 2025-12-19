@@ -69,4 +69,62 @@ public class SpeciesLibrary {
 		Types.GROUND, 
 		List.of(), 
 		MovesetData.URSALUNA);
+
+	public static final PokemonSpecies HEATRAN = new PokemonSpecies(
+		"Heatran", 
+		StatsCalculator.realizeAllStats(StatsData.HEATRAN),
+		948, 
+		Types.STEEL, 
+		Types.FIRE, 
+		List.of(), 
+		MovesetData.HEATRAN);
+	
+	public static final PokemonSpecies ZARUDE = new PokemonSpecies(
+		"Zarude", 
+		StatsCalculator.realizeAllStats(StatsData.ZARUDE), 
+		154, 
+		Types.DARK, 
+		Types.GRASS, 
+		List.of(), 
+		MovesetData.ZARUDE);
+
+	public static final PokemonSpecies ZAPDOS = new PokemonSpecies(
+		"Zapdos", 
+		StatsCalculator.realizeAllStats(StatsData.ZAPDOS), 
+		116, 
+		Types.ELECTRIC, 
+		Types.FLYING, 
+		List.of(), 
+		MovesetData.ZAPDOS);
+
+	public static final PokemonSpecies GLIMMORA = new PokemonSpecies(
+		"Glimmora", 
+		StatsCalculator.realizeAllStats(StatsData.GLIMMORA), 
+		99,
+		Types.ROCK, 
+		Types.POISON, 
+		List.of(), 
+		MovesetData.GLIMMORA);
+
+	public static final PokemonSpecies DARKRAI = new PokemonSpecies(
+		"Darkrai", 
+		StatsCalculator.realizeAllStats(StatsData.DARKRAI), 
+		529, 
+		Types.DARK, 
+		Types.NONE, 
+		List.of(), 
+		MovesetData.DARKRAI);
+	
+	public static final PokemonSpecies PELLIPER = new PokemonSpecies(
+		"Pelliper", 
+		StatsCalculator.realizeAllStats(StatsData.PELLIPER), 
+		61, 
+		Types.WATER, 
+		Types.FLYING, 
+		List.of(),
+		MovesetData.PELLIPER 
+	);
+
+	
+	
 }
