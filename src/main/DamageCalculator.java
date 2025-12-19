@@ -6,9 +6,12 @@ import main.Globals.Types;
 import main.Globals.Weather;
 import moves.Move;
 import pokemon.Pokemon;
+import abilities.Ability;
+import abilities.*;
 
 import java.util.Map;
 import java.util.HashMap;
+
 
 
 public class DamageCalculator {
@@ -21,8 +24,13 @@ public class DamageCalculator {
 		typeEffectivenessMap.put("NORMAL_POISON", 2.0);
 	}
 	
+	//user will deal damage to target
 	public static int calculateDamage(Pokemon user, Pokemon target, Move move, BattleContext context) {
-		// first calculate main damage using atk/def and move base power
+		// Check for abilities that gives immunity to the target like levitate
+        
+		
+		
+  		// first calculate main damage using atk/def and move base power
 		float targetDef = 0;
 		float userAtk = 0;
 		float basePwr = move.getBasePower();

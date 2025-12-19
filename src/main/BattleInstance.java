@@ -52,6 +52,7 @@ public class BattleInstance {
 		eventBus.subscribeToEvent(BattleEvent.POKEMON_DIED, args -> onPokemonDied(args));
 	}
 	
+	//handles turn order, execution of moves, check if you won
 	public void runBattle() {
 		Globals.curInstance = this;
 		runBattleInitialization();
@@ -276,7 +277,7 @@ public class BattleInstance {
 				activeMon.takeDamage(activeMon.getBaseStats().getHp() * activeMon.getStatusTurns() / 16);
 				System.out.println(activeMon.getPokemonSpecies().getName() + " took poison damage!");
 				
-				
+			//chance to remove status debuffs every turn
 			} else if (activeMon.getCurStatus() == Status.FREEZE) {
 				if (Globals.randomEngine.nextDouble() < 0.33) {
 					activeMon.applyStatus(Status.NONE);
@@ -294,7 +295,7 @@ public class BattleInstance {
 				}
 			}
 			
-			//each status turns will increment
+			//each status debuffs turns will increment
 			activeMon.incrementStatusTurns();
 		}
 		

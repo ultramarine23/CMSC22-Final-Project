@@ -3,6 +3,7 @@ package main;
 import moves.Move;
 import pokemon.Pokemon;
 import pokemon.TurnIntent;
+import abilities.*;
 
 public class MoveExecutor {
 	public void executeMove(TurnIntent intent) {

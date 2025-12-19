@@ -1,11 +1,12 @@
 package abilities;
 
 import pokemon.Pokemon;
+import main.BattleContext;
 
 enum Event {
 	before_switchin,
 	after_switchin,
-	before_get_hit,
+	before_get_hit, 
 	after_get_hit,
 	before_attack,
 	after_attack
@@ -22,7 +23,8 @@ public abstract class Ability {
 		triggerEvent = newTriggerEvent;
 	}
 	
-	public abstract void trigger(Pokemon target);
+	//this is different for every ability, since they have different Event triggers
+	public abstract void trigger(BattleContext btx);
 	
 	// set-get functions
 	public void setUser(Pokemon newUser) { user = newUser; }
