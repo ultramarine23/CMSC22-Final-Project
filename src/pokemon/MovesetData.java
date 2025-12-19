@@ -144,6 +144,14 @@ public class MovesetData {
 	);
 
 	public static List<Move> HOOPA_UNBOUND = List.of(
-		
+		new SelfDestruct(),
+		new BrickBreak(),
+		new DarkPulse(),
+		new DrainPunch(),
+		new Facade(),
+		new IcePunch(),
+		new ThunderPunch()
 	);
+
+
 }
