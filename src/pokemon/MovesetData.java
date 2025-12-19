@@ -11,7 +11,7 @@ public class MovesetData {
 			new SludgeBomb(),
 			new Curse(),
 			new DarkPulse(),
-			new Self_Destruct()
+			new SelfDestruct()
 			);
 	
 	public static final List<Move> DRAGAPULT = List.of(
@@ -21,7 +21,7 @@ public class MovesetData {
 			new Thunder(),
 			new Curse(),
 			new Acrobatics(),
-			new Self_Destruct()
+			new SelfDestruct()
 			);
 	
 	public static final List<Move> ZAMAZENTA = List.of(
@@ -29,7 +29,7 @@ public class MovesetData {
 			new BrickBreak(),
 			new SandsearStorm(),
 			new WildCharge(),
-			new Self_Destruct()
+			new SelfDestruct()
 
 	);
 
@@ -38,7 +38,7 @@ public class MovesetData {
 		new IcePunch(),
 		new Flamethrower(),
 		new Hurricane(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static final List<Move> ENAMORUS = List.of(
@@ -46,7 +46,7 @@ public class MovesetData {
 		new SludgeBomb(),
 		new Moonblast(),
 		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static final List<Move> CERUDLEDGE = List.of(
@@ -54,7 +54,7 @@ public class MovesetData {
 		new StoneEdge(),
 		new Curse(),
 		new BrickBreak(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static final List<Move> URSALUNA = List.of(
@@ -63,7 +63,7 @@ public class MovesetData {
 		new DrainPunch(),
 		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
 		new BrickBreak(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static final List<Move> HEATRAN = List.of(
@@ -72,7 +72,7 @@ public class MovesetData {
 		new BodySlam(),
 		new Flamethrower(),
 		new ScorchingSands(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static final List<Move> ZARUDE = List.of(
@@ -81,7 +81,7 @@ public class MovesetData {
 		new BodySlam(),
 		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
 		new BrickBreak(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static final List<Move> ZAPDOS = List.of(
@@ -92,7 +92,7 @@ public class MovesetData {
 		new Acrobatics(),
 		new Facade(null, 0, 0, null, null, 0, 0, null, false, false),
 		new Hurricane(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static List<Move> ALOMOMOLA = List.of(
@@ -100,7 +100,7 @@ public class MovesetData {
 		new BodySlam(),
 		new Blizzard(),
 		new Acrobatics(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static List<Move> CERULEDGE = List.of(
@@ -108,7 +108,7 @@ public class MovesetData {
 		new Flamethrower(),
 		new BrickBreak(),
 		new Curse(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static List<Move> GLIMMORA = List.of(
@@ -116,7 +116,7 @@ public class MovesetData {
 		new StoneEdge(),
 		new SludgeBomb(),
 		new SludgeWave(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static List<Move> DARKRAI = List.of(
@@ -128,11 +128,11 @@ public class MovesetData {
 		new Thunderbolt(),
 		new WillOWisp(),
 		new ThunderWave(),
-		new Self_Destruct()
+		new SelfDestruct()
 	);
 
 	public static List<Move> PELLIPER = List.of(
-		new Self_Destruct(),
+		new SelfDestruct(),
 		new Hurricane(),
 		new BodySlam(),
 		new Acrobatics(),
@@ -143,6 +143,12 @@ public class MovesetData {
 	);
 
 	public static List<Move> HOOPA_UNBOUND = List.of(
-		
+		new SelfDestruct(),
+		new BrickBreak(),
+		new DarkPulse(),
+		new DrainPunch(),
+		new Facade(),
+		new IcePunch(),
+		new ThunderPunch()
 	);
 }
