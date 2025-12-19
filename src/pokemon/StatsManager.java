@@ -51,19 +51,30 @@ public class StatsManager {
 		}
 	}
 	
+	//used when adding status in pokemon
 	public void addMiscStatMod(StatMods miscMod) {
-		miscellaneousMods.add(miscMod);
+		miscellaneousMods.add(miscMod); 
 	}
 	
+	//used when adding status in pokemon
 	public void removeMiscStatMod(StatMods miscMod) {
 		miscellaneousMods.remove(miscMod);
 	}
 	
+	//used when applying status mods to pokemon
 	public void incrementStatStage(Stats stat, int amount) {
-		Integer statStage = statChanges.get(stat);
+		Integer statStage = statChanges.get(stat); 
 		statStage += amount;
+		statStage = this.limitMod(statStage);
+		calculateStats();
 	}
 	
+	private int limitMod(int mod) {
+        return Math.max(-4, Math.min(4, mod));
+    }
+	
+	
+	//helper method
 	public void resetStatStages() {
 		this.statChanges.put(Stats.ATK, 0);
 		this.statChanges.put(Stats.DEF, 0);
@@ -72,6 +83,13 @@ public class StatsManager {
 		this.statChanges.put(Stats.SPE, 0);
 	}
 	
-	public StatsContainer getCurrentStats() { return currentStats; }
+	
+	//getters
+	public StatsContainer getCurrentStats() {return currentStats; }
+	public EnumSet<StatMods> getMiscallaneous(){return this.miscellaneousMods;}
+	
+	
+	
+	
 	
 }
