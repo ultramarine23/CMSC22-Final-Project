@@ -37,5 +37,7 @@ public class Switch extends Move {
 	public void afterExecution(Pokemon user, Pokemon target, BattleContext ctx) {
 		ctx.requestSwitch(user, replacer);
 	}
+	
+	public Pokemon getReplacer() { return replacer; }
 
 }

@@ -199,7 +199,6 @@ public class DamageCalculator {
 		String typePairStr2 = move.getMoveType().toString() + "_" + target.getType2().toString();
 		mainDamage *= typeEffectivenessMap.getOrDefault(typePairStr2, 1.0);
 		
-		// !@! TBA: apply other modifiers (life orb, expert belt, etc.) to the damage
 		
 		
 		return (int) mainDamage;

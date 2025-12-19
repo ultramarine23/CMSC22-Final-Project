@@ -36,6 +36,7 @@ public class BattleInstance {
 	private int roundCount;
 	private TurnSnapshot curTurnSnapshot;
 	private TurnHistory curTurnHistory;
+	private EnemyAI enemyAI;
 	
 	// flags
 	private boolean hasBattleEnded;
@@ -51,6 +52,7 @@ public class BattleInstance {
 		this.context = new BattleContext(this);
 		this.eventBus = new BattleEventBus();
 		this.moveExecutor = new MoveExecutor();
+		this.enemyAI = new EnemyAI(context);
 		
 		eventBus.subscribeToEvent(BattleEvent.POKEMON_DIED, args -> onPokemonDied(args));
 	}
@@ -67,7 +69,7 @@ public class BattleInstance {
 			// run the current round
 			// get turn inputs first, then run simultaneously
 			TurnIntent allyIntent = buildTurnIntent(activeAlly, activeEnemy);			
-			TurnIntent enemyIntent = buildTurnIntent(activeEnemy, activeAlly);
+			TurnIntent enemyIntent = enemyAI.generateEnemyIntent(activeEnemy, context);
 			
 			// calculate turn order
 			if (allyIntent.getEffectiveSpeed() > enemyIntent.getEffectiveSpeed()) {
@@ -314,7 +316,7 @@ public class BattleInstance {
 			} else if (activeMon.getCurStatus() == Status.SLEEP) {
 				if(Globals.randomEngine.nextDouble() < 0.125) {
 					activeMon.applyStatus(Status.NONE);
-					System.out.println(activeMon.getPokemonSpecies().getName() + " woke up");
+					System.out.println(activeMon.getPokemonSpecies().getName() + " woke up!");
 				}
 			} else if (activeMon.getCurStatus() == Status.PARALYSIS) {
 				if(Globals.randomEngine.nextDouble() < 0.25) {

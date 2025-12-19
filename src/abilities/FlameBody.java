@@ -29,9 +29,6 @@ public class FlameBody extends Ability {
 				System.out.println(this.getName()+" passive is triggered");
 			}
 		}
-	
-		
-			
 	}
 
 }
