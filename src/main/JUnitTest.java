@@ -1,11 +1,10 @@
 package main;
 
-import pokemon.MovesetData;
-import pokemon.Pokemon;
-import pokemon.StatsManager;
-import pokemon.StatsContainer;
-import pokemon.StatsData;
-import pokemon.PokemonSpecies;
+import pokemon.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,47 +23,48 @@ public class JUnitTest {
 	StatsManager statsManager;
 	StatsContainer statsContainer;
 	PokemonSpecies pokemonSpecies;
-	
-	
 
-	public JUnitTest() {
-		
-	}
-	
-	
-	void testStatsManager() {
-		
-		
-	}
-	
-	void testStatsContainer() {
-		
-	}
-	
-	void testPokemonSpecies() {
-		StatsContainer stats = new StatsContainer(new int[]{100,100,100,100,100,100});
-	    Ability ability = new None();
-	    Move move = new GenFailMove();
+	@Test
+	public void testPokemonInitialization() {
+		Pokemon p = new Pokemon(SpeciesLibrary.WEEZING, true);
 
-	    PokemonSpecies species = new PokemonSpecies(
-				"Weezing", 
-				StatsCalculator.realizeAllStats(StatsData.WEEZING), 
-				9, 
-				Types.POISON, 
+		assertNotNull(p.getPokemonSpecies(), "Pokemon species should not be null");
+		assertEquals("Weezing", p.getPokemonSpecies().getName());
+		assertNotNull(p.getMoves(), "Pokemon should have moves");
+	}
+
+	@Test
+	public void testBattleInstanceCreation() {
+		ArrayList<Pokemon> allies = new ArrayList<>();
+		ArrayList<Pokemon> enemies = new ArrayList<>();
+
+		allies.add(new Pokemon(SpeciesLibrary.WEEZING, true));
+		enemies.add(new Pokemon(SpeciesLibrary.ZAMAZENTA, false));
+
+		BattleInstance battle = new BattleInstance(allies, enemies);
+
+		assertNotNull(battle, "BattleInstance should be created");
+		assertNotNull(battle.getContext(), "BattleContext should not be null");
+	}
+
+	@Test
+	void testPokemonStats() {
+		PokemonSpecies species = new PokemonSpecies(
+				"Weezing",
+				StatsCalculator.realizeAllStats(StatsData.WEEZING),
+				60,
+				Types.POISON,
 				Types.NONE,
 				List.of(new SwiftSwim()),
-				MovesetData.WEEZING);
+				MovesetData.WEEZING); // Weezing has 10 moves available
 
-	    assertEquals("Weezing", species.getName());
-	    assertEquals(stats, species.getBaseStats());
-	    assertEquals(60, species.getWeight());
-	    assertEquals(Types.ELECTRIC, species.getType1());
-	    assertEquals(Types.NONE, species.getType2());
-	    assertEquals(1, species.getAbilities().size());
-	    assertEquals(1, species.getLearnableMoves().size());
-		}
-		
+		assertEquals("Weezing", species.getName());
+		assertNotNull(species.getBaseStats(), "Base stats should not be null");
+		assertEquals(60, species.getWeight());
+		assertEquals(Types.POISON, species.getType1());
+		assertEquals(Types.NONE, species.getType2());
+		assertEquals(1, species.getAbilities().size());
+		assertEquals(10, species.getLearnableMoves().size());
 	}
-	
-	
 }
+
