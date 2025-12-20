@@ -71,7 +71,6 @@ public class BattleInstance {
 				while (!hasBattleEnded) {
 					if (scanner.hasNextLine()) {
 						String line = scanner.nextLine();
-						System.out.println("[INPUT] Received: '" + line + "'");
 						inputQueue.offer(line);
 					} else {
 						Thread.sleep(50);
@@ -90,9 +89,10 @@ public class BattleInstance {
 		Globals.curInstance = this;
 		runBattleInitialization();
 
+		int turnCount = 1;
 		while (!isOver && !hasBattleEnded) {
 			try {
-				System.out.println("\n========== TURN START ==========");
+				System.out.println("\n========== TURN " + turnCount + " START ==========");
 
 				// get turn inputs first, then run simultaneously
 				TurnIntent allyIntent = buildTurnIntent(activeAlly, activeEnemy);
@@ -186,6 +186,7 @@ public class BattleInstance {
 				hasBattleEnded = true;
 			}
 		}
+		turnCount++;
 	}
 
 	public void changeWeather(Weather newWeather, int duration) {
@@ -256,7 +257,6 @@ public class BattleInstance {
 
 				if (moveInput != null) {
 					moveInput = moveInput.trim();
-					System.out.println("Received: '" + moveInput + "'");
 
 					try {
 						int moveIndex = Integer.parseInt(moveInput);

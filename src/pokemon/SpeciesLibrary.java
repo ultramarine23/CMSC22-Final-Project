@@ -126,7 +126,7 @@ public class SpeciesLibrary {
 	);
 
 	public static final PokemonSpecies HOOPA_UNBOUND = new PokemonSpecies(
-		"Hoopa Unbound", 
+		"Hoopa_Unbound",
 		StatsCalculator.realizeAllStats(StatsData.HOOPA_UNBOUND), 
 		19, 
 		Types.PSYCHIC, 
@@ -162,7 +162,7 @@ public class SpeciesLibrary {
 		MovesetData.CLEFABLE);
 
 	public static final PokemonSpecies DEOXYS_SPEED = new PokemonSpecies(
-		"Deoxys (Speed)", 
+		"Deoxys_Speed",
 		StatsCalculator.realizeAllStats(StatsData.DEOXYS_SPEED), 
 		134, 
 		Types.PSYCHIC, 

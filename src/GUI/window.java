@@ -115,14 +115,14 @@ public class window extends JFrame {
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Globals.defBgColor);
-        panel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        panel.setBorder(new EmptyBorder(25, 25, 25, 25));
 
         JLabel title = new JLabel("CHOOSE YOUR POKEMON", SwingConstants.CENTER);
         title.setFont(pokemonFont.deriveFont(20f));
         title.setForeground(Color.WHITE);
         panel.add(title, BorderLayout.NORTH);
 
-        JPanel grid = new JPanel(new GridLayout(4, 5, 1, 1));
+        JPanel grid = new JPanel(new GridLayout(4, 5, 3, 3));
         grid.setOpaque(false);
 
         // gets all name from pokemonFields and creates buttons linked to them
@@ -145,7 +145,7 @@ public class window extends JFrame {
 
     private JButton createSelectionButton(String name, int selectionIndex) {
         JButton btn = new JButton(name);
-        btn.setFont(pokemonFont.deriveFont(10f));
+        btn.setFont(pokemonFont.deriveFont(8f));
         btn.setBackground(Color.WHITE);
         btn.setFocusPainted(false);
 
@@ -159,7 +159,7 @@ public class window extends JFrame {
         }
 
         // preferred size (GridLayout respects this indirectly via wrapper panel)
-        btn.setPreferredSize(new Dimension(140, 40));
+        btn.setPreferredSize(new Dimension(250, 80));
 
         btn.addActionListener(e -> {
             if (onPokemonSelected != null) {
@@ -246,7 +246,7 @@ public class window extends JFrame {
         battleLog.setWrapStyleWord(true);
 
         DefaultCaret caret = (DefaultCaret)battleLog.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 
         JScrollPane scroll = new JScrollPane(battleLog);
         scroll.setBorder(new EmptyBorder(10, 10, 10, 10));

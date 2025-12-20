@@ -40,13 +40,11 @@ public class Main {
 
     // ====Sets up the I/O piping and starts the battle thread====
     public void startBattle(int selectionIndex) {
-        // Create pipes with larger buffer to prevent blocking
-        final int PIPE_SIZE = 8192; // 8KB buffer
-        PipedInputStream inPipe = new PipedInputStream(PIPE_SIZE);
+        PipedInputStream inPipe = new PipedInputStream();
         commandSender = new PipedOutputStream();
 
         PipedOutputStream outPipe = new PipedOutputStream();
-        PipedInputStream outPipeReader = new PipedInputStream(PIPE_SIZE);
+        PipedInputStream outPipeReader = new PipedInputStream();
 
         try {
             // Connect the GUI buttons to the Game's System.in
